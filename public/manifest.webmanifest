@@ -1,13 +1,19 @@
 {
-  "name": "Ritmo Habit Planner",
+  "name": "Ritmo Presence",
   "short_name": "Ritmo",
-  "description": "Habitos, tarefas, GitHub e IA da OpenAI em um planner sem premium.",
+  "description": "Tarefas, presença anual, GitHub e IA em um planner pessoal.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#101615",
-  "theme_color": "#101615",
+  "background_color": "#090706",
+  "theme_color": "#090706",
   "icons": [
+    {
+      "src": "/icone-transparent.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/icone.jpeg",
       "sizes": "512x512",

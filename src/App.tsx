@@ -24,6 +24,7 @@ import {
   X,
 } from 'lucide-react';
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 type View = 'dashboard' | 'habits' | 'planner' | 'review' | 'journal' | 'settings';
 type Frequency = 'daily' | 'weekdays' | 'custom';
@@ -1198,6 +1199,7 @@ function App() {
           );
         })}
       </nav>
+      <SpeedInsights />
     </div>
   );
 }

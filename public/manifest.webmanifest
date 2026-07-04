@@ -1,0 +1,18 @@
+{
+  "name": "Ritmo Habit Planner",
+  "short_name": "Ritmo",
+  "description": "Habitos, tarefas, GitHub e IA da OpenAI em um planner sem premium.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#101615",
+  "theme_color": "#101615",
+  "icons": [
+    {
+      "src": "/icone.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

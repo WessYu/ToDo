@@ -964,6 +964,118 @@ function App() {
     </div>
   );
 }
+/* Loggd + fixed tasks upgrades */
+.loggd-card {
+  grid-column: 1 / 2;
+}
 
+.presence-grid.compact {
+  margin-top: 12px;
+  grid-template-rows: repeat(7, 11px);
+  grid-auto-columns: 11px;
+  gap: 4px;
+  max-height: 128px;
+}
+
+.presence-grid.compact .presence-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+}
+
+.inline-report {
+  margin-top: 16px;
+}
+
+.github-sync-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+  gap: 16px;
+  align-items: end;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  margin-bottom: 18px;
+  padding: 16px;
+  background: rgba(255, 122, 24, 0.055);
+}
+
+.github-sync-card strong {
+  display: block;
+  margin: 6px 0;
+  color: var(--text);
+  font-size: 1.25rem;
+}
+
+.github-sync-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.github-sync-actions input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  outline: none;
+  color: var(--text);
+  background: rgba(5, 4, 3, 0.86);
+  padding: 13px 14px;
+}
+
+.github-sync-actions input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 122, 24, 0.14);
+}
+
+.profile-form .outline-button {
+  width: 100%;
+}
+
+.fixed-toggle {
+  display: flex !important;
+  align-items: center;
+  grid-template-columns: auto 1fr !important;
+  gap: 10px !important;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 122, 24, 0.05);
+}
+
+.fixed-toggle input {
+  width: auto;
+  accent-color: var(--orange);
+}
+
+.weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.weekday-row button {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--muted);
+  background: rgba(255, 122, 24, 0.04);
+  padding: 10px 0;
+  font-weight: 900;
+}
+
+.weekday-row button.active {
+  color: #160b05;
+  border-color: var(--line-strong);
+  background: linear-gradient(135deg, var(--orange), var(--orange-2));
+}
+
+@media (max-width: 780px) {
+  .github-sync-card {
+    grid-template-columns: 1fr;
+  }
+
+  .github-sync-actions {
+    grid-template-columns: 1fr;
+  }
+}
 export default App;
             

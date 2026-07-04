@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ritmo-habit-planner-v1';
+const CACHE_NAME = 'ritmo-presence-v2';
 const APP_SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icone.jpeg'];
 
 self.addEventListener('install', (event) => {

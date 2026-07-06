@@ -4,6 +4,7 @@ import App from './AppSocial';
 import './neo.css';
 import './monthly.css';
 import './profile-photo.css';
+import './nav-icons.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useMemo, useState } from 'react';
+/** @jsxRuntime classic */
+import React, { FormEvent, useEffect, useMemo, useState } from 'react';
 
 type View = 'hoje' | 'tarefas' | 'presenca' | 'ia' | 'perfil';
 type Priority = 'baixa' | 'media' | 'alta';
@@ -78,19 +79,19 @@ const emptyData: AppData = {
 const navItems: Array<{ id: View; label: string; icon: string }> = [
   { id: 'hoje', label: 'Hoje', icon: 'H' },
   { id: 'tarefas', label: 'Tarefas', icon: 'T' },
-  { id: 'presenca', label: 'Presenca', icon: 'P' },
+  { id: 'presenca', label: 'Presença', icon: 'P' },
   { id: 'ia', label: 'IA', icon: 'AI' },
   { id: 'perfil', label: 'Perfil', icon: 'U' },
 ];
 
 const weekLabels = [
-  { value: 0, label: 'D' },
-  { value: 1, label: 'S' },
-  { value: 2, label: 'T' },
-  { value: 3, label: 'Q' },
-  { value: 4, label: 'Q' },
-  { value: 5, label: 'S' },
-  { value: 6, label: 'S' },
+  { value: 0, label: 'D', title: 'Domingo' },
+  { value: 1, label: 'S', title: 'Segunda' },
+  { value: 2, label: 'T', title: 'Terça' },
+  { value: 3, label: 'Q', title: 'Quarta' },
+  { value: 4, label: 'Q', title: 'Quinta' },
+  { value: 5, label: 'S', title: 'Sexta' },
+  { value: 6, label: 'S', title: 'Sábado' },
 ];
 
 function makeId(prefix: string) {
@@ -140,7 +141,7 @@ function normalizeData(raw?: Partial<AppData> | null): AppData {
 }
 
 function priorityLabel(priority: Priority) {
-  return { baixa: 'Baixa', media: 'Media', alta: 'Alta' }[priority];
+  return { baixa: 'Baixa', media: 'Média', alta: 'Alta' }[priority];
 }
 
 function presenceLevel(total: number) {
@@ -192,15 +193,15 @@ async function apiRequest<T>(path: string, options: RequestInit = {}, token = ''
 
 async function fetchGithubPublicEvents(username: string) {
   const cleanUsername = username.trim();
-  if (!cleanUsername) throw new Error('Informe um usuario do GitHub no perfil.');
+  if (!cleanUsername) throw new Error('Informe um usuário do GitHub no perfil.');
 
   const activity: Record<string, number> = {};
 
   for (let page = 1; page <= 3; page += 1) {
     const response = await fetch(`https://api.github.com/users/${encodeURIComponent(cleanUsername)}/events/public?per_page=100&page=${page}`);
 
-    if (response.status === 404) throw new Error('Usuario do GitHub nao encontrado.');
-    if (!response.ok) throw new Error('Nao consegui buscar os eventos publicos do GitHub.');
+    if (response.status === 404) throw new Error('Usuário do GitHub não encontrado.');
+    if (!response.ok) throw new Error('Não consegui buscar os eventos públicos do GitHub.');
 
     const events = await response.json();
 
@@ -248,7 +249,7 @@ function AuthScreen({ onAuth }: { onAuth: (token: string, user: User, state?: Ap
 
       onAuth(payload.token, payload.user, payload.state);
     } catch (apiError) {
-      setError(apiError instanceof Error ? apiError.message : 'Nao consegui entrar.');
+      setError(apiError instanceof Error ? apiError.message : 'Não consegui entrar.');
     } finally {
       setLoading(false);
     }
@@ -260,13 +261,13 @@ function AuthScreen({ onAuth }: { onAuth: (token: string, user: User, state?: Ap
         <div className="top-leds" aria-hidden="true"><span /><span /><span /></div>
         <span className="kicker">RT-78 / SECURE ACCESS</span>
         <h1>Ritmo Presence</h1>
-        <p>Conta real pelo backend do Vercel, tarefas salvas por usuario, presenca estilo Loggd e integracao publica com GitHub.</p>
+        <p>Conta real pelo backend do Vercel, tarefas salvas por usuário, presença estilo Loggd e integração pública com GitHub.</p>
 
         <form className="neo-form" onSubmit={submit}>
           {mode === 'register' && (
             <label>
               Nome
-              <input value={name} onChange={(event) => setName(event.target.value)} placeholder="Wess" />
+              <input value={name} onChange={(event: { target: { value: any; }; }) => setName(event.target.value)} placeholder="Wess" />
             </label>
           )}
 
@@ -277,18 +278,18 @@ function AuthScreen({ onAuth }: { onAuth: (token: string, user: User, state?: Ap
 
           <label>
             Senha
-            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="minimo 6 caracteres" />
+            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="mínimo 6 caracteres" />
           </label>
 
           {error && <div className="alert error">{error}</div>}
 
           <button className="neo-primary" type="submit" disabled={loading}>
-            {loading ? 'PROCESSANDO...' : mode === 'login' ? 'ENTRAR' : 'CRIAR USUARIO'}
+            {loading ? 'PROCESSANDO...' : mode === 'login' ? 'ENTRAR' : 'CRIAR USUÁRIO'}
           </button>
         </form>
 
         <button className="link-button" type="button" onClick={() => setMode(mode === 'login' ? 'register' : 'login')}>
-          {mode === 'login' ? 'Criar novo usuario' : 'Ja tenho uma conta'}
+          {mode === 'login' ? 'Criar novo usuário' : 'Já tenho uma conta'}
         </button>
       </section>
     </main>
@@ -303,7 +304,7 @@ function PresenceGrid({ days, selectedDate, onSelectDate, compact = false }: { d
   ];
 
   return (
-    <div className={compact ? 'presence-grid compact' : 'presence-grid'} role="grid" aria-label="Presenca anual por tarefas concluidas e GitHub">
+    <div className={compact ? 'presence-grid compact' : 'presence-grid'} role="grid" aria-label="Presença anual por tarefas concluídas e GitHub">
       {cells.map((cell) => {
         if (cell.type === 'blank') return <span className="presence-cell blank" key={cell.id} />;
 
@@ -322,15 +323,27 @@ function PresenceGrid({ days, selectedDate, onSelectDate, compact = false }: { d
   );
 }
 
+function TaskPresenceMarker({ task }: { task: Task }) {
+  return (
+    <span
+      className={`task-presence-marker presence-cell level-${task.done ? 1 : 0}`}
+      title={task.done ? 'Esta tarefa já acendeu a presença deste dia.' : 'Concluir esta tarefa acende a presença deste dia.'}
+      aria-hidden="true"
+    />
+  );
+}
+
 function TaskRow({ task, onToggle, onRemove, fixed = false }: { task: Task; onToggle: (id: string) => void; onRemove: (id: string) => void; fixed?: boolean }) {
   return (
     <article className={task.done ? 'task-row done' : 'task-row'}>
-      <button className="task-check" type="button" onClick={() => onToggle(task.id)} aria-label="Alternar conclusao">{task.done ? 'OK' : ''}</button>
+      <button className="task-check" type="button" onClick={() => onToggle(task.id)} aria-label="Alternar conclusão">{task.done ? 'OK' : ''}</button>
 
       <button className="task-main" type="button" onClick={() => onToggle(task.id)}>
-        <strong>{task.title}{fixed ? ' - fixa' : ''}</strong>
-        <span>{task.time || 'sem horario'} - {priorityLabel(task.priority)}{task.project ? ` - ${task.project}` : ''}</span>
+        <strong>{task.title}{fixed ? <small> fixa</small> : null}</strong>
+        <span>{task.time || 'sem horário'} - {priorityLabel(task.priority)}{task.project ? ` - ${task.project}` : ''}</span>
       </button>
+
+      <TaskPresenceMarker task={task} />
 
       <button className="task-delete" type="button" onClick={() => onRemove(task.id)} aria-label="Excluir tarefa">X</button>
     </article>
@@ -444,7 +457,7 @@ function App() {
         setToken('');
         setUser(null);
         setHydrated(false);
-        setError(apiError instanceof Error ? apiError.message : 'Sessao invalida.');
+        setError(apiError instanceof Error ? apiError.message : 'Sessão inválida.');
       } finally {
         if (!cancelled) setBooting(false);
       }
@@ -462,7 +475,7 @@ function App() {
 
     const timer = window.setTimeout(() => {
       apiRequest('/api/state', { method: 'PUT', body: JSON.stringify({ state: data }) }, token).catch((apiError) => {
-        setError(apiError instanceof Error ? apiError.message : 'Nao salvei no backend.');
+        setError(apiError instanceof Error ? apiError.message : 'Não salvei no backend.');
       });
     }, 450);
 
@@ -603,7 +616,7 @@ function App() {
       setProfileDraft((current) => ({ ...current, githubUsername: username }));
       setError('GitHub sincronizado.');
     } catch (apiError) {
-      setError(apiError instanceof Error ? apiError.message : 'Nao consegui sincronizar o GitHub.');
+      setError(apiError instanceof Error ? apiError.message : 'Não consegui sincronizar o GitHub.');
     } finally {
       setGithubSyncing(false);
     }
@@ -618,7 +631,7 @@ function App() {
       const payload = await apiRequest<{ answer: string }>('/api/ai', {
         method: 'POST',
         body: JSON.stringify({
-          prompt: aiPrompt.trim() || 'Analise minhas tarefas, GitHub e presenca e me diga o proximo passo mais importante.',
+          prompt: aiPrompt.trim() || 'Analise minhas tarefas, GitHub e presença e me diga o próximo passo mais importante.',
           date: selectedDate,
           tasks: [...selectedOneOffTasks, ...selectedFixedItems.map((item) => item.task)],
           fixedTasks: data.fixedTasks,
@@ -634,9 +647,9 @@ function App() {
         }),
       }, token);
 
-      setAiAnswer(payload.answer || 'A IA nao devolveu texto.');
+      setAiAnswer(payload.answer || 'A IA não devolveu texto.');
     } catch (apiError) {
-      setAiAnswer(apiError instanceof Error ? apiError.message : 'Nao consegui falar com a IA.');
+      setAiAnswer(apiError instanceof Error ? apiError.message : 'Não consegui falar com a IA.');
     } finally {
       setAiLoading(false);
     }
@@ -664,7 +677,7 @@ function App() {
       }));
       setError('Perfil salvo no backend.');
     } catch (apiError) {
-      setError(apiError instanceof Error ? apiError.message : 'Nao consegui salvar o perfil.');
+      setError(apiError instanceof Error ? apiError.message : 'Não consegui salvar o perfil.');
     }
   }
 
@@ -712,13 +725,13 @@ function App() {
         <header className="neo-header">
           <div>
             <span className="kicker">RT-78 / {formatDate(selectedDate, { weekday: 'long' })}</span>
-            <h1>{view === 'presenca' ? 'Presenca' : view === 'tarefas' ? 'Tarefas' : view === 'perfil' ? 'Perfil' : view === 'ia' ? 'OpenAI' : 'Painel'}</h1>
+            <h1>{view === 'presenca' ? 'Presença' : view === 'tarefas' ? 'Tarefas' : view === 'perfil' ? 'Perfil' : view === 'ia' ? 'OpenAI' : 'Painel'}</h1>
           </div>
 
           <div className="date-terminal">
-            <button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), -1)))}><</button>
+            <button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), -1)))}>&lt;</button>
             <input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} />
-            <button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), 1)))}>></button>
+            <button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), 1)))}>&gt;</button>
           </div>
         </header>
 
@@ -730,8 +743,8 @@ function App() {
               <div className="panel-head">
                 <div>
                   <span className="kicker">TRACK YOUR LIFE / SEE YOUR YEAR</span>
-                  <h2>Presenca anual</h2>
-                  <p>Tarefas concluidas + atividade publica do GitHub. Clique em qualquer dia para ver detalhes.</p>
+                  <h2>Presença anual</h2>
+                  <p>Tarefas concluídas + atividade pública do GitHub. Clique em qualquer dia para ver detalhes.</p>
                 </div>
                 <button className="outline-button" type="button" onClick={() => setView('presenca')}>ABRIR</button>
               </div>
@@ -767,7 +780,7 @@ function App() {
                   <TaskRow key={item.fixedTask.id} task={item.task} fixed onToggle={() => toggleFixedTask(item.fixedTask.id)} onRemove={() => removeFixedTask(item.fixedTask.id)} />
                 ))}
                 {selectedOneOffTasks.map((task) => <TaskRow key={task.id} task={task} onToggle={toggleTask} onRemove={removeTask} />)}
-                {!selectedFixedItems.length && !selectedOneOffTasks.length && <EmptyTerminal title="Nenhuma tarefa nesse dia" text="Crie uma tarefa normal ou fixa para acender a presenca." />}
+                {!selectedFixedItems.length && !selectedOneOffTasks.length && <EmptyTerminal title="Nenhuma tarefa nesse dia" text="Crie uma tarefa normal ou fixa para acender a presença." />}
               </div>
             </section>
           </section>
@@ -776,8 +789,8 @@ function App() {
         {view === 'tarefas' && (
           <section className="task-layout">
             <form className="terminal-frame neo-form task-form" onSubmit={addTask}>
-              <span className="kicker">NEW TASK</span>
-              <h2>Registrar tarefa</h2>
+              <span className="kicker">NOVA TAREFA</span>
+              <h2>{draftFixed ? 'Criar tarefa fixa' : 'Registrar tarefa'}</h2>
 
               <label>
                 Titulo
@@ -794,7 +807,7 @@ function App() {
                   Prioridade
                   <select value={draftPriority} onChange={(event) => setDraftPriority(event.target.value as Priority)}>
                     <option value="baixa">Baixa</option>
-                    <option value="media">Media</option>
+                    <option value="media">Média</option>
                     <option value="alta">Alta</option>
                   </select>
                 </label>
@@ -813,7 +826,7 @@ function App() {
               {draftFixed && (
                 <div className="weekday-row">
                   {weekLabels.map((day) => (
-                    <button key={`${day.value}-${day.label}`} type="button" className={draftWeekdays.includes(day.value) ? 'active' : ''} onClick={() => toggleWeekday(day.value)}>
+                    <button key={`${day.value}-${day.label}`} type="button" className={draftWeekdays.includes(day.value) ? 'active' : ''} onClick={() => toggleWeekday(day.value)} title={day.title} aria-label={day.title}>
                       {day.label}
                     </button>
                   ))}
@@ -847,8 +860,8 @@ function App() {
             <div className="panel-head">
               <div>
                 <span className="kicker">365 DAYS / TASK + GITHUB COMPLETION</span>
-                <h2>Sistema de presenca</h2>
-                <p>Fiel ao conceito do Loggd: um ano inteiro de atividade, tudo clicavel e salvo no seu perfil.</p>
+                <h2>Sistema de presença</h2>
+                <p>Fiel ao conceito do Loggd: um ano inteiro de atividade, tudo clicável e salvo no seu perfil.</p>
               </div>
               <div className="presence-legend"><span /><span /><span /><span /><span /></div>
             </div>
@@ -857,7 +870,7 @@ function App() {
               <div>
                 <span className="kicker">VINCULAR GITHUB</span>
                 <strong>{data.github.username ? `@${data.github.username}` : 'Nenhum GitHub conectado'}</strong>
-                <p>{data.github.syncedAt ? `Sincronizado em ${new Date(data.github.syncedAt).toLocaleString('pt-BR')}` : 'Digite seu usuario publico do GitHub e sincronize.'}</p>
+                <p>{data.github.syncedAt ? `Sincronizado em ${new Date(data.github.syncedAt).toLocaleString('pt-BR')}` : 'Digite seu usuário público do GitHub e sincronize.'}</p>
               </div>
               <div className="github-sync-actions">
                 <input value={profileDraft.githubUsername} onChange={(event) => setProfileDraft((current) => ({ ...current, githubUsername: event.target.value }))} placeholder="WessYu" />
@@ -870,7 +883,7 @@ function App() {
             <div className="selected-report">
               <span className="kicker">SELECTED DATE</span>
               <h3>{formatDate(selectedDate, { day: '2-digit', month: 'long', year: 'numeric' })}</h3>
-              <p>{selectedPresence.taskCompleted} tarefa(s) concluida(s), {selectedPresence.githubActivity} atividade(s) GitHub e {selectedPresence.total} atividade(s) no total.</p>
+              <p>{selectedPresence.taskCompleted} tarefa(s) concluída(s), {selectedPresence.githubActivity} atividade(s) GitHub e {selectedPresence.total} atividade(s) no total.</p>
             </div>
 
             <div className="task-list compact-list">
@@ -878,7 +891,7 @@ function App() {
                 <TaskRow key={item.fixedTask.id} task={item.task} fixed onToggle={() => toggleFixedTask(item.fixedTask.id)} onRemove={() => removeFixedTask(item.fixedTask.id)} />
               ))}
               {selectedOneOffTasks.map((task) => <TaskRow key={task.id} task={task} onToggle={toggleTask} onRemove={removeTask} />)}
-              {!selectedFixedItems.length && !selectedOneOffTasks.length && <EmptyTerminal title="Sem tarefas nesse dia" text="O quadrado tambem pode acender so com atividade publica do GitHub." />}
+              {!selectedFixedItems.length && !selectedOneOffTasks.length && <EmptyTerminal title="Sem tarefas nesse dia" text="O quadrado também pode acender só com atividade pública do GitHub." />}
             </div>
           </section>
         )}
@@ -887,7 +900,7 @@ function App() {
           <section className="terminal-frame ai-screen">
             <span className="kicker">OPENAI PLANNER</span>
             <h2>Planejamento inteligente</h2>
-            <p>A IA usa as tarefas do dia selecionado, tarefas fixas, presenca anual e GitHub para sugerir o proximo passo.</p>
+            <p>A IA usa as tarefas do dia selecionado, tarefas fixas, presença anual e GitHub para sugerir o próximo passo.</p>
 
             <textarea value={aiPrompt} onChange={(event) => setAiPrompt(event.target.value)} placeholder="Pergunte: o que devo priorizar hoje?" />
 
@@ -907,7 +920,7 @@ function App() {
               <h2>{user.name}</h2>
               <p>@{user.username}</p>
               <p>{user.email}</p>
-              <p>{data.github.username ? `GitHub: @${data.github.username}` : 'GitHub ainda nao conectado'}</p>
+              <p>{data.github.username ? `GitHub: @${data.github.username}` : 'GitHub ainda não conectado'}</p>
 
               <div className="metric-strip mini">
                 <div className="metric-card"><span>TASKS</span><strong>{data.tasks.length}</strong></div>
@@ -927,7 +940,7 @@ function App() {
               </label>
 
               <label>
-                Usuario
+                Usuário
                 <input value={profileDraft.username} onChange={(event) => setProfileDraft((current) => ({ ...current, username: event.target.value }))} />
               </label>
 

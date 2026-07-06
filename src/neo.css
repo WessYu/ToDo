@@ -431,7 +431,7 @@ p {
 
 .task-row {
   display: grid;
-  grid-template-columns: 42px minmax(0, 1fr) 36px;
+  grid-template-columns: 42px minmax(0, 1fr) 22px 36px;
   align-items: center;
   gap: 10px;
   border: 1px solid var(--line);
@@ -470,12 +470,31 @@ p {
 }
 
 .task-main strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 1rem;
+}
+
+.task-main strong small {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 3px 7px;
+  color: var(--orange-2);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 122, 24, 0.08);
 }
 
 .task-main span {
   color: var(--muted);
   font-size: 0.84rem;
+}
+
+.task-presence-marker {
+  justify-self: center;
 }
 
 .task-delete {

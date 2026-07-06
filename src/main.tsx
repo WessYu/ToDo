@@ -1,7 +1,8 @@
-﻿import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './AppNeo';
+import App from './AppSocial';
 import './neo.css';
+import './monthly.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

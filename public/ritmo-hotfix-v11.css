@@ -27,8 +27,10 @@
   opacity: 0 !important;
 }
 
-/* Bottom bar: icons only, aligned like a compact cyber terminal dock. */
+/* Bottom bar: one icon per section, centered. */
 .bottom-terminal {
+  display: flex !important;
+  align-items: center !important;
   justify-content: space-around !important;
   gap: 8px !important;
   padding-inline: 18px !important;
@@ -39,42 +41,50 @@
   min-width: 58px !important;
   height: 58px !important;
   padding: 0 !important;
-  justify-content: center !important;
-  font-size: 0 !important;
-  line-height: 1 !important;
-}
-
-.bottom-terminal button span {
-  width: 30px !important;
-  height: 30px !important;
   display: grid !important;
   place-items: center !important;
   font-size: 0 !important;
+  line-height: 1 !important;
+  overflow: hidden !important;
+}
+
+.bottom-terminal button span {
+  width: 34px !important;
+  height: 34px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
   color: currentColor !important;
 }
 
 .bottom-terminal button span::before {
+  content: none !important;
+  display: none !important;
+}
+
+.bottom-terminal button span::after {
   display: block !important;
-  font-size: 25px !important;
+  font-size: 30px !important;
   line-height: 1 !important;
   font-weight: 900 !important;
   color: currentColor !important;
   text-shadow: 0 0 14px rgba(255, 92, 24, 0.38) !important;
 }
 
-.bottom-terminal button:nth-child(1) span::before {
+.bottom-terminal button:nth-child(1) span::after {
   content: '⌂';
 }
 
-.bottom-terminal button:nth-child(2) span::before {
+.bottom-terminal button:nth-child(2) span::after {
   content: '☷';
 }
 
-.bottom-terminal button:nth-child(3) span::before {
+.bottom-terminal button:nth-child(3) span::after {
   content: '▦';
 }
 
-.bottom-terminal button:nth-child(5) span::before {
+.bottom-terminal button:nth-child(5) span::after {
   content: '◯';
 }
 
@@ -97,7 +107,12 @@
     height: 52px !important;
   }
 
-  .bottom-terminal button span::before {
-    font-size: 23px !important;
+  .bottom-terminal button span {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .bottom-terminal button span::after {
+    font-size: 27px !important;
   }
 }

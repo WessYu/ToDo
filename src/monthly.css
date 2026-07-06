@@ -1,15 +1,40 @@
 .presence-grid.monthly {
-  grid-auto-flow: column;
-  grid-template-rows: repeat(7, 14px);
-  grid-auto-columns: 14px;
-  justify-content: start;
-  overflow-x: visible;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: none;
+  grid-auto-columns: unset;
+  gap: clamp(6px, 1.5vw, 10px);
+  width: 100%;
+  max-width: 560px;
+  justify-content: stretch;
+  align-items: stretch;
+  overflow: visible;
+  padding: 8px 0 16px;
 }
 
 .presence-grid.monthly.compact {
-  grid-template-rows: repeat(7, 12px);
-  grid-auto-columns: 12px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-rows: none;
+  grid-auto-columns: unset;
+  width: 100%;
+  max-width: 520px;
   max-height: none;
+  margin: clamp(18px, 5vw, 34px) auto 0;
+}
+
+.presence-grid.monthly .presence-cell {
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  aspect-ratio: 1;
+  border-radius: clamp(5px, 1.2vw, 9px);
+}
+
+.presence-grid.monthly.compact .presence-cell {
+  width: 100%;
+  height: auto;
+  border-radius: clamp(5px, 1.2vw, 8px);
 }
 
 .monthly-overview {
@@ -63,11 +88,19 @@
 
 .task-month-grid {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-rows: repeat(7, 11px);
-  grid-auto-columns: 11px;
-  gap: 4px;
-  justify-content: start;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
+  justify-content: stretch;
+  width: 100%;
+}
+
+.task-month-grid .presence-cell {
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  aspect-ratio: 1;
+  border-radius: 5px;
 }
 
 .friend-share-box {
@@ -179,5 +212,15 @@
 
   .task-presence-board {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .presence-grid.monthly.compact {
+    gap: 7px;
+  }
+
+  .presence-grid.monthly .presence-cell {
+    border-radius: 7px;
   }
 }

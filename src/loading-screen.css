@@ -5,35 +5,42 @@
   overflow: hidden;
   padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
   background:
-    radial-gradient(circle at 50% 54%, rgba(255, 77, 18, 0.12), transparent 19rem),
+    radial-gradient(circle at 58% 48%, rgba(255, 77, 18, 0.16), transparent 23rem),
+    linear-gradient(118deg, transparent 0 45%, rgba(255, 77, 18, 0.18) 45.1%, transparent 45.35% 100%),
     linear-gradient(rgba(255, 77, 18, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 77, 18, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 77, 18, 0.024) 1px, transparent 1px),
     #010101;
-  background-size: auto, 100% 40px, 40px 100%, auto;
+  background-size: auto, auto, 100% 38px, 38px 100%, auto;
+  isolation: isolate;
 }
 
 .neo-auth:has(.auth-frame:not(:has(form)))::before {
-  content: "";
+  content: "SAKA\A SECURES\A CRITICAL\A DIGITAL\A INFRASTRUCT\A URE.\A WE IDENTIFY,\A CONTAIN,\A AND\A NEUTRALIZE\A EMERGING\A THREATS.\A BUILT FOR\A RESILIENCE.";
   position: absolute;
-  inset: -20%;
+  left: clamp(12px, 4vw, 48px);
+  top: 37%;
+  z-index: 0;
+  width: 104px;
+  color: rgba(255, 77, 18, 0.58);
+  font-size: clamp(0.5rem, 1.45vw, 0.72rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  white-space: pre-line;
   pointer-events: none;
-  opacity: 0.2;
-  background:
-    linear-gradient(112deg, transparent 0 47%, rgba(255, 77, 18, 0.34) 47.1%, transparent 47.35% 100%),
-    linear-gradient(180deg, transparent 0 48%, rgba(255, 77, 18, 0.12) 48.1%, transparent 48.35% 100%);
-  animation: loadSweep 4.8s linear infinite;
+  transform: translateZ(0);
 }
 
 .neo-auth:has(.auth-frame:not(:has(form)))::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.32;
+  opacity: 0.22;
   background:
     repeating-linear-gradient(180deg, rgba(255, 97, 32, 0.18) 0 1px, transparent 1px 5px),
-    radial-gradient(circle at 50% 50%, transparent 0, rgba(0, 0, 0, 0.48) 76%);
-  mix-blend-mode: screen;
+    radial-gradient(circle at 50% 50%, transparent 0, rgba(0, 0, 0, 0.5) 78%);
 }
 
 .neo-auth .auth-frame:not(:has(form)) {
@@ -44,7 +51,8 @@
   width: min(88vw, 760px);
   min-height: clamp(150px, 24vh, 230px);
   padding: clamp(24px, 5vw, 44px);
-  overflow: hidden;
+  overflow: visible;
+  contain: layout paint;
   border: 2px solid var(--orange);
   border-radius: 12px;
   background:
@@ -56,9 +64,9 @@
   box-shadow:
     inset 0 0 0 1px rgba(255, 174, 118, 0.14),
     0 0 0 1px rgba(255, 77, 18, 0.22),
-    0 0 42px rgba(255, 77, 18, 0.18),
-    0 32px 100px rgba(0, 0, 0, 0.86);
-  transform: translateY(8vh);
+    0 0 32px rgba(255, 77, 18, 0.16),
+    0 32px 92px rgba(0, 0, 0, 0.82);
+  transform: translate3d(0, 7vh, 0);
 }
 
 .neo-auth .auth-frame:not(:has(form))::before {
@@ -70,9 +78,11 @@
   height: 8px;
   border-radius: 999px;
   background:
-    linear-gradient(90deg, var(--orange) 0 68%, rgba(255, 77, 18, 0.22) 68% 100%);
-  box-shadow: 0 0 18px rgba(255, 77, 18, 0.5);
-  animation: loadBar 1.7s steps(6, end) infinite;
+    linear-gradient(90deg, var(--orange), var(--orange)) left / 46% 100% no-repeat,
+    rgba(255, 77, 18, 0.2);
+  box-shadow: 0 0 14px rgba(255, 77, 18, 0.42);
+  animation: loadBar 1.15s ease-in-out infinite alternate;
+  will-change: background-size;
 }
 
 .neo-auth .auth-frame:not(:has(form))::after {
@@ -82,17 +92,51 @@
   bottom: 32px;
   color: var(--orange);
   font-size: 1.25rem;
-  opacity: 0.8;
+  opacity: 0.82;
+  animation: loadPulse 1.2s ease-in-out infinite alternate;
 }
 
 .neo-auth .auth-frame:not(:has(form)) .kicker {
   position: relative;
   z-index: 1;
+  width: fit-content;
   margin-bottom: 8px;
   color: var(--orange);
   font-size: clamp(0.88rem, 3.4vw, 1.15rem);
   letter-spacing: 0.18em;
   text-shadow: 0 0 14px rgba(255, 77, 18, 0.55);
+}
+
+.neo-auth .auth-frame:not(:has(form)) .kicker::before,
+.neo-auth .auth-frame:not(:has(form)) .kicker::after {
+  position: absolute;
+  bottom: calc(100% + clamp(42px, 7vh, 68px));
+  display: grid;
+  min-width: clamp(118px, 25vw, 176px);
+  min-height: 54px;
+  align-content: center;
+  padding: 10px 14px;
+  border: 2px solid var(--orange);
+  border-radius: 10px;
+  color: var(--orange);
+  background: rgba(5, 1, 0, 0.86);
+  font-size: clamp(0.48rem, 1.4vw, 0.68rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0.08em;
+  white-space: pre-line;
+  box-shadow: 0 0 18px rgba(255, 77, 18, 0.12);
+  pointer-events: none;
+}
+
+.neo-auth .auth-frame:not(:has(form)) .kicker::before {
+  content: "IDENTIFY\A CONTAIN\A ***";
+  left: 0;
+}
+
+.neo-auth .auth-frame:not(:has(form)) .kicker::after {
+  content: "BUILT\A FOR\A RESILIENCE    +";
+  left: clamp(134px, 31vw, 202px);
 }
 
 .neo-auth .auth-frame:not(:has(form)) h1 {
@@ -109,32 +153,69 @@
   text-overflow: clip;
   text-transform: uppercase;
   text-shadow:
-    0 0 12px rgba(255, 77, 18, 0.28),
-    2px 0 rgba(255, 77, 18, 0.45),
-    -2px 0 rgba(255, 160, 96, 0.16);
-  animation: loadGlitch 1.45s steps(2, end) infinite;
+    0 0 12px rgba(255, 77, 18, 0.24),
+    1px 0 rgba(255, 77, 18, 0.38),
+    -1px 0 rgba(255, 160, 96, 0.14);
+  animation: loadNudge 2.2s ease-in-out infinite;
+  will-change: transform;
 }
 
-@keyframes loadSweep {
-  0% { transform: translate3d(-5%, -3%, 0); }
-  100% { transform: translate3d(5%, 3%, 0); }
+.neo-auth .auth-frame:not(:has(form)) h1::after {
+  content: "RT-78    FLAG RT-78    POSITION INFORMATION    LOCKED";
+  position: absolute;
+  left: 0;
+  bottom: -34px;
+  width: 100%;
+  color: rgba(255, 77, 18, 0.62);
+  font-size: clamp(0.48rem, 1.45vw, 0.7rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  animation: loadTicker 6s linear infinite;
+  will-change: transform;
 }
 
 @keyframes loadBar {
-  0% { transform: scaleX(0.22); transform-origin: left; }
-  55% { transform: scaleX(1); transform-origin: left; }
-  56% { transform: scaleX(1); transform-origin: right; }
-  100% { transform: scaleX(0.18); transform-origin: right; }
+  0% { background-size: 34% 100%, auto; }
+  100% { background-size: 92% 100%, auto; }
 }
 
-@keyframes loadGlitch {
-  0%, 100% { transform: translateX(0); filter: none; }
-  18% { transform: translateX(-1px); filter: blur(0.2px); }
-  20% { transform: translateX(2px); }
-  22% { transform: translateX(0); }
-  72% { transform: translateX(1px); }
-  74% { transform: translateX(-2px); }
-  76% { transform: translateX(0); filter: none; }
+@keyframes loadPulse {
+  0% { opacity: 0.35; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes loadNudge {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  45% { transform: translate3d(1px, 0, 0); }
+  52% { transform: translate3d(-1px, 0, 0); }
+}
+
+@keyframes loadTicker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-44%, 0, 0); }
+}
+
+@media (max-width: 700px) {
+  .neo-auth:has(.auth-frame:not(:has(form)))::before {
+    top: auto;
+    bottom: 86px;
+    opacity: 0.65;
+    transform: rotate(-90deg);
+    transform-origin: left bottom;
+  }
+
+  .neo-auth .auth-frame:not(:has(form)) .kicker::before,
+  .neo-auth .auth-frame:not(:has(form)) .kicker::after {
+    bottom: calc(100% + 34px);
+    min-width: 104px;
+    min-height: 46px;
+    padding: 8px 10px;
+  }
+
+  .neo-auth .auth-frame:not(:has(form)) .kicker::after {
+    left: 118px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -142,7 +223,7 @@
     width: min(88vw, 420px);
     min-height: 142px;
     padding: 22px;
-    transform: translateY(6vh);
+    transform: translate3d(0, 5vh, 0);
   }
 
   .neo-auth .auth-frame:not(:has(form)) h1 {

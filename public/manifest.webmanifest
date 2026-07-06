@@ -2,17 +2,23 @@
   "name": "Ritmo Presence",
   "short_name": "Ritmo",
   "description": "Tarefas, presença anual, GitHub e IA em um planner pessoal.",
-  "start_url": "/",
+  "start_url": "/?v=7",
   "scope": "/",
   "display": "standalone",
   "background_color": "#090706",
   "theme_color": "#090706",
   "icons": [
     {
-      "src": "/icone.png",
+      "src": "/icone.png?v=7",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icone.png?v=7",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }

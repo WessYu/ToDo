@@ -1,0 +1,103 @@
+:root {
+  --ritmo-icon-url: url('/icone-v11.png');
+}
+
+/* Remove AI entry from the visible app navigation. */
+.side-nav button:nth-child(4),
+.bottom-terminal button:nth-child(4) {
+  display: none !important;
+}
+
+.ai-screen {
+  display: none !important;
+}
+
+/* Use the provided logo as the app brand mark without redrawing it. */
+.brand-mark,
+.profile-avatar {
+  color: transparent !important;
+  overflow: hidden !important;
+  background: #050505 var(--ritmo-icon-url) center / cover no-repeat !important;
+  border: 1px solid rgba(255, 92, 24, 0.55) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 26px rgba(255, 78, 16, 0.18) !important;
+}
+
+.brand-mark > *,
+.profile-avatar > * {
+  opacity: 0 !important;
+}
+
+/* Bottom bar: icons only, aligned like a compact cyber terminal dock. */
+.bottom-terminal {
+  justify-content: space-around !important;
+  gap: 8px !important;
+  padding-inline: 18px !important;
+}
+
+.bottom-terminal button {
+  width: 58px !important;
+  min-width: 58px !important;
+  height: 58px !important;
+  padding: 0 !important;
+  justify-content: center !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+
+.bottom-terminal button span {
+  width: 30px !important;
+  height: 30px !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 0 !important;
+  color: currentColor !important;
+}
+
+.bottom-terminal button span::before {
+  display: block !important;
+  font-size: 25px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  color: currentColor !important;
+  text-shadow: 0 0 14px rgba(255, 92, 24, 0.38) !important;
+}
+
+.bottom-terminal button:nth-child(1) span::before {
+  content: '⌂';
+}
+
+.bottom-terminal button:nth-child(2) span::before {
+  content: '☷';
+}
+
+.bottom-terminal button:nth-child(3) span::before {
+  content: '▦';
+}
+
+.bottom-terminal button:nth-child(5) span::before {
+  content: '◯';
+}
+
+.bottom-terminal button.active {
+  background: linear-gradient(135deg, #ff4b18, #ff7a18) !important;
+  color: #140703 !important;
+  border-color: rgba(255, 119, 48, 0.95) !important;
+}
+
+@media (max-width: 520px) {
+  .bottom-terminal {
+    left: 18px !important;
+    right: 18px !important;
+    padding-inline: 12px !important;
+  }
+
+  .bottom-terminal button {
+    width: 52px !important;
+    min-width: 52px !important;
+    height: 52px !important;
+  }
+
+  .bottom-terminal button span::before {
+    font-size: 23px !important;
+  }
+}

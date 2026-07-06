@@ -1,0 +1,30 @@
+.side-nav button span,
+.bottom-terminal button span {
+  display: inline-grid;
+  place-items: center;
+  color: inherit;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+  filter: drop-shadow(0 0 8px rgba(255, 122, 24, 0.18));
+}
+
+.bottom-terminal .nav-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.side-nav button.active .nav-icon,
+.bottom-terminal button.active .nav-icon {
+  color: var(--orange-2);
+  filter: drop-shadow(0 0 10px rgba(255, 122, 24, 0.55));
+}
+
+@media (max-width: 980px) {
+  .bottom-terminal button {
+    gap: 5px;
+  }
+}

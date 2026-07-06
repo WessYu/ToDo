@@ -1,0 +1,151 @@
+.neo-auth:has(.auth-frame:not(:has(form))) {
+  position: relative;
+  min-height: 100svh;
+  place-items: center;
+  overflow: hidden;
+  padding: max(24px, env(safe-area-inset-top)) 18px max(24px, env(safe-area-inset-bottom));
+  background:
+    radial-gradient(circle at 50% 54%, rgba(255, 77, 18, 0.12), transparent 19rem),
+    linear-gradient(rgba(255, 77, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 77, 18, 0.025) 1px, transparent 1px),
+    #010101;
+  background-size: auto, 100% 40px, 40px 100%, auto;
+}
+
+.neo-auth:has(.auth-frame:not(:has(form)))::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.2;
+  background:
+    linear-gradient(112deg, transparent 0 47%, rgba(255, 77, 18, 0.34) 47.1%, transparent 47.35% 100%),
+    linear-gradient(180deg, transparent 0 48%, rgba(255, 77, 18, 0.12) 48.1%, transparent 48.35% 100%);
+  animation: loadSweep 4.8s linear infinite;
+}
+
+.neo-auth:has(.auth-frame:not(:has(form)))::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 97, 32, 0.18) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 50% 50%, transparent 0, rgba(0, 0, 0, 0.48) 76%);
+  mix-blend-mode: screen;
+}
+
+.neo-auth .auth-frame:not(:has(form)) {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  width: min(88vw, 760px);
+  min-height: clamp(150px, 24vh, 230px);
+  padding: clamp(24px, 5vw, 44px);
+  overflow: hidden;
+  border: 2px solid var(--orange);
+  border-radius: 12px;
+  background:
+    linear-gradient(rgba(255, 77, 18, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 77, 18, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 77, 18, 0.16), rgba(255, 77, 18, 0.045)),
+    rgba(6, 1, 0, 0.94);
+  background-size: 48px 48px, 48px 48px, auto, auto;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 174, 118, 0.14),
+    0 0 0 1px rgba(255, 77, 18, 0.22),
+    0 0 42px rgba(255, 77, 18, 0.18),
+    0 32px 100px rgba(0, 0, 0, 0.86);
+  transform: translateY(8vh);
+}
+
+.neo-auth .auth-frame:not(:has(form))::before {
+  content: "";
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 18px;
+  height: 8px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, var(--orange) 0 68%, rgba(255, 77, 18, 0.22) 68% 100%);
+  box-shadow: 0 0 18px rgba(255, 77, 18, 0.5);
+  animation: loadBar 1.7s steps(6, end) infinite;
+}
+
+.neo-auth .auth-frame:not(:has(form))::after {
+  content: "+";
+  position: absolute;
+  right: 28px;
+  bottom: 32px;
+  color: var(--orange);
+  font-size: 1.25rem;
+  opacity: 0.8;
+}
+
+.neo-auth .auth-frame:not(:has(form)) .kicker {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
+  color: var(--orange);
+  font-size: clamp(0.88rem, 3.4vw, 1.15rem);
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 14px rgba(255, 77, 18, 0.55);
+}
+
+.neo-auth .auth-frame:not(:has(form)) h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+  color: #ffede0;
+  font-size: clamp(2.25rem, 10.5vw, 6rem);
+  line-height: 0.86;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  text-overflow: clip;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 12px rgba(255, 77, 18, 0.28),
+    2px 0 rgba(255, 77, 18, 0.45),
+    -2px 0 rgba(255, 160, 96, 0.16);
+  animation: loadGlitch 1.45s steps(2, end) infinite;
+}
+
+@keyframes loadSweep {
+  0% { transform: translate3d(-5%, -3%, 0); }
+  100% { transform: translate3d(5%, 3%, 0); }
+}
+
+@keyframes loadBar {
+  0% { transform: scaleX(0.22); transform-origin: left; }
+  55% { transform: scaleX(1); transform-origin: left; }
+  56% { transform: scaleX(1); transform-origin: right; }
+  100% { transform: scaleX(0.18); transform-origin: right; }
+}
+
+@keyframes loadGlitch {
+  0%, 100% { transform: translateX(0); filter: none; }
+  18% { transform: translateX(-1px); filter: blur(0.2px); }
+  20% { transform: translateX(2px); }
+  22% { transform: translateX(0); }
+  72% { transform: translateX(1px); }
+  74% { transform: translateX(-2px); }
+  76% { transform: translateX(0); filter: none; }
+}
+
+@media (max-width: 520px) {
+  .neo-auth .auth-frame:not(:has(form)) {
+    width: min(88vw, 420px);
+    min-height: 142px;
+    padding: 22px;
+    transform: translateY(6vh);
+  }
+
+  .neo-auth .auth-frame:not(:has(form)) h1 {
+    font-size: clamp(2.08rem, 9.8vw, 3.5rem);
+  }
+}

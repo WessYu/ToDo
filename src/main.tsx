@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './AppSocial';
 import './neo.css';
 import './monthly.css';
+import './profile-photo.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

@@ -1231,3 +1231,389 @@ h3,
       0 0 26px rgba(255, 75, 18, 0.1) !important;
   }
 }
+
+/* Mobile alignment hardening. */
+@media (max-width: 980px) {
+  html,
+  body,
+  #root {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    min-width: 0 !important;
+  }
+
+  .neo-app {
+    display: grid !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 12px 10px calc(104px + env(safe-area-inset-bottom)) !important;
+    overflow-x: clip !important;
+  }
+
+  .neo-auth {
+    display: grid !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-height: 100svh !important;
+    align-items: center !important;
+    justify-items: start !important;
+    padding: 12px 10px !important;
+    overflow-x: hidden !important;
+  }
+
+  .neo-auth .auth-frame {
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 !important;
+    padding: 16px !important;
+  }
+
+  .neo-auth .auth-frame h1 {
+    max-width: 100% !important;
+    font-size: clamp(2.05rem, 10vw, 2.8rem) !important;
+    line-height: 0.92 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .neo-auth .auth-frame p {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .neo-workspace,
+  .neo-header,
+  .screen-grid,
+  .task-layout,
+  .profile-layout,
+  .presence-view,
+  .panel-large,
+  .profile-card,
+  .profile-form,
+  .task-form,
+  .friends-panel,
+  .github-sync-card,
+  .monthly-overview,
+  .selected-report,
+  .friend-share-box,
+  .task-presence-section,
+  .task-presence-board,
+  .friend-list,
+  .task-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .screen-grid,
+  .task-layout,
+  .profile-layout,
+  .screen-grid .loggd-card,
+  .profile-layout > .profile-form:not(.friends-panel),
+  .friends-panel,
+  .github-sync-card,
+  .monthly-overview,
+  .task-presence-board,
+  .friend-list,
+  .metric-strip,
+  .profile-card .metric-strip.mini,
+  .screen-grid > .metric-strip {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: none !important;
+    gap: 12px !important;
+  }
+
+  .screen-grid > *,
+  .profile-layout > *,
+  .task-layout > *,
+  .screen-grid .loggd-card > *,
+  .profile-layout > .profile-form:not(.friends-panel) > *,
+  .friends-panel > *,
+  .monthly-overview > *,
+  .github-sync-card > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-area: auto !important;
+    justify-self: stretch !important;
+  }
+
+  .neo-header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: start !important;
+    gap: 10px !important;
+  }
+
+  .neo-header h1 {
+    max-width: 100% !important;
+    font-size: clamp(2.45rem, 15vw, 3.75rem) !important;
+    line-height: 0.9 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .neo-header .kicker,
+  .panel-head .kicker,
+  .kicker {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .date-terminal {
+    display: grid !important;
+    grid-template-columns: 44px minmax(0, 1fr) 44px !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .date-terminal button,
+  .date-terminal input {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 8px !important;
+  }
+
+  .date-terminal input {
+    font-size: 0.92rem !important;
+    text-align: center !important;
+  }
+
+  .terminal-frame,
+  .metric-card,
+  .task-row,
+  .friend-card,
+  .selected-report,
+  .empty-terminal,
+  .github-sync-card,
+  .monthly-overview,
+  .friend-share-box,
+  .fixed-toggle,
+  .task-presence-card {
+    border-radius: 8px !important;
+  }
+
+  .panel-large,
+  .presence-view,
+  .profile-card,
+  .profile-form,
+  .task-form {
+    padding: 14px !important;
+  }
+
+  .panel-head {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .panel-head h2 {
+    max-width: 100% !important;
+    font-size: clamp(1.72rem, 10vw, 2.55rem) !important;
+    line-height: 0.98 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .panel-head p,
+  p,
+  .task-main span,
+  .friend-card small {
+    max-width: 100% !important;
+    line-height: 1.45 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .panel-head .outline-button,
+  .neo-primary,
+  .outline-button,
+  .link-button,
+  .file-button {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 44px !important;
+    justify-content: center !important;
+    text-align: center !important;
+    white-space: normal !important;
+  }
+
+  .metric-strip,
+  .profile-card .metric-strip.mini,
+  .screen-grid > .metric-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .metric-card {
+    min-height: 78px !important;
+    padding: 12px !important;
+  }
+
+  .metric-card strong {
+    font-size: clamp(1.45rem, 8vw, 2rem) !important;
+  }
+
+  .presence-grid,
+  .presence-grid.monthly,
+  .presence-grid.monthly.compact,
+  .task-month-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+    justify-self: center !important;
+    overflow-x: auto !important;
+    overscroll-behavior-x: contain !important;
+    padding: 8px 2px 14px !important;
+  }
+
+  .presence-grid.monthly.compact {
+    grid-template-rows: repeat(7, 12px) !important;
+    grid-auto-columns: 12px !important;
+    gap: 5px !important;
+  }
+
+  .presence-grid.monthly .presence-cell,
+  .presence-grid.monthly.compact .presence-cell {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  .selected-report {
+    padding: 12px !important;
+  }
+
+  .selected-report h3 {
+    font-size: 1.05rem !important;
+    line-height: 1.15 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .task-row {
+    grid-template-columns: 38px minmax(0, 1fr) 18px 34px !important;
+    gap: 8px !important;
+    min-height: 58px !important;
+    padding: 10px !important;
+  }
+
+  .task-main strong {
+    display: block !important;
+    max-width: 100% !important;
+    font-size: 0.96rem !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .task-check,
+  .task-delete {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  .field-row,
+  .github-sync-actions,
+  .photo-upload-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .photo-upload-row {
+    justify-items: stretch !important;
+  }
+
+  .photo-preview,
+  .profile-avatar {
+    justify-self: start !important;
+  }
+
+  .neo-form label,
+  .neo-form input,
+  .neo-form select,
+  .neo-form textarea,
+  .github-sync-actions input {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .friend-choice-row,
+  .weekday-row {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .friend-choice-row button,
+  .weekday-row button {
+    min-width: 0 !important;
+    min-height: 42px !important;
+    padding: 8px 6px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .friend-card {
+    display: grid !important;
+    grid-template-columns: 34px minmax(0, 1fr) 34px !important;
+    align-items: center !important;
+    gap: 9px !important;
+  }
+
+  .friend-card strong,
+  .friend-card small {
+    display: block !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .bottom-terminal {
+    right: 8px !important;
+    bottom: max(8px, env(safe-area-inset-bottom)) !important;
+    left: 8px !important;
+    width: auto !important;
+    max-width: calc(100vw - 16px) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    padding: 7px !important;
+  }
+
+  .bottom-terminal button {
+    min-width: 0 !important;
+    min-height: 48px !important;
+    border-radius: 7px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  .neo-app {
+    padding-inline: 8px !important;
+  }
+
+  .neo-header h1 {
+    font-size: clamp(2.25rem, 14vw, 3.25rem) !important;
+  }
+
+  .date-terminal {
+    grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+    gap: 7px !important;
+  }
+
+  .metric-strip,
+  .profile-card .metric-strip.mini,
+  .screen-grid > .metric-strip {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .friend-choice-row,
+  .weekday-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .task-row {
+    grid-template-columns: 36px minmax(0, 1fr) 16px 32px !important;
+  }
+}

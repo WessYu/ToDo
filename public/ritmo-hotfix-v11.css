@@ -116,3 +116,128 @@
     font-size: 27px !important;
   }
 }
+
+/* v13: keep the published hotfix from undoing the responsive dashboard fix. */
+.bottom-terminal {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: center !important;
+  justify-content: stretch !important;
+  gap: 6px !important;
+  right: 10px !important;
+  bottom: max(10px, env(safe-area-inset-bottom)) !important;
+  left: 10px !important;
+  padding: 8px !important;
+  border-radius: 10px !important;
+}
+
+.bottom-terminal button {
+  display: grid !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 50px !important;
+  height: 50px !important;
+  place-items: center !important;
+  padding: 0 !important;
+}
+
+.bottom-terminal button span {
+  display: grid !important;
+  width: 100% !important;
+  height: 100% !important;
+  place-items: center !important;
+}
+
+.bottom-terminal button span::after {
+  content: none !important;
+  display: none !important;
+}
+
+.bottom-terminal .nav-icon {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+@media (max-width: 980px) {
+  .neo-app {
+    min-height: 100svh !important;
+    padding: 16px 14px calc(116px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .neo-workspace {
+    padding-bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .neo-header h1 {
+    margin-bottom: 0 !important;
+    font-size: 3.1rem !important;
+    line-height: 0.92 !important;
+  }
+
+  .date-terminal {
+    display: grid !important;
+    grid-template-columns: 48px minmax(0, 1fr) 48px !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .date-terminal button,
+  .date-terminal input {
+    min-height: 48px !important;
+    border-radius: 8px !important;
+  }
+
+  .date-terminal button {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .panel-head h2 {
+    font-size: 2.1rem !important;
+    line-height: 0.98 !important;
+  }
+
+  .panel-head p {
+    max-width: 34ch !important;
+    margin-bottom: 0 !important;
+    font-size: 0.94rem !important;
+    line-height: 1.42 !important;
+  }
+
+  .presence-grid.monthly.compact {
+    gap: 6px !important;
+    max-width: 380px !important;
+    margin-top: 18px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .bottom-terminal {
+    right: 10px !important;
+    left: 10px !important;
+    padding: 8px !important;
+  }
+
+  .bottom-terminal button {
+    width: auto !important;
+    min-width: 0 !important;
+    height: 50px !important;
+  }
+
+  .neo-header h1 {
+    font-size: 2.85rem !important;
+  }
+
+  .panel-head h2 {
+    font-size: 1.82rem !important;
+  }
+
+  .panel-head p {
+    font-size: 0.88rem !important;
+  }
+
+  .presence-grid.monthly.compact {
+    gap: 5px !important;
+    max-width: 330px !important;
+  }
+}

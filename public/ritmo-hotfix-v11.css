@@ -241,3 +241,152 @@
     max-width: 330px !important;
   }
 }
+
+/* v14: make the desktop workspace read like an app, not an oversized poster. */
+@media (min-width: 981px) {
+  .neo-app {
+    grid-template-columns: 244px minmax(0, 1fr) !important;
+    gap: 14px !important;
+    padding: 14px !important;
+  }
+
+  .neo-sidebar {
+    height: calc(100vh - 28px) !important;
+    padding: 18px !important;
+    gap: 18px !important;
+  }
+
+  .brand-mark {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 14px !important;
+  }
+
+  .brand-lockup strong {
+    font-size: 1.05rem !important;
+  }
+
+  .side-copy {
+    font-size: 0.68rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .side-nav {
+    gap: 7px !important;
+  }
+
+  .side-nav button {
+    min-height: 42px !important;
+    padding: 10px 12px !important;
+    font-size: 0.82rem !important;
+  }
+
+  .neo-workspace {
+    gap: 14px !important;
+    padding: 0 !important;
+  }
+
+  .neo-header {
+    gap: 14px !important;
+  }
+
+  .neo-header h1 {
+    margin-bottom: 0 !important;
+    font-size: clamp(3rem, 4.4vw, 4.2rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .date-terminal {
+    gap: 8px !important;
+  }
+
+  .date-terminal button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+  }
+
+  .date-terminal input {
+    min-height: 44px !important;
+    border-radius: 8px !important;
+    padding: 0 14px !important;
+  }
+
+  .profile-layout,
+  .screen-grid,
+  .task-layout {
+    gap: 14px !important;
+  }
+
+  .profile-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr) !important;
+  }
+
+  .panel-large,
+  .presence-view,
+  .ai-screen,
+  .profile-card,
+  .profile-form,
+  .task-form {
+    padding: 18px !important;
+  }
+
+  .profile-avatar {
+    width: 74px !important;
+    height: 74px !important;
+    border-radius: 22px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .profile-form h2,
+  .profile-card h2,
+  .panel-head h2 {
+    font-size: clamp(1.9rem, 3vw, 2.6rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .metric-strip.mini {
+    gap: 10px !important;
+  }
+
+  .metric-card {
+    min-height: 86px !important;
+    padding: 14px !important;
+  }
+
+  .metric-card strong {
+    font-size: 1.7rem !important;
+  }
+
+  .photo-upload-row {
+    border-radius: 10px !important;
+    padding: 12px !important;
+  }
+
+  .photo-preview {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 18px !important;
+  }
+
+  .neo-form input,
+  .neo-form select,
+  .neo-form textarea,
+  .github-sync-actions input {
+    border-radius: 8px !important;
+    padding: 11px 12px !important;
+  }
+
+  .neo-form textarea {
+    min-height: 104px !important;
+  }
+
+  .neo-primary,
+  .outline-button,
+  .link-button,
+  .file-button.photo-button {
+    min-height: 44px !important;
+    border-radius: 8px !important;
+    padding: 0 14px !important;
+  }
+}

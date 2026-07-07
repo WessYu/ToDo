@@ -191,7 +191,7 @@ function encodeInvite(user) {
 }
 
 function decodeInvite(code) {
-  const clean = code.trim().replace(/^ritmo:\/\//, '');
+  const clean = code.trim().match(/ritmo:\/\/([A-Za-z0-9+/=]+)/)?.[1] || code.trim().replace(/^ritmo:\/\//, '');
   return JSON.parse(decodeURIComponent(escape(atob(clean))));
 }
 
@@ -204,7 +204,7 @@ function imageFileToAvatar(file) {
       const image = new Image();
       image.onerror = () => reject(new Error('Arquivo de imagem invalido.'));
       image.onload = () => {
-        const size = 360;
+        const size = 240;
         const canvas = document.createElement('canvas');
         canvas.width = size;
         canvas.height = size;
@@ -215,7 +215,7 @@ function imageFileToAvatar(file) {
         context.fillStyle = '#090706';
         context.fillRect(0, 0, size, size);
         context.drawImage(image, (size - width) / 2, (size - height) / 2, width, height);
-        resolve(canvas.toDataURL('image/jpeg', 0.86));
+        resolve(canvas.toDataURL('image/jpeg', 0.78));
       };
       image.src = String(reader.result);
     };
@@ -435,10 +435,21 @@ function App() {
 
   function addFriend(event) {
     event.preventDefault();
-    if (!friendDraft.name.trim()) return;
-    const friend = { id: makeId('friend'), name: friendDraft.name.trim(), email: friendDraft.email.trim(), avatar: friendDraft.avatar.trim().slice(0, 2) || friendDraft.name.trim().slice(0, 1).toUpperCase(), createdAt: new Date().toISOString(), status: 'accepted' };
+    const email = friendDraft.email.trim().toLowerCase();
+    const name = friendDraft.name.trim() || email.split('@')[0] || '';
+    if (!name) {
+      setError('Informe pelo menos nome ou email do amigo.');
+      return;
+    }
+    const exists = data.friends.some((friend) => (email && friend.email?.toLowerCase() === email) || String(friend.name || '').trim().toLowerCase() === name.toLowerCase());
+    if (exists) {
+      setError('Esse amigo ja esta na sua lista.');
+      return;
+    }
+    const friend = { id: makeId('friend'), name, email, avatar: friendDraft.avatar.trim().slice(0, 2).toUpperCase() || name.slice(0, 1).toUpperCase(), createdAt: new Date().toISOString(), status: 'accepted' };
     setData((current) => ({ ...current, friends: [friend, ...current.friends] }));
     setFriendDraft({ name: '', email: '', avatar: '' });
+    setError('Amigo adicionado. Agora voce pode marcar tarefas com essa pessoa.');
   }
 
   function acceptInvite(event) {
@@ -507,6 +518,7 @@ function App() {
     try {
       const payload = await apiRequest('/api/profile', { method: 'PUT', body: JSON.stringify({ name: profileDraft.name, username: profileDraft.username, bio: profileDraft.bio, avatar: profileDraft.avatar, githubUsername: profileDraft.githubUsername }) }, token);
       setUser(payload.user);
+      setProfileDraft((current) => ({ ...current, avatar: payload.user.avatar || current.avatar, name: payload.user.name || current.name, username: payload.user.username || current.username, bio: payload.user.bio || current.bio }));
       setData((current) => ({ ...current, github: { ...current.github, username: profileDraft.githubUsername.trim() } }));
       setError('Perfil salvo no backend.');
     } catch (apiError) {

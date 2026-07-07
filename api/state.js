@@ -10,6 +10,7 @@ function normalizeState(state) {
       events: state?.github?.events && typeof state.github.events === 'object' ? state.github.events : {},
       syncedAt: typeof state?.github?.syncedAt === 'string' ? state.github.syncedAt : '',
     },
+    friends: Array.isArray(state?.friends) ? state.friends : [],
     updatedAt: new Date().toISOString(),
     createdAt: state?.createdAt || new Date().toISOString(),
   };
@@ -29,6 +30,7 @@ export default async function handler(req, res) {
           events: {},
           syncedAt: '',
         },
+        friends: [],
       };
 
       return json(res, 200, { state: normalizeState(state) });

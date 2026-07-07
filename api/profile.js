@@ -9,7 +9,10 @@ export default async function handler(req, res) {
 
     const name = String(body.name || user.name).trim();
     const bio = String(body.bio || '').trim().slice(0, 180);
-    const avatar = String(body.avatar || name.slice(0, 1) || 'R').trim().slice(0, 2).toUpperCase();
+    const rawAvatar = String(body.avatar || user.avatar || name.slice(0, 1) || 'R').trim();
+    const avatar = rawAvatar.startsWith('data:image/')
+      ? rawAvatar.slice(0, 220000)
+      : rawAvatar.slice(0, 2).toUpperCase();
     const nextUsername = slugify(body.username || user.username);
 
     if (!name) return json(res, 400, { error: 'Nome obrigatório.' });

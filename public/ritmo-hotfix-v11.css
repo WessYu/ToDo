@@ -8,7 +8,7 @@
   --rt-orange-2: #ff6a1a;
   --rt-text: #fff0e8;
   --rt-muted: rgba(255, 150, 96, 0.72);
-  --rt-icon-url: url("/icone-v11.png");
+  --rt-icon-url: url("/terminal-icon-512.png?v=1");
 }
 
 /* Keep the current visible product surface: todo sections only. */
@@ -154,21 +154,34 @@ p,
   box-shadow: 0 0 16px rgba(255, 75, 18, 0.75) !important;
 }
 
-.brand-mark,
-.profile-avatar {
+.brand-mark {
   color: transparent !important;
   overflow: hidden !important;
   border: 1px solid var(--rt-line) !important;
   border-radius: 8px !important;
-  background: #030000 var(--rt-icon-url) center / cover no-repeat !important;
+  background: #030000 var(--rt-icon-url) center / contain no-repeat !important;
   box-shadow:
     inset 0 0 0 1px rgba(255, 180, 122, 0.08),
     0 0 22px rgba(255, 75, 18, 0.14) !important;
 }
 
-.brand-mark > *,
-.profile-avatar > * {
+.brand-mark > * {
   opacity: 0 !important;
+}
+
+.profile-avatar {
+  color: var(--rt-orange) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--rt-line) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(rgba(255, 75, 18, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.028) 1px, transparent 1px),
+    rgba(3, 0, 0, 0.94) !important;
+  background-size: 18px 18px, 18px 18px, auto !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 180, 122, 0.08),
+    0 0 22px rgba(255, 75, 18, 0.14) !important;
 }
 
 .side-copy {

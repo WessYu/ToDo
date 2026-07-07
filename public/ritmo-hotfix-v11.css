@@ -325,8 +325,8 @@ p,
     top: 24px !important;
     height: calc(100vh - 48px) !important;
     min-height: 720px !important;
-    padding: 18px !important;
-    gap: 18px !important;
+    padding: 16px !important;
+    gap: 16px !important;
     border-radius: 8px !important;
     background:
       linear-gradient(rgba(255, 75, 18, 0.028) 1px, transparent 1px),
@@ -338,12 +338,14 @@ p,
 
   .neo-sidebar::before {
     content: "IDENTIFY\A CONTAIN\A ***" !important;
-    position: absolute !important;
-    top: 72px !important;
-    right: 18px !important;
-    width: 64px !important;
-    min-height: 42px !important;
-    padding: 7px !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    order: -1 !important;
+    display: grid !important;
+    width: 92px !important;
+    min-height: 38px !important;
+    padding: 7px 8px !important;
     border: 1px solid var(--rt-line) !important;
     border-radius: 6px !important;
     color: var(--rt-orange) !important;
@@ -358,38 +360,39 @@ p,
   }
 
   .neo-sidebar::after {
-    content: "RITMO" !important;
+    content: "+" !important;
     position: absolute !important;
-    right: -18px !important;
-    bottom: 70px !important;
+    right: 12px !important;
+    bottom: 10px !important;
     color: var(--rt-orange) !important;
-    font-size: 4.8rem !important;
-    font-weight: 900 !important;
-    line-height: 0.78 !important;
-    letter-spacing: 0.02em !important;
-    writing-mode: vertical-rl !important;
-    transform: rotate(180deg) !important;
-    opacity: 0.98 !important;
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
     pointer-events: none !important;
-    text-shadow: 0 0 18px rgba(255, 75, 18, 0.22) !important;
   }
 
   .brand-lockup {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    grid-template-columns: unset !important;
+    align-items: center !important;
     gap: 12px !important;
-    margin-top: 14px !important;
+    margin-top: 0 !important;
+    min-width: 0 !important;
   }
 
   .brand-mark {
-    width: 126px !important;
-    height: 126px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
     border-radius: 6px !important;
   }
 
   .brand-lockup strong {
-    font-size: 1.65rem !important;
-    line-height: 0.9 !important;
+    font-size: 1.05rem !important;
+    line-height: 1 !important;
+  }
+
+  .brand-lockup div {
+    min-width: 0 !important;
   }
 
   .brand-lockup small {

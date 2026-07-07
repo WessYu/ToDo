@@ -390,3 +390,526 @@
     padding: 0 14px !important;
   }
 }
+
+/* v15: reference pass - terminal/cyberpunk todo skin without changing content. */
+:root {
+  --rt-black: #010000;
+  --rt-panel: rgba(8, 2, 0, 0.88);
+  --rt-ink: #ffefe6;
+  --rt-orange: #ff4b12;
+  --rt-orange-hot: #ff6a1a;
+  --rt-orange-dim: rgba(255, 75, 18, 0.5);
+  --rt-orange-soft: rgba(255, 75, 18, 0.12);
+}
+
+html,
+body {
+  background: var(--rt-black) !important;
+}
+
+body {
+  color: var(--rt-ink) !important;
+  letter-spacing: 0 !important;
+}
+
+body::before {
+  opacity: 0.18 !important;
+  background:
+    repeating-linear-gradient(180deg, rgba(255, 85, 22, 0.14) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 50% 52%, transparent 0, rgba(0, 0, 0, 0.62) 76%) !important;
+}
+
+body::after {
+  opacity: 0.34 !important;
+  background:
+    linear-gradient(90deg, transparent 0 17%, rgba(255, 75, 18, 0.28) 17.08%, transparent 17.16% 100%),
+    linear-gradient(90deg, transparent 0 52%, rgba(255, 75, 18, 0.16) 52.05%, transparent 52.12% 100%),
+    linear-gradient(180deg, transparent 0 30%, rgba(255, 75, 18, 0.16) 30.04%, transparent 30.12% 100%),
+    linear-gradient(124deg, transparent 0 48%, rgba(255, 75, 18, 0.12) 48.06%, transparent 48.2% 100%) !important;
+}
+
+.neo-app {
+  background:
+    radial-gradient(circle at 76% 18%, rgba(255, 75, 18, 0.08), transparent 24rem),
+    linear-gradient(rgba(255, 75, 18, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.016) 1px, transparent 1px),
+    var(--rt-black) !important;
+  background-size: auto, 42px 42px, 42px 42px, auto !important;
+  color: var(--rt-ink) !important;
+}
+
+.terminal-frame,
+.metric-card,
+.task-row,
+.github-sync-card,
+.friend-share-box,
+.friend-card,
+.task-presence-card,
+.monthly-overview,
+.fixed-toggle,
+.selected-report,
+.empty-terminal,
+.ai-answer {
+  border: 1px solid rgba(255, 75, 18, 0.82) !important;
+  border-radius: 8px !important;
+  background:
+    linear-gradient(rgba(255, 75, 18, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.026) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 75, 18, 0.09), rgba(255, 75, 18, 0.016)),
+    rgba(3, 0, 0, 0.94) !important;
+  background-size: 28px 28px, 28px 28px, auto, auto !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 154, 88, 0.08),
+    0 0 0 1px rgba(255, 75, 18, 0.04),
+    0 0 26px rgba(255, 75, 18, 0.08) !important;
+}
+
+.terminal-frame::before,
+.metric-card::before {
+  opacity: 0.58 !important;
+  background:
+    linear-gradient(rgba(255, 75, 18, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.03) 1px, transparent 1px) !important;
+  background-size: 36px 36px, 36px 36px !important;
+}
+
+.terminal-frame::after,
+.metric-card::after,
+.github-sync-card::after,
+.selected-report::after {
+  content: "+" !important;
+  position: absolute !important;
+  right: 12px !important;
+  bottom: 8px !important;
+  color: var(--rt-orange) !important;
+  font-size: 0.9rem !important;
+  opacity: 0.9 !important;
+  pointer-events: none !important;
+}
+
+.kicker,
+.panel-head span,
+.metric-card span,
+.sync-status-card span,
+.neo-form label,
+.friend-card small,
+.task-main span,
+p {
+  color: rgba(255, 148, 94, 0.72) !important;
+}
+
+.kicker,
+.panel-head span,
+.metric-card span,
+.sync-status-card span,
+.neo-form label,
+.side-nav button,
+.bottom-terminal button,
+.outline-button,
+.neo-primary {
+  font-weight: 900 !important;
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase !important;
+}
+
+h1,
+h2,
+h3,
+.brand-lockup strong,
+.metric-card strong,
+.task-main strong {
+  color: #fff1e9 !important;
+  letter-spacing: 0.02em !important;
+  text-shadow:
+    0 0 10px rgba(255, 75, 18, 0.22),
+    1px 0 rgba(255, 75, 18, 0.24) !important;
+}
+
+.top-leds {
+  gap: 7px !important;
+  margin-bottom: 18px !important;
+}
+
+.top-leds span {
+  width: 9px !important;
+  height: 9px !important;
+  border-radius: 50% !important;
+  background: var(--rt-orange) !important;
+  box-shadow: 0 0 18px rgba(255, 75, 18, 0.82) !important;
+}
+
+.brand-mark,
+.profile-avatar {
+  border: 1px solid rgba(255, 75, 18, 0.82) !important;
+  border-radius: 8px !important;
+  background-color: #030000 !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 180, 122, 0.08),
+    0 0 24px rgba(255, 75, 18, 0.14) !important;
+}
+
+.side-copy {
+  color: rgba(255, 148, 94, 0.7) !important;
+}
+
+.side-nav button,
+.bottom-terminal button,
+.outline-button,
+.link-button,
+.weekday-row button,
+.friend-choice-row button,
+.friend-card button {
+  border: 1px solid transparent !important;
+  color: rgba(255, 177, 137, 0.7) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.side-nav button:hover,
+.side-nav button.active,
+.bottom-terminal button.active,
+.outline-button:hover,
+.link-button:hover,
+.weekday-row button:hover,
+.friend-choice-row button:hover,
+.friend-card button:hover {
+  border-color: rgba(255, 75, 18, 0.76) !important;
+  color: #120300 !important;
+  background: linear-gradient(180deg, var(--rt-orange-hot), var(--rt-orange)) !important;
+}
+
+.neo-primary,
+.date-terminal button,
+.weekday-row button.active,
+.friend-choice-row button.active {
+  border: 1px solid rgba(255, 75, 18, 0.95) !important;
+  color: #120300 !important;
+  background: linear-gradient(180deg, var(--rt-orange-hot), var(--rt-orange)) !important;
+  box-shadow: 0 0 24px rgba(255, 75, 18, 0.12) !important;
+}
+
+.neo-form input,
+.neo-form select,
+.neo-form textarea,
+.date-terminal input,
+.ai-screen textarea,
+.github-sync-actions input {
+  border: 1px solid rgba(255, 75, 18, 0.82) !important;
+  border-radius: 6px !important;
+  color: var(--rt-orange-hot) !important;
+  background: rgba(0, 0, 0, 0.9) !important;
+  box-shadow: inset 0 0 18px rgba(255, 75, 18, 0.055) !important;
+}
+
+.neo-form input::placeholder,
+.neo-form textarea::placeholder,
+.github-sync-actions input::placeholder {
+  color: rgba(255, 148, 94, 0.48) !important;
+}
+
+.date-terminal {
+  padding: 0 !important;
+}
+
+.date-terminal button {
+  font-size: 1.1rem !important;
+}
+
+.date-terminal input {
+  font-weight: 900 !important;
+  letter-spacing: 0.1em !important;
+}
+
+.metric-strip {
+  gap: 10px !important;
+}
+
+.metric-card {
+  min-height: 78px !important;
+}
+
+.metric-card span {
+  margin-bottom: 8px !important;
+  font-size: 0.62rem !important;
+}
+
+.metric-card strong {
+  font-size: clamp(1.5rem, 3vw, 2.05rem) !important;
+}
+
+.task-row {
+  border-radius: 7px !important;
+}
+
+.task-check,
+.task-delete {
+  border: 1px solid rgba(255, 75, 18, 0.72) !important;
+  border-radius: 5px !important;
+  color: var(--rt-orange) !important;
+  background: rgba(255, 75, 18, 0.055) !important;
+}
+
+.task-row.done .task-check,
+.task-check.done {
+  color: #120300 !important;
+  background: var(--rt-orange) !important;
+}
+
+.presence-grid.monthly,
+.task-month-grid {
+  filter: drop-shadow(0 0 12px rgba(255, 75, 18, 0.16)) !important;
+}
+
+.presence-cell {
+  border: 1px solid rgba(255, 75, 18, 0.38) !important;
+  border-radius: 3px !important;
+  background: rgba(255, 75, 18, 0.04) !important;
+}
+
+.presence-cell.level-1 {
+  background: rgba(255, 75, 18, 0.28) !important;
+}
+
+.presence-cell.level-2 {
+  background: rgba(255, 75, 18, 0.5) !important;
+}
+
+.presence-cell.level-3,
+.presence-cell.level-4,
+.presence-cell.on,
+.presence-cell.github,
+.presence-cell.total {
+  border-color: var(--rt-orange) !important;
+  background: var(--rt-orange) !important;
+  box-shadow: 0 0 14px rgba(255, 75, 18, 0.52) !important;
+}
+
+.presence-cell.selected {
+  outline: 2px solid #ffe6d6 !important;
+  outline-offset: 2px !important;
+}
+
+@media (min-width: 981px) {
+  .neo-app {
+    grid-template-columns: minmax(220px, 255px) minmax(0, 1fr) !important;
+    min-height: 100vh !important;
+    gap: 18px !important;
+    padding: 18px !important;
+  }
+
+  .neo-sidebar {
+    position: sticky !important;
+    top: 18px !important;
+    height: calc(100vh - 36px) !important;
+    border-radius: 8px !important;
+    padding: 18px !important;
+    gap: 20px !important;
+  }
+
+  .neo-sidebar::after {
+    content: "+" !important;
+    right: 16px !important;
+    bottom: 12px !important;
+    color: var(--rt-orange) !important;
+    font-size: 1rem !important;
+  }
+
+  .brand-lockup {
+    gap: 12px !important;
+  }
+
+  .brand-mark {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .brand-lockup strong {
+    font-size: 1.1rem !important;
+  }
+
+  .brand-lockup small {
+    color: rgba(255, 126, 72, 0.68) !important;
+  }
+
+  .side-copy {
+    max-width: 21ch !important;
+    font-size: 0.68rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .side-nav {
+    gap: 8px !important;
+  }
+
+  .side-nav button {
+    min-height: 44px !important;
+    border-radius: 6px !important;
+    padding: 10px 12px !important;
+  }
+
+  .neo-workspace {
+    gap: 18px !important;
+    padding: 0 !important;
+  }
+
+  .neo-header {
+    align-items: flex-start !important;
+    gap: 18px !important;
+  }
+
+  .neo-header h1 {
+    font-size: clamp(3.4rem, 5.2vw, 5.8rem) !important;
+    line-height: 0.86 !important;
+  }
+
+  .date-terminal {
+    align-self: start !important;
+  }
+
+  .date-terminal button {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .date-terminal input {
+    min-height: 38px !important;
+  }
+
+  .screen-grid,
+  .task-layout,
+  .profile-layout {
+    grid-template-columns: minmax(0, 1.16fr) minmax(340px, 0.84fr) !important;
+    gap: 18px !important;
+  }
+
+  .profile-card,
+  .profile-form,
+  .panel-large,
+  .presence-view,
+  .task-form,
+  .ai-screen {
+    padding: 20px !important;
+  }
+
+  .profile-avatar {
+    width: 76px !important;
+    height: 76px !important;
+    border-radius: 8px !important;
+  }
+
+  .profile-form h2,
+  .profile-card h2,
+  .panel-head h2 {
+    font-size: clamp(2rem, 3.2vw, 3.2rem) !important;
+  }
+
+  .photo-upload-row {
+    border-radius: 8px !important;
+  }
+
+  .photo-preview {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 8px !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .neo-app {
+    background-size: auto, 34px 34px, 34px 34px, auto !important;
+  }
+
+  .neo-header h1 {
+    font-size: clamp(2.7rem, 12vw, 4.2rem) !important;
+  }
+
+  .terminal-frame,
+  .metric-card,
+  .bottom-terminal {
+    border-radius: 8px !important;
+  }
+
+  .bottom-terminal {
+    background:
+      linear-gradient(rgba(255, 75, 18, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 75, 18, 0.028) 1px, transparent 1px),
+      rgba(2, 0, 0, 0.94) !important;
+    background-size: 24px 24px, 24px 24px, auto !important;
+  }
+}
+
+/* v16: keep auth screens inside narrow mobile viewports. */
+.neo-auth {
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+.neo-auth .auth-frame {
+  max-width: min(460px, calc(100vw - 32px)) !important;
+}
+
+@media (max-width: 520px) {
+  .neo-auth {
+    padding: 18px 16px !important;
+    place-items: center !important;
+  }
+
+  .neo-auth .auth-frame {
+    width: 100% !important;
+    max-width: calc(100vw - 32px) !important;
+    padding: 18px !important;
+  }
+
+  .neo-auth .auth-frame h1 {
+    font-size: clamp(2.45rem, 14vw, 3.35rem) !important;
+    line-height: 0.92 !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .neo-auth {
+    padding-inline: 12px !important;
+  }
+
+  .neo-auth .auth-frame {
+    max-width: calc(100vw - 24px) !important;
+    padding: 16px !important;
+  }
+
+  .neo-auth .auth-frame h1 {
+    font-size: clamp(2.2rem, 13vw, 2.85rem) !important;
+  }
+}
+
+/* v17: hard clamp auth layout to the viewport on installed/mobile browsers. */
+@media (max-width: 620px) {
+  .neo-auth {
+    display: flex !important;
+    width: 100vw !important;
+    min-width: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: hidden !important;
+    padding: 18px 14px !important;
+  }
+
+  .neo-auth .auth-frame {
+    width: min(360px, calc(100vw - 28px)) !important;
+    min-width: 0 !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    justify-self: center !important;
+  }
+
+  .neo-auth .auth-frame,
+  .neo-auth .auth-frame * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .neo-auth .auth-frame h1,
+  .neo-auth .auth-frame p {
+    overflow-wrap: anywhere !important;
+  }
+}

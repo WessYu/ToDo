@@ -389,24 +389,36 @@ p,
   }
 
   .screen-grid {
-    grid-template-columns: minmax(0, 1fr) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px) !important;
+    grid-template-areas:
+      "presence metrics"
+      "tasks metrics" !important;
     gap: 14px !important;
+    align-items: start !important;
   }
 
   .screen-grid .loggd-card {
-    order: 1 !important;
+    grid-area: presence !important;
+    display: grid !important;
+    grid-template-columns: minmax(320px, 0.95fr) minmax(260px, 0.55fr) !important;
+    gap: 16px !important;
+    align-items: start !important;
+    min-height: 0 !important;
+    padding: 16px !important;
   }
 
   .screen-grid > .metric-strip {
-    order: 2 !important;
+    grid-area: metrics !important;
     display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    grid-template-columns: 1fr !important;
     gap: 10px !important;
     margin: 0 !important;
   }
 
   .screen-grid > .terminal-frame.panel-large:not(.loggd-card) {
-    order: 3 !important;
+    grid-area: tasks !important;
+    min-height: 0 !important;
   }
 
   .panel-large,
@@ -442,12 +454,35 @@ p,
   }
 
   .presence-grid.monthly.compact {
-    max-width: 420px !important;
-    gap: 8px !important;
-    margin: 18px auto 0 !important;
+    grid-column: 2 !important;
+    grid-row: 1 / span 2 !important;
+    max-width: 300px !important;
+    gap: 5px !important;
+    margin: 4px auto 0 !important;
+    align-self: center !important;
+    justify-self: center !important;
+  }
+
+  .loggd-card .panel-head {
+    grid-column: 1 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: start !important;
+    margin: 0 !important;
+  }
+
+  .loggd-card .panel-head p {
+    max-width: 42ch !important;
+  }
+
+  .loggd-card .panel-head .outline-button {
+    min-height: 34px !important;
+    padding: 0 14px !important;
+    font-size: 0.72rem !important;
   }
 
   .selected-report {
+    grid-column: 1 !important;
     margin-top: 16px !important;
     padding: 12px 14px !important;
   }
@@ -458,7 +493,7 @@ p,
   }
 
   .metric-card {
-    min-height: 86px !important;
+    min-height: 92px !important;
     padding: 14px !important;
   }
 
@@ -468,7 +503,7 @@ p,
   }
 
   .metric-card strong {
-    font-size: 1.8rem !important;
+    font-size: 1.75rem !important;
   }
 
   .profile-layout,

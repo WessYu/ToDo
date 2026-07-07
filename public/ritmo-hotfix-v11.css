@@ -8,7 +8,7 @@
   --rt-orange-2: #ff6a1a;
   --rt-text: #fff0e8;
   --rt-muted: rgba(255, 150, 96, 0.72);
-  --rt-icon-url: url("/terminal-icon-512.png?v=1");
+  --rt-icon-url: url("/icone-v11.png?v=2");
 }
 
 /* Keep the current visible product surface: todo sections only. */
@@ -512,6 +512,95 @@ p,
     gap: 16px !important;
   }
 
+  .profile-layout {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr) !important;
+    grid-template-areas:
+      "summary editor"
+      "friends friends" !important;
+    align-items: start !important;
+  }
+
+  .profile-layout > .profile-card {
+    grid-area: summary !important;
+    position: sticky !important;
+    top: 16px !important;
+  }
+
+  .profile-layout > .profile-form:not(.friends-panel) {
+    grid-area: editor !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .profile-layout > .profile-form:not(.friends-panel) > .kicker,
+  .profile-layout > .profile-form:not(.friends-panel) > h2,
+  .profile-layout > .profile-form:not(.friends-panel) > .photo-upload-row,
+  .profile-layout > .profile-form:not(.friends-panel) > label:has(textarea),
+  .profile-layout > .profile-form:not(.friends-panel) > button {
+    grid-column: 1 / -1 !important;
+  }
+
+  .profile-layout > .profile-form:not(.friends-panel) > h2 {
+    margin-bottom: 2px !important;
+  }
+
+  .profile-card > p {
+    margin-bottom: 8px !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .profile-card .metric-strip.mini {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-top: 14px !important;
+  }
+
+  .profile-card .metric-card {
+    min-height: 74px !important;
+    padding: 12px !important;
+  }
+
+  .profile-card .metric-card strong {
+    font-size: 1.35rem !important;
+  }
+
+  .friends-panel {
+    grid-area: friends !important;
+    display: grid !important;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1fr) !important;
+    gap: 12px 18px !important;
+    align-items: start !important;
+  }
+
+  .friends-panel > .kicker,
+  .friends-panel > h2,
+  .friends-panel > p,
+  .friends-panel > button,
+  .friends-panel > .friend-form {
+    grid-column: 1 !important;
+  }
+
+  .friends-panel > h2 {
+    margin-bottom: 0 !important;
+  }
+
+  .friends-panel > p {
+    margin-bottom: 2px !important;
+    max-width: 44ch !important;
+  }
+
+  .friends-panel > .friend-list {
+    grid-column: 2 !important;
+    grid-row: 1 / span 7 !important;
+    align-self: stretch !important;
+    margin-top: 0 !important;
+  }
+
+  .friend-card {
+    grid-template-columns: 34px minmax(0, 1fr) 34px !important;
+  }
+
   .profile-avatar {
     width: 70px !important;
     height: 70px !important;
@@ -520,6 +609,8 @@ p,
   }
 
   .photo-upload-row {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
     border-radius: 8px !important;
     padding: 12px !important;
   }
@@ -593,6 +684,37 @@ p,
   .profile-layout {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
+  }
+
+  .profile-layout {
+    grid-template-areas: none !important;
+  }
+
+  .profile-layout > .profile-card,
+  .profile-layout > .profile-form:not(.friends-panel),
+  .friends-panel {
+    position: static !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-area: auto !important;
+  }
+
+  .friends-panel > .kicker,
+  .friends-panel > h2,
+  .friends-panel > p,
+  .friends-panel > button,
+  .friends-panel > .friend-form,
+  .friends-panel > .friend-list {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .friends-panel > .friend-list {
+    margin-top: 4px !important;
+  }
+
+  .profile-card .metric-strip.mini {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   .screen-grid > .metric-strip {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ritmo-presence-v27';
+const CACHE_NAME = 'ritmo-presence-v28';
 
 const APP_SHELL = [
   '/',
@@ -7,7 +7,7 @@ const APP_SHELL = [
   '/icone-v11.png?v=2',
   '/apple-touch-icon-v11.png?v=2',
   '/favicon-32-v11.png?v=2',
-  '/ritmo-hotfix-v11.css?v=25',
+  '/ritmo-hotfix-v11.css?v=26',
 ];
 
 self.addEventListener('install', (event) => {

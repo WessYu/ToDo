@@ -113,27 +113,6 @@ async function apiRequest(path, options = {}, token = '') {
   return payload;
 }
 
-async function fetchGithubPublicEvents(username) {
-  const cleanUsername = username.trim();
-  if (!cleanUsername) throw new Error('Informe um usuario do GitHub.');
-  const activity = {};
-  for (let page = 1; page <= 3; page += 1) {
-    const response = await fetch(`https://api.github.com/users/${encodeURIComponent(cleanUsername)}/events/public?per_page=100&page=${page}`);
-    if (response.status === 404) throw new Error('Usuario do GitHub nao encontrado.');
-    if (!response.ok) throw new Error('Nao consegui buscar eventos publicos do GitHub.');
-    const events = await response.json();
-    if (!Array.isArray(events) || events.length === 0) break;
-    for (const event of events) {
-      if (!event?.created_at) continue;
-      const date = String(event.created_at).slice(0, 10);
-      const type = String(event.type || '');
-      const weight = type === 'PushEvent' ? Math.max(1, event.payload?.commits?.length || 1) : type === 'PullRequestEvent' ? 2 : 1;
-      activity[date] = (activity[date] || 0) + weight;
-    }
-  }
-  return activity;
-}
-
 function fixedIsPlanned(fixedTask, date) {
   return fixedTask.active && fixedTask.weekdays.includes(parseIso(date).getDay());
 }
@@ -502,10 +481,13 @@ function App() {
     setGithubSyncing(true);
     setError('');
     try {
-      const events = await fetchGithubPublicEvents(username);
-      setData((current) => ({ ...current, github: { username, events, syncedAt: new Date().toISOString() } }));
-      setProfileDraft((current) => ({ ...current, githubUsername: username }));
-      setError('GitHub sincronizado.');
+      const payload = await apiRequest('/api/github', { method: 'POST', body: JSON.stringify({ username }) }, token);
+      const normalized = normalizeData(payload.state);
+      setData(normalized);
+      setProfileDraft((current) => ({ ...current, githubUsername: normalized.github.username || username }));
+      const total = payload.github?.total || 0;
+      const days = payload.github?.days || 0;
+      setError(`GitHub sincronizado: ${total} atividade(s) em ${days} dia(s).`);
     } catch (apiError) {
       setError(apiError instanceof Error ? apiError.message : 'Nao consegui sincronizar o GitHub.');
     } finally {

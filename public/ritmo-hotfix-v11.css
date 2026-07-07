@@ -1,441 +1,61 @@
 :root {
-  --ritmo-icon-url: url('/icone-v11.png');
+  --rt-black: #010000;
+  --rt-panel: rgba(8, 2, 0, 0.9);
+  --rt-panel-soft: rgba(255, 75, 18, 0.055);
+  --rt-line: rgba(255, 75, 18, 0.72);
+  --rt-line-hot: rgba(255, 75, 18, 0.96);
+  --rt-orange: #ff4b12;
+  --rt-orange-2: #ff6a1a;
+  --rt-text: #fff0e8;
+  --rt-muted: rgba(255, 150, 96, 0.72);
+  --rt-icon-url: url("/icone-v11.png");
 }
 
-/* Remove AI entry from the visible app navigation. */
+/* Keep the current visible product surface: todo sections only. */
 .side-nav button:nth-child(4),
-.bottom-terminal button:nth-child(4) {
-  display: none !important;
-}
-
+.bottom-terminal button:nth-child(4),
 .ai-screen {
   display: none !important;
-}
-
-/* Use the provided logo as the app brand mark without redrawing it. */
-.brand-mark,
-.profile-avatar {
-  color: transparent !important;
-  overflow: hidden !important;
-  background: #050505 var(--ritmo-icon-url) center / cover no-repeat !important;
-  border: 1px solid rgba(255, 92, 24, 0.55) !important;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 26px rgba(255, 78, 16, 0.18) !important;
-}
-
-.brand-mark > *,
-.profile-avatar > * {
-  opacity: 0 !important;
-}
-
-/* Bottom bar: one icon per section, centered. */
-.bottom-terminal {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-around !important;
-  gap: 8px !important;
-  padding-inline: 18px !important;
-}
-
-.bottom-terminal button {
-  width: 58px !important;
-  min-width: 58px !important;
-  height: 58px !important;
-  padding: 0 !important;
-  display: grid !important;
-  place-items: center !important;
-  font-size: 0 !important;
-  line-height: 1 !important;
-  overflow: hidden !important;
-}
-
-.bottom-terminal button span {
-  width: 34px !important;
-  height: 34px !important;
-  display: grid !important;
-  place-items: center !important;
-  font-size: 0 !important;
-  line-height: 0 !important;
-  color: currentColor !important;
-}
-
-.bottom-terminal button span::before {
-  content: none !important;
-  display: none !important;
-}
-
-.bottom-terminal button span::after {
-  display: block !important;
-  font-size: 30px !important;
-  line-height: 1 !important;
-  font-weight: 900 !important;
-  color: currentColor !important;
-  text-shadow: 0 0 14px rgba(255, 92, 24, 0.38) !important;
-}
-
-.bottom-terminal button:nth-child(1) span::after {
-  content: '⌂';
-}
-
-.bottom-terminal button:nth-child(2) span::after {
-  content: '☷';
-}
-
-.bottom-terminal button:nth-child(3) span::after {
-  content: '▦';
-}
-
-.bottom-terminal button:nth-child(5) span::after {
-  content: '◯';
-}
-
-.bottom-terminal button.active {
-  background: linear-gradient(135deg, #ff4b18, #ff7a18) !important;
-  color: #140703 !important;
-  border-color: rgba(255, 119, 48, 0.95) !important;
-}
-
-@media (max-width: 520px) {
-  .bottom-terminal {
-    left: 18px !important;
-    right: 18px !important;
-    padding-inline: 12px !important;
-  }
-
-  .bottom-terminal button {
-    width: 52px !important;
-    min-width: 52px !important;
-    height: 52px !important;
-  }
-
-  .bottom-terminal button span {
-    width: 30px !important;
-    height: 30px !important;
-  }
-
-  .bottom-terminal button span::after {
-    font-size: 27px !important;
-  }
-}
-
-/* v13: keep the published hotfix from undoing the responsive dashboard fix. */
-.bottom-terminal {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  align-items: center !important;
-  justify-content: stretch !important;
-  gap: 6px !important;
-  right: 10px !important;
-  bottom: max(10px, env(safe-area-inset-bottom)) !important;
-  left: 10px !important;
-  padding: 8px !important;
-  border-radius: 10px !important;
-}
-
-.bottom-terminal button {
-  display: grid !important;
-  width: auto !important;
-  min-width: 0 !important;
-  min-height: 50px !important;
-  height: 50px !important;
-  place-items: center !important;
-  padding: 0 !important;
-}
-
-.bottom-terminal button span {
-  display: grid !important;
-  width: 100% !important;
-  height: 100% !important;
-  place-items: center !important;
-}
-
-.bottom-terminal button span::after {
-  content: none !important;
-  display: none !important;
-}
-
-.bottom-terminal .nav-icon {
-  width: 24px !important;
-  height: 24px !important;
-}
-
-@media (max-width: 980px) {
-  .neo-app {
-    min-height: 100svh !important;
-    padding: 16px 14px calc(116px + env(safe-area-inset-bottom)) !important;
-  }
-
-  .neo-workspace {
-    padding-bottom: calc(18px + env(safe-area-inset-bottom)) !important;
-  }
-
-  .neo-header h1 {
-    margin-bottom: 0 !important;
-    font-size: 3.1rem !important;
-    line-height: 0.92 !important;
-  }
-
-  .date-terminal {
-    display: grid !important;
-    grid-template-columns: 48px minmax(0, 1fr) 48px !important;
-    gap: 10px !important;
-    width: 100% !important;
-  }
-
-  .date-terminal button,
-  .date-terminal input {
-    min-height: 48px !important;
-    border-radius: 8px !important;
-  }
-
-  .date-terminal button {
-    width: 48px !important;
-    height: 48px !important;
-  }
-
-  .panel-head h2 {
-    font-size: 2.1rem !important;
-    line-height: 0.98 !important;
-  }
-
-  .panel-head p {
-    max-width: 34ch !important;
-    margin-bottom: 0 !important;
-    font-size: 0.94rem !important;
-    line-height: 1.42 !important;
-  }
-
-  .presence-grid.monthly.compact {
-    gap: 6px !important;
-    max-width: 380px !important;
-    margin-top: 18px !important;
-  }
-}
-
-@media (max-width: 520px) {
-  .bottom-terminal {
-    right: 10px !important;
-    left: 10px !important;
-    padding: 8px !important;
-  }
-
-  .bottom-terminal button {
-    width: auto !important;
-    min-width: 0 !important;
-    height: 50px !important;
-  }
-
-  .neo-header h1 {
-    font-size: 2.85rem !important;
-  }
-
-  .panel-head h2 {
-    font-size: 1.82rem !important;
-  }
-
-  .panel-head p {
-    font-size: 0.88rem !important;
-  }
-
-  .presence-grid.monthly.compact {
-    gap: 5px !important;
-    max-width: 330px !important;
-  }
-}
-
-/* v14: make the desktop workspace read like an app, not an oversized poster. */
-@media (min-width: 981px) {
-  .neo-app {
-    grid-template-columns: 244px minmax(0, 1fr) !important;
-    gap: 14px !important;
-    padding: 14px !important;
-  }
-
-  .neo-sidebar {
-    height: calc(100vh - 28px) !important;
-    padding: 18px !important;
-    gap: 18px !important;
-  }
-
-  .brand-mark {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 14px !important;
-  }
-
-  .brand-lockup strong {
-    font-size: 1.05rem !important;
-  }
-
-  .side-copy {
-    font-size: 0.68rem !important;
-    line-height: 1.45 !important;
-  }
-
-  .side-nav {
-    gap: 7px !important;
-  }
-
-  .side-nav button {
-    min-height: 42px !important;
-    padding: 10px 12px !important;
-    font-size: 0.82rem !important;
-  }
-
-  .neo-workspace {
-    gap: 14px !important;
-    padding: 0 !important;
-  }
-
-  .neo-header {
-    gap: 14px !important;
-  }
-
-  .neo-header h1 {
-    margin-bottom: 0 !important;
-    font-size: clamp(3rem, 4.4vw, 4.2rem) !important;
-    line-height: 0.94 !important;
-  }
-
-  .date-terminal {
-    gap: 8px !important;
-  }
-
-  .date-terminal button {
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 8px !important;
-  }
-
-  .date-terminal input {
-    min-height: 44px !important;
-    border-radius: 8px !important;
-    padding: 0 14px !important;
-  }
-
-  .profile-layout,
-  .screen-grid,
-  .task-layout {
-    gap: 14px !important;
-  }
-
-  .profile-layout {
-    grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr) !important;
-  }
-
-  .panel-large,
-  .presence-view,
-  .ai-screen,
-  .profile-card,
-  .profile-form,
-  .task-form {
-    padding: 18px !important;
-  }
-
-  .profile-avatar {
-    width: 74px !important;
-    height: 74px !important;
-    border-radius: 22px !important;
-    margin-bottom: 14px !important;
-  }
-
-  .profile-form h2,
-  .profile-card h2,
-  .panel-head h2 {
-    font-size: clamp(1.9rem, 3vw, 2.6rem) !important;
-    line-height: 0.98 !important;
-  }
-
-  .metric-strip.mini {
-    gap: 10px !important;
-  }
-
-  .metric-card {
-    min-height: 86px !important;
-    padding: 14px !important;
-  }
-
-  .metric-card strong {
-    font-size: 1.7rem !important;
-  }
-
-  .photo-upload-row {
-    border-radius: 10px !important;
-    padding: 12px !important;
-  }
-
-  .photo-preview {
-    width: 58px !important;
-    height: 58px !important;
-    border-radius: 18px !important;
-  }
-
-  .neo-form input,
-  .neo-form select,
-  .neo-form textarea,
-  .github-sync-actions input {
-    border-radius: 8px !important;
-    padding: 11px 12px !important;
-  }
-
-  .neo-form textarea {
-    min-height: 104px !important;
-  }
-
-  .neo-primary,
-  .outline-button,
-  .link-button,
-  .file-button.photo-button {
-    min-height: 44px !important;
-    border-radius: 8px !important;
-    padding: 0 14px !important;
-  }
-}
-
-/* v15: reference pass - terminal/cyberpunk todo skin without changing content. */
-:root {
-  --rt-black: #010000;
-  --rt-panel: rgba(8, 2, 0, 0.88);
-  --rt-ink: #ffefe6;
-  --rt-orange: #ff4b12;
-  --rt-orange-hot: #ff6a1a;
-  --rt-orange-dim: rgba(255, 75, 18, 0.5);
-  --rt-orange-soft: rgba(255, 75, 18, 0.12);
 }
 
 html,
 body {
   background: var(--rt-black) !important;
-}
-
-body {
-  color: var(--rt-ink) !important;
-  letter-spacing: 0 !important;
+  color: var(--rt-text) !important;
+  overflow-x: hidden;
 }
 
 body::before {
-  opacity: 0.18 !important;
+  opacity: 0.16 !important;
   background:
-    repeating-linear-gradient(180deg, rgba(255, 85, 22, 0.14) 0 1px, transparent 1px 5px),
-    radial-gradient(circle at 50% 52%, transparent 0, rgba(0, 0, 0, 0.62) 76%) !important;
+    repeating-linear-gradient(180deg, rgba(255, 78, 18, 0.13) 0 1px, transparent 1px 5px),
+    radial-gradient(circle at 50% 50%, transparent 0, rgba(0, 0, 0, 0.64) 76%) !important;
 }
 
 body::after {
-  opacity: 0.34 !important;
+  opacity: 0.28 !important;
   background:
-    linear-gradient(90deg, transparent 0 17%, rgba(255, 75, 18, 0.28) 17.08%, transparent 17.16% 100%),
-    linear-gradient(90deg, transparent 0 52%, rgba(255, 75, 18, 0.16) 52.05%, transparent 52.12% 100%),
-    linear-gradient(180deg, transparent 0 30%, rgba(255, 75, 18, 0.16) 30.04%, transparent 30.12% 100%),
-    linear-gradient(124deg, transparent 0 48%, rgba(255, 75, 18, 0.12) 48.06%, transparent 48.2% 100%) !important;
+    linear-gradient(90deg, transparent 0 16.5%, rgba(255, 75, 18, 0.22) 16.58%, transparent 16.66%),
+    linear-gradient(90deg, transparent 0 52.5%, rgba(255, 75, 18, 0.16) 52.56%, transparent 52.64%),
+    linear-gradient(180deg, transparent 0 28%, rgba(255, 75, 18, 0.12) 28.05%, transparent 28.15%),
+    linear-gradient(124deg, transparent 0 50%, rgba(255, 75, 18, 0.12) 50.05%, transparent 50.2%) !important;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: "SFMono-Regular", "Roboto Mono", "Cascadia Mono", "Courier New", monospace !important;
 }
 
 .neo-app {
+  min-height: 100vh !important;
   background:
-    radial-gradient(circle at 76% 18%, rgba(255, 75, 18, 0.08), transparent 24rem),
+    radial-gradient(circle at 76% 18%, rgba(255, 75, 18, 0.08), transparent 26rem),
     linear-gradient(rgba(255, 75, 18, 0.018) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 75, 18, 0.016) 1px, transparent 1px),
     var(--rt-black) !important;
   background-size: auto, 42px 42px, 42px 42px, auto !important;
-  color: var(--rt-ink) !important;
 }
 
 .terminal-frame,
@@ -450,32 +70,31 @@ body::after {
 .selected-report,
 .empty-terminal,
 .ai-answer {
-  border: 1px solid rgba(255, 75, 18, 0.82) !important;
+  position: relative;
+  border: 1px solid var(--rt-line) !important;
   border-radius: 8px !important;
   background:
-    linear-gradient(rgba(255, 75, 18, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 75, 18, 0.026) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 75, 18, 0.09), rgba(255, 75, 18, 0.016)),
-    rgba(3, 0, 0, 0.94) !important;
+    linear-gradient(rgba(255, 75, 18, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.028) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 75, 18, 0.085), rgba(255, 75, 18, 0.014)),
+    var(--rt-panel) !important;
   background-size: 28px 28px, 28px 28px, auto, auto !important;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 154, 88, 0.08),
-    0 0 0 1px rgba(255, 75, 18, 0.04),
-    0 0 26px rgba(255, 75, 18, 0.08) !important;
+    inset 0 0 0 1px rgba(255, 155, 90, 0.07),
+    0 0 22px rgba(255, 75, 18, 0.075) !important;
 }
 
 .terminal-frame::before,
 .metric-card::before {
-  opacity: 0.58 !important;
+  opacity: 0.48 !important;
   background:
-    linear-gradient(rgba(255, 75, 18, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 75, 18, 0.03) 1px, transparent 1px) !important;
-  background-size: 36px 36px, 36px 36px !important;
+    linear-gradient(rgba(255, 75, 18, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.028) 1px, transparent 1px) !important;
+  background-size: 34px 34px, 34px 34px !important;
 }
 
 .terminal-frame::after,
 .metric-card::after,
-.github-sync-card::after,
 .selected-report::after {
   content: "+" !important;
   position: absolute !important;
@@ -483,19 +102,22 @@ body::after {
   bottom: 8px !important;
   color: var(--rt-orange) !important;
   font-size: 0.9rem !important;
+  line-height: 1 !important;
   opacity: 0.9 !important;
   pointer-events: none !important;
 }
 
-.kicker,
-.panel-head span,
-.metric-card span,
-.sync-status-card span,
-.neo-form label,
-.friend-card small,
-.task-main span,
-p {
-  color: rgba(255, 148, 94, 0.72) !important;
+h1,
+h2,
+h3,
+.brand-lockup strong,
+.metric-card strong,
+.task-main strong {
+  color: var(--rt-text) !important;
+  letter-spacing: 0.02em !important;
+  text-shadow:
+    0 0 10px rgba(255, 75, 18, 0.22),
+    1px 0 rgba(255, 75, 18, 0.22) !important;
 }
 
 .kicker,
@@ -506,23 +128,18 @@ p {
 .side-nav button,
 .bottom-terminal button,
 .outline-button,
-.neo-primary {
+.neo-primary,
+.link-button {
+  color: var(--rt-muted) !important;
   font-weight: 900 !important;
-  letter-spacing: 0.13em !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
 }
 
-h1,
-h2,
-h3,
-.brand-lockup strong,
-.metric-card strong,
-.task-main strong {
-  color: #fff1e9 !important;
-  letter-spacing: 0.02em !important;
-  text-shadow:
-    0 0 10px rgba(255, 75, 18, 0.22),
-    1px 0 rgba(255, 75, 18, 0.24) !important;
+p,
+.task-main span,
+.friend-card small {
+  color: var(--rt-muted) !important;
 }
 
 .top-leds {
@@ -533,23 +150,29 @@ h3,
 .top-leds span {
   width: 9px !important;
   height: 9px !important;
-  border-radius: 50% !important;
   background: var(--rt-orange) !important;
-  box-shadow: 0 0 18px rgba(255, 75, 18, 0.82) !important;
+  box-shadow: 0 0 16px rgba(255, 75, 18, 0.75) !important;
 }
 
 .brand-mark,
 .profile-avatar {
-  border: 1px solid rgba(255, 75, 18, 0.82) !important;
+  color: transparent !important;
+  overflow: hidden !important;
+  border: 1px solid var(--rt-line) !important;
   border-radius: 8px !important;
-  background-color: #030000 !important;
+  background: #030000 var(--rt-icon-url) center / cover no-repeat !important;
   box-shadow:
     inset 0 0 0 1px rgba(255, 180, 122, 0.08),
-    0 0 24px rgba(255, 75, 18, 0.14) !important;
+    0 0 22px rgba(255, 75, 18, 0.14) !important;
+}
+
+.brand-mark > *,
+.profile-avatar > * {
+  opacity: 0 !important;
 }
 
 .side-copy {
-  color: rgba(255, 148, 94, 0.7) !important;
+  color: var(--rt-muted) !important;
 }
 
 .side-nav button,
@@ -560,7 +183,7 @@ h3,
 .friend-choice-row button,
 .friend-card button {
   border: 1px solid transparent !important;
-  color: rgba(255, 177, 137, 0.7) !important;
+  border-radius: 6px !important;
   background: transparent !important;
   box-shadow: none !important;
 }
@@ -572,20 +195,25 @@ h3,
 .link-button:hover,
 .weekday-row button:hover,
 .friend-choice-row button:hover,
-.friend-card button:hover {
-  border-color: rgba(255, 75, 18, 0.76) !important;
-  color: #120300 !important;
-  background: linear-gradient(180deg, var(--rt-orange-hot), var(--rt-orange)) !important;
-}
-
+.friend-card button:hover,
 .neo-primary,
 .date-terminal button,
 .weekday-row button.active,
 .friend-choice-row button.active {
-  border: 1px solid rgba(255, 75, 18, 0.95) !important;
+  border-color: var(--rt-line-hot) !important;
   color: #120300 !important;
-  background: linear-gradient(180deg, var(--rt-orange-hot), var(--rt-orange)) !important;
-  box-shadow: 0 0 24px rgba(255, 75, 18, 0.12) !important;
+  background: linear-gradient(180deg, var(--rt-orange-2), var(--rt-orange)) !important;
+  text-shadow: none !important;
+  box-shadow: 0 0 20px rgba(255, 75, 18, 0.12) !important;
+}
+
+.nav-icon {
+  stroke-width: 2.2 !important;
+}
+
+.side-nav button.active .nav-icon,
+.bottom-terminal button.active .nav-icon {
+  color: #120300 !important;
 }
 
 .neo-form input,
@@ -594,56 +222,31 @@ h3,
 .date-terminal input,
 .ai-screen textarea,
 .github-sync-actions input {
-  border: 1px solid rgba(255, 75, 18, 0.82) !important;
+  border: 1px solid var(--rt-line) !important;
   border-radius: 6px !important;
-  color: var(--rt-orange-hot) !important;
+  color: var(--rt-orange-2) !important;
   background: rgba(0, 0, 0, 0.9) !important;
-  box-shadow: inset 0 0 18px rgba(255, 75, 18, 0.055) !important;
+  box-shadow: inset 0 0 16px rgba(255, 75, 18, 0.055) !important;
+}
+
+.neo-form input:focus,
+.neo-form select:focus,
+.neo-form textarea:focus,
+.date-terminal input:focus,
+.github-sync-actions input:focus {
+  border-color: var(--rt-orange-2) !important;
+  box-shadow: 0 0 0 1px rgba(255, 75, 18, 0.7), 0 0 24px rgba(255, 75, 18, 0.14) !important;
 }
 
 .neo-form input::placeholder,
 .neo-form textarea::placeholder,
 .github-sync-actions input::placeholder {
-  color: rgba(255, 148, 94, 0.48) !important;
-}
-
-.date-terminal {
-  padding: 0 !important;
-}
-
-.date-terminal button {
-  font-size: 1.1rem !important;
-}
-
-.date-terminal input {
-  font-weight: 900 !important;
-  letter-spacing: 0.1em !important;
-}
-
-.metric-strip {
-  gap: 10px !important;
-}
-
-.metric-card {
-  min-height: 78px !important;
-}
-
-.metric-card span {
-  margin-bottom: 8px !important;
-  font-size: 0.62rem !important;
-}
-
-.metric-card strong {
-  font-size: clamp(1.5rem, 3vw, 2.05rem) !important;
-}
-
-.task-row {
-  border-radius: 7px !important;
+  color: rgba(255, 148, 94, 0.46) !important;
 }
 
 .task-check,
 .task-delete {
-  border: 1px solid rgba(255, 75, 18, 0.72) !important;
+  border: 1px solid var(--rt-line) !important;
   border-radius: 5px !important;
   color: var(--rt-orange) !important;
   background: rgba(255, 75, 18, 0.055) !important;
@@ -657,7 +260,7 @@ h3,
 
 .presence-grid.monthly,
 .task-month-grid {
-  filter: drop-shadow(0 0 12px rgba(255, 75, 18, 0.16)) !important;
+  filter: drop-shadow(0 0 12px rgba(255, 75, 18, 0.15)) !important;
 }
 
 .presence-cell {
@@ -691,27 +294,17 @@ h3,
 
 @media (min-width: 981px) {
   .neo-app {
-    grid-template-columns: minmax(220px, 255px) minmax(0, 1fr) !important;
-    min-height: 100vh !important;
-    gap: 18px !important;
-    padding: 18px !important;
+    grid-template-columns: 252px minmax(0, 1fr) !important;
+    gap: 16px !important;
+    padding: 16px !important;
   }
 
   .neo-sidebar {
-    position: sticky !important;
-    top: 18px !important;
-    height: calc(100vh - 36px) !important;
-    border-radius: 8px !important;
+    top: 16px !important;
+    height: calc(100vh - 32px) !important;
     padding: 18px !important;
-    gap: 20px !important;
-  }
-
-  .neo-sidebar::after {
-    content: "+" !important;
-    right: 16px !important;
-    bottom: 12px !important;
-    color: var(--rt-orange) !important;
-    font-size: 1rem !important;
+    gap: 18px !important;
+    border-radius: 8px !important;
   }
 
   .brand-lockup {
@@ -724,7 +317,7 @@ h3,
   }
 
   .brand-lockup strong {
-    font-size: 1.1rem !important;
+    font-size: 1.08rem !important;
   }
 
   .brand-lockup small {
@@ -732,7 +325,7 @@ h3,
   }
 
   .side-copy {
-    max-width: 21ch !important;
+    max-width: 22ch !important;
     font-size: 0.68rem !important;
     line-height: 1.55 !important;
   }
@@ -742,151 +335,298 @@ h3,
   }
 
   .side-nav button {
-    min-height: 44px !important;
-    border-radius: 6px !important;
-    padding: 10px 12px !important;
+    min-height: 42px !important;
+    padding: 9px 12px !important;
+    font-size: 0.8rem !important;
   }
 
   .neo-workspace {
-    gap: 18px !important;
+    gap: 14px !important;
     padding: 0 !important;
   }
 
   .neo-header {
     align-items: flex-start !important;
-    gap: 18px !important;
+    gap: 16px !important;
   }
 
   .neo-header h1 {
-    font-size: clamp(3.4rem, 5.2vw, 5.8rem) !important;
-    line-height: 0.86 !important;
+    margin-bottom: 0 !important;
+    font-size: clamp(3.1rem, 4.5vw, 4.8rem) !important;
+    line-height: 0.88 !important;
   }
 
   .date-terminal {
     align-self: start !important;
+    gap: 8px !important;
   }
 
   .date-terminal button {
     width: 38px !important;
     height: 38px !important;
+    font-size: 1rem !important;
   }
 
   .date-terminal input {
     min-height: 38px !important;
+    min-width: 190px !important;
+    padding: 0 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.08em !important;
   }
 
-  .screen-grid,
-  .task-layout,
-  .profile-layout {
-    grid-template-columns: minmax(0, 1.16fr) minmax(340px, 0.84fr) !important;
-    gap: 18px !important;
+  .screen-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
   }
 
-  .profile-card,
-  .profile-form,
+  .screen-grid .loggd-card {
+    order: 1 !important;
+  }
+
+  .screen-grid > .metric-strip {
+    order: 2 !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin: 0 !important;
+  }
+
+  .screen-grid > .terminal-frame.panel-large:not(.loggd-card) {
+    order: 3 !important;
+  }
+
   .panel-large,
   .presence-view,
-  .task-form,
-  .ai-screen {
-    padding: 20px !important;
+  .profile-card,
+  .profile-form,
+  .task-form {
+    padding: 18px !important;
+  }
+
+  .panel-head {
+    gap: 14px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .panel-head h2 {
+    margin-bottom: 8px !important;
+    font-size: clamp(1.95rem, 3vw, 3rem) !important;
+    line-height: 0.96 !important;
+  }
+
+  .panel-head p {
+    max-width: 64ch !important;
+    margin-bottom: 0 !important;
+    line-height: 1.5 !important;
+  }
+
+  .panel-head .outline-button {
+    min-height: 40px !important;
+    align-self: start !important;
+    padding: 0 18px !important;
+    white-space: nowrap !important;
+  }
+
+  .presence-grid.monthly.compact {
+    max-width: 420px !important;
+    gap: 8px !important;
+    margin: 18px auto 0 !important;
+  }
+
+  .selected-report {
+    margin-top: 16px !important;
+    padding: 12px 14px !important;
+  }
+
+  .selected-report h3 {
+    font-size: 1.1rem !important;
+    line-height: 1.1 !important;
+  }
+
+  .metric-card {
+    min-height: 86px !important;
+    padding: 14px !important;
+  }
+
+  .metric-card span {
+    margin-bottom: 8px !important;
+    font-size: 0.62rem !important;
+  }
+
+  .metric-card strong {
+    font-size: 1.8rem !important;
+  }
+
+  .profile-layout,
+  .task-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr) !important;
+    gap: 16px !important;
   }
 
   .profile-avatar {
-    width: 76px !important;
-    height: 76px !important;
+    width: 70px !important;
+    height: 70px !important;
     border-radius: 8px !important;
-  }
-
-  .profile-form h2,
-  .profile-card h2,
-  .panel-head h2 {
-    font-size: clamp(2rem, 3.2vw, 3.2rem) !important;
+    margin-bottom: 14px !important;
   }
 
   .photo-upload-row {
     border-radius: 8px !important;
+    padding: 12px !important;
   }
 
   .photo-preview {
     width: 58px !important;
     height: 58px !important;
-    border-radius: 8px !important;
+  }
+
+  .neo-form input,
+  .neo-form select,
+  .neo-form textarea,
+  .github-sync-actions input {
+    padding: 11px 12px !important;
+  }
+
+  .neo-form textarea {
+    min-height: 104px !important;
   }
 }
 
 @media (max-width: 980px) {
   .neo-app {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    min-height: 100svh !important;
+    padding: 14px 12px calc(108px + env(safe-area-inset-bottom)) !important;
     background-size: auto, 34px 34px, 34px 34px, auto !important;
   }
 
+  .neo-sidebar {
+    display: none !important;
+  }
+
+  .neo-workspace {
+    gap: 14px !important;
+    padding: 0 !important;
+  }
+
+  .neo-header {
+    align-items: stretch !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
   .neo-header h1 {
-    font-size: clamp(2.7rem, 12vw, 4.2rem) !important;
+    margin-bottom: 0 !important;
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    line-height: 0.9 !important;
   }
 
-  .terminal-frame,
-  .metric-card,
+  .date-terminal {
+    display: grid !important;
+    grid-template-columns: 46px minmax(0, 1fr) 46px !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .date-terminal button,
+  .date-terminal input {
+    min-height: 46px !important;
+  }
+
+  .date-terminal button {
+    width: 46px !important;
+    height: 46px !important;
+  }
+
+  .screen-grid,
+  .task-layout,
+  .profile-layout {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .screen-grid > .metric-strip {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .panel-large,
+  .presence-view,
+  .profile-card,
+  .profile-form,
+  .task-form {
+    padding: 16px !important;
+  }
+
+  .panel-head {
+    display: grid !important;
+    gap: 12px !important;
+  }
+
+  .panel-head h2 {
+    font-size: clamp(1.75rem, 9vw, 2.6rem) !important;
+  }
+
+  .presence-grid.monthly.compact {
+    max-width: 330px !important;
+    gap: 5px !important;
+    margin-top: 14px !important;
+  }
+
+  .metric-card {
+    min-height: 82px !important;
+    padding: 13px !important;
+  }
+
   .bottom-terminal {
+    position: fixed !important;
+    right: 10px !important;
+    bottom: max(10px, env(safe-area-inset-bottom)) !important;
+    left: 10px !important;
+    z-index: 20 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+    padding: 8px !important;
+    border: 1px solid var(--rt-line) !important;
     border-radius: 8px !important;
-  }
-
-  .bottom-terminal {
     background:
       linear-gradient(rgba(255, 75, 18, 0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(255, 75, 18, 0.028) 1px, transparent 1px),
       rgba(2, 0, 0, 0.94) !important;
     background-size: 24px 24px, 24px 24px, auto !important;
   }
-}
 
-/* v16: keep auth screens inside narrow mobile viewports. */
-.neo-auth {
-  width: 100% !important;
-  overflow-x: hidden !important;
-}
+  .bottom-terminal button {
+    display: grid !important;
+    min-width: 0 !important;
+    min-height: 50px !important;
+    place-items: center !important;
+    padding: 0 !important;
+    font-size: 0 !important;
+  }
 
-.neo-auth .auth-frame {
-  max-width: min(460px, calc(100vw - 32px)) !important;
-}
-
-@media (max-width: 520px) {
-  .neo-auth {
-    padding: 18px 16px !important;
+  .bottom-terminal button span {
+    display: grid !important;
+    width: 100% !important;
+    height: 100% !important;
     place-items: center !important;
   }
 
-  .neo-auth .auth-frame {
-    width: 100% !important;
-    max-width: calc(100vw - 32px) !important;
-    padding: 18px !important;
-  }
-
-  .neo-auth .auth-frame h1 {
-    font-size: clamp(2.45rem, 14vw, 3.35rem) !important;
-    line-height: 0.92 !important;
-    overflow-wrap: anywhere !important;
+  .bottom-terminal .nav-icon {
+    width: 24px !important;
+    height: 24px !important;
   }
 }
 
-@media (max-width: 380px) {
-  .neo-auth {
-    padding-inline: 12px !important;
-  }
-
-  .neo-auth .auth-frame {
-    max-width: calc(100vw - 24px) !important;
-    padding: 16px !important;
-  }
-
-  .neo-auth .auth-frame h1 {
-    font-size: clamp(2.2rem, 13vw, 2.85rem) !important;
-  }
-}
-
-/* v17: hard clamp auth layout to the viewport on installed/mobile browsers. */
 @media (max-width: 620px) {
   .neo-auth {
     display: flex !important;
     width: 100vw !important;
+    min-height: 100svh !important;
     min-width: 0 !important;
     justify-content: center !important;
     align-items: center !important;
@@ -899,7 +639,7 @@ h3,
     min-width: 0 !important;
     max-width: 360px !important;
     margin: 0 auto !important;
-    justify-self: center !important;
+    padding: 18px !important;
   }
 
   .neo-auth .auth-frame,
@@ -908,8 +648,8 @@ h3,
     max-width: 100% !important;
   }
 
-  .neo-auth .auth-frame h1,
-  .neo-auth .auth-frame p {
-    overflow-wrap: anywhere !important;
+  .neo-auth .auth-frame h1 {
+    font-size: clamp(2.35rem, 13vw, 3.25rem) !important;
+    line-height: 0.92 !important;
   }
 }

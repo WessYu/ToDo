@@ -927,3 +927,307 @@ p,
     line-height: 0.92 !important;
   }
 }
+
+/* Commercial cyberpunk refinement: product polish without losing the RT terminal soul. */
+:root {
+  --rt-black: #020100;
+  --rt-panel: rgba(10, 3, 0, 0.88);
+  --rt-panel-deep: rgba(2, 0, 0, 0.96);
+  --rt-line: rgba(255, 84, 24, 0.64);
+  --rt-line-hot: rgba(255, 92, 28, 0.98);
+  --rt-orange: #ff4f19;
+  --rt-orange-2: #ff8a1c;
+  --rt-cyan: #53e6ff;
+  --rt-text: #fff1e8;
+  --rt-muted: rgba(255, 171, 118, 0.76);
+  --rt-shadow-premium:
+    0 0 0 1px rgba(255, 115, 56, 0.08),
+    0 20px 70px rgba(0, 0, 0, 0.68),
+    0 0 34px rgba(255, 76, 18, 0.08);
+}
+
+body::before {
+  opacity: 0.2 !important;
+}
+
+body::after {
+  opacity: 0.22 !important;
+  background:
+    linear-gradient(90deg, transparent 0 18%, rgba(255, 75, 18, 0.2) 18.08%, transparent 18.18%),
+    linear-gradient(90deg, transparent 0 58%, rgba(83, 230, 255, 0.08) 58.06%, transparent 58.16%),
+    linear-gradient(180deg, transparent 0 31%, rgba(255, 75, 18, 0.12) 31.05%, transparent 31.16%),
+    linear-gradient(127deg, transparent 0 53%, rgba(255, 75, 18, 0.14) 53.05%, transparent 53.2%) !important;
+}
+
+.neo-app {
+  background:
+    radial-gradient(circle at 74% 12%, rgba(255, 88, 24, 0.12), transparent 24rem),
+    radial-gradient(circle at 22% 82%, rgba(83, 230, 255, 0.035), transparent 24rem),
+    linear-gradient(rgba(255, 75, 18, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.014) 1px, transparent 1px),
+    var(--rt-black) !important;
+}
+
+.terminal-frame,
+.metric-card,
+.task-row,
+.github-sync-card,
+.friend-share-box,
+.friend-card,
+.task-presence-card,
+.monthly-overview,
+.fixed-toggle,
+.selected-report,
+.empty-terminal,
+.ai-answer {
+  background:
+    linear-gradient(135deg, rgba(255, 95, 28, 0.12), transparent 38%),
+    linear-gradient(rgba(255, 75, 18, 0.034) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 75, 18, 0.024) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 75, 18, 0.07), rgba(255, 75, 18, 0.012)),
+    var(--rt-panel) !important;
+  border-color: rgba(255, 88, 24, 0.78) !important;
+  box-shadow: var(--rt-shadow-premium) !important;
+}
+
+.terminal-frame::before,
+.metric-card::before {
+  opacity: 0.36 !important;
+}
+
+.terminal-frame::after,
+.metric-card::after,
+.selected-report::after {
+  color: var(--rt-cyan) !important;
+  opacity: 0.66 !important;
+}
+
+h1,
+h2,
+h3,
+.brand-lockup strong,
+.metric-card strong,
+.task-main strong {
+  letter-spacing: 0 !important;
+  text-shadow:
+    0 0 16px rgba(255, 78, 18, 0.22),
+    0 0 2px rgba(255, 241, 232, 0.36) !important;
+}
+
+.kicker,
+.panel-head span,
+.metric-card span,
+.sync-status-card span,
+.neo-form label {
+  color: var(--rt-orange-2) !important;
+}
+
+.neo-primary,
+.date-terminal button,
+.weekday-row button.active,
+.friend-choice-row button.active {
+  color: #110300 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 181, 76, 0.98), rgba(255, 76, 18, 0.98)),
+    var(--rt-orange) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 241, 232, 0.42),
+    0 0 26px rgba(255, 80, 24, 0.24) !important;
+}
+
+.outline-button,
+.link-button,
+.weekday-row button,
+.friend-choice-row button,
+.friend-card button {
+  color: var(--rt-orange-2) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 76, 18, 0.08), rgba(255, 76, 18, 0.015)) !important;
+}
+
+.neo-form input,
+.neo-form select,
+.neo-form textarea,
+.date-terminal input,
+.ai-screen textarea,
+.github-sync-actions input {
+  background:
+    linear-gradient(180deg, rgba(255, 76, 18, 0.035), transparent),
+    rgba(0, 0, 0, 0.91) !important;
+}
+
+.alert.success {
+  border-color: rgba(83, 230, 255, 0.46) !important;
+  color: #dffaff !important;
+  background: rgba(83, 230, 255, 0.08) !important;
+}
+
+.presence-cell.selected {
+  outline-color: var(--rt-cyan) !important;
+  box-shadow:
+    0 0 0 3px rgba(83, 230, 255, 0.28),
+    0 0 22px rgba(255, 75, 18, 0.46) !important;
+}
+
+@media (min-width: 981px) {
+  .neo-app {
+    grid-template-columns: 248px minmax(0, 1fr) !important;
+    width: min(1600px, calc(100vw - 64px)) !important;
+    margin: 28px auto !important;
+  }
+
+  .neo-sidebar {
+    min-height: 710px !important;
+    padding: 18px !important;
+    gap: 18px !important;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 143, 82, 0.07),
+      0 0 42px rgba(255, 75, 18, 0.08) !important;
+  }
+
+  .neo-sidebar::before {
+    content: "RITMO OS\A TODO ENGINE\A ONLINE" !important;
+    width: 100% !important;
+    min-height: 44px !important;
+    padding: 8px 10px !important;
+    border-color: rgba(255, 88, 24, 0.64) !important;
+    color: var(--rt-orange-2) !important;
+    background:
+      linear-gradient(90deg, rgba(255, 75, 18, 0.13), transparent 68%),
+      rgba(0, 0, 0, 0.72) !important;
+  }
+
+  .brand-lockup {
+    padding: 6px 0 10px !important;
+    border-bottom: 1px solid rgba(255, 75, 18, 0.18) !important;
+  }
+
+  .brand-mark {
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+  }
+
+  .side-nav button {
+    min-height: 46px !important;
+    padding: 10px 12px !important;
+  }
+
+  .side-nav button.active {
+    transform: translateX(4px) !important;
+  }
+
+  .neo-workspace {
+    gap: 16px !important;
+  }
+
+  .neo-workspace::before {
+    inset: 92px 0 0 0 !important;
+    opacity: 0.54 !important;
+    background:
+      radial-gradient(circle at 24% 24%, transparent 0 114px, rgba(255, 75, 18, 0.2) 115px, transparent 117px),
+      radial-gradient(circle at 72% 32%, rgba(255, 75, 18, 0.08) 0 90px, rgba(255, 75, 18, 0.34) 91px, transparent 93px),
+      radial-gradient(circle at 65% 88%, transparent 0 186px, rgba(83, 230, 255, 0.12) 187px, transparent 189px),
+      linear-gradient(90deg, transparent 0 40%, rgba(255, 75, 18, 0.18) 40.08%, transparent 40.18%),
+      linear-gradient(90deg, transparent 0 70%, rgba(83, 230, 255, 0.08) 70.08%, transparent 70.18%),
+      linear-gradient(180deg, transparent 0 48%, rgba(255, 75, 18, 0.13) 48.08%, transparent 48.18%),
+      linear-gradient(132deg, transparent 0 55%, rgba(255, 75, 18, 0.14) 55.08%, transparent 55.18%) !important;
+  }
+
+  .neo-header {
+    min-height: 88px !important;
+  }
+
+  .neo-header .kicker::after {
+    content: " / SYSTEM READY" !important;
+    color: rgba(83, 230, 255, 0.72) !important;
+  }
+
+  .neo-header h1 {
+    font-size: clamp(3.4rem, 4.8vw, 5.4rem) !important;
+  }
+
+  .screen-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(252px, 320px) !important;
+    gap: 16px !important;
+  }
+
+  .screen-grid .loggd-card {
+    grid-template-columns: minmax(320px, 0.92fr) minmax(240px, 0.5fr) !important;
+    min-height: 420px !important;
+    padding: 20px !important;
+  }
+
+  .panel-large,
+  .presence-view,
+  .profile-card,
+  .profile-form,
+  .task-form {
+    padding: 20px !important;
+  }
+
+  .panel-head h2 {
+    font-size: clamp(2.2rem, 3.3vw, 3.35rem) !important;
+  }
+
+  .panel-head p {
+    color: rgba(255, 188, 146, 0.82) !important;
+    font-size: 0.98rem !important;
+  }
+
+  .presence-grid.monthly.compact {
+    max-width: 260px !important;
+    gap: 5px !important;
+  }
+
+  .metric-card {
+    min-height: 104px !important;
+    padding: 16px !important;
+  }
+
+  .metric-card strong {
+    font-size: 2rem !important;
+  }
+
+  .task-row {
+    min-height: 62px !important;
+    padding: 12px !important;
+  }
+
+  .task-row:hover,
+  .friend-card:hover,
+  .metric-card:hover {
+    border-color: var(--rt-line-hot) !important;
+    box-shadow:
+      var(--rt-shadow-premium),
+      0 0 0 1px rgba(83, 230, 255, 0.08) !important;
+  }
+
+  .profile-layout {
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr) !important;
+  }
+
+  .friends-panel {
+    grid-template-columns: minmax(310px, 0.64fr) minmax(0, 1fr) !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .neo-app {
+    background:
+      radial-gradient(circle at 78% 4%, rgba(255, 80, 24, 0.12), transparent 17rem),
+      linear-gradient(rgba(255, 75, 18, 0.017) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 75, 18, 0.013) 1px, transparent 1px),
+      var(--rt-black) !important;
+  }
+
+  .panel-head p {
+    color: rgba(255, 188, 146, 0.82) !important;
+  }
+
+  .bottom-terminal {
+    box-shadow:
+      0 -16px 52px rgba(0, 0, 0, 0.74),
+      0 0 26px rgba(255, 75, 18, 0.1) !important;
+  }
+}

@@ -2020,3 +2020,305 @@ p,
     background-size: 12px 12px, auto !important;
   }
 }
+
+/* Resolution alignment contract. Keep every surface centered and bounded. */
+html,
+body,
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  scrollbar-gutter: stable both-edges;
+}
+
+.neo-auth {
+  width: 100% !important;
+  min-height: 100svh !important;
+  place-items: center !important;
+  padding: clamp(12px, 3vw, 32px) !important;
+}
+
+.neo-auth .auth-frame {
+  width: min(100%, 460px) !important;
+  margin-inline: auto !important;
+}
+
+.neo-app,
+.neo-workspace,
+.neo-header,
+.screen-grid,
+.task-layout,
+.profile-layout,
+.presence-view,
+.panel-large,
+.profile-card,
+.profile-form,
+.task-form,
+.friends-panel,
+.metric-strip,
+.task-list,
+.friend-list,
+.github-sync-card,
+.monthly-overview,
+.selected-report {
+  min-width: 0 !important;
+}
+
+.neo-workspace,
+.screen-grid,
+.task-layout,
+.profile-layout,
+.presence-view,
+.panel-large,
+.profile-card,
+.profile-form,
+.task-form,
+.friends-panel {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.terminal-frame,
+.metric-card,
+.task-row,
+.friend-card,
+.selected-report,
+.github-sync-card,
+.monthly-overview,
+.task-presence-card {
+  max-width: 100% !important;
+}
+
+.neo-header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: start !important;
+}
+
+.neo-header > div:first-child,
+.panel-head > div,
+.task-main,
+.friend-card > div {
+  min-width: 0 !important;
+}
+
+.neo-header h1,
+.panel-head h2,
+.profile-card h2,
+.task-main strong,
+.friend-card strong,
+.friend-card small,
+.selected-report h3 {
+  max-width: 100% !important;
+  overflow-wrap: anywhere !important;
+}
+
+.date-terminal {
+  justify-self: end !important;
+}
+
+.date-terminal input {
+  min-width: 0 !important;
+}
+
+.presence-grid,
+.presence-grid.monthly,
+.presence-grid.monthly.compact,
+.task-month-grid {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overscroll-behavior-x: contain !important;
+}
+
+@media (min-width: 1500px) {
+  .neo-app {
+    grid-template-columns: 260px minmax(0, 1fr) !important;
+    width: min(1680px, calc(100vw - 96px)) !important;
+    margin-inline: auto !important;
+  }
+
+  .screen-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px) !important;
+  }
+}
+
+@media (min-width: 1281px) and (max-width: 1499px) {
+  .neo-app {
+    grid-template-columns: 244px minmax(0, 1fr) !important;
+    width: min(100%, calc(100vw - 56px)) !important;
+    margin-inline: auto !important;
+  }
+
+  .screen-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 310px) !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1280px) {
+  .neo-app {
+    grid-template-columns: 220px minmax(0, 1fr) !important;
+    width: min(100%, calc(100vw - 36px)) !important;
+    margin: 18px auto !important;
+    gap: 14px !important;
+  }
+
+  .neo-sidebar {
+    padding: 14px !important;
+  }
+
+  .neo-header {
+    gap: 12px !important;
+  }
+
+  .neo-header h1 {
+    font-size: clamp(2.8rem, 5.2vw, 4.25rem) !important;
+  }
+
+  .screen-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas:
+      "presence"
+      "metrics"
+      "tasks" !important;
+  }
+
+  .screen-grid .loggd-card,
+  .screen-grid > .terminal-frame.panel-large:not(.loggd-card),
+  .screen-grid > .metric-strip {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-area: auto !important;
+  }
+
+  .screen-grid .loggd-card {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px) !important;
+  }
+
+  .screen-grid > .metric-strip {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+
+  .profile-layout,
+  .task-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .profile-layout > *,
+  .task-layout > *,
+  .friends-panel {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-area: auto !important;
+  }
+}
+
+@media (max-width: 980px) {
+  body {
+    scrollbar-gutter: auto;
+  }
+
+  .neo-auth {
+    padding: 16px 12px !important;
+  }
+
+  .neo-auth .auth-frame {
+    width: min(100%, 320px) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+
+  .neo-app {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 12px 10px calc(104px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .neo-header {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .date-terminal {
+    justify-self: stretch !important;
+    width: 100% !important;
+  }
+
+  .screen-grid,
+  .task-layout,
+  .profile-layout,
+  .screen-grid .loggd-card,
+  .profile-layout > .profile-form:not(.friends-panel),
+  .friends-panel,
+  .github-sync-card,
+  .monthly-overview,
+  .task-presence-board,
+  .friend-list {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: none !important;
+    gap: 12px !important;
+  }
+
+  .screen-grid > *,
+  .task-layout > *,
+  .profile-layout > *,
+  .friends-panel > *,
+  .github-sync-card > *,
+  .monthly-overview > * {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    grid-area: auto !important;
+  }
+
+  .metric-strip,
+  .profile-card .metric-strip.mini,
+  .screen-grid > .metric-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .neo-app {
+    padding-inline: 8px !important;
+  }
+
+  .neo-auth .auth-frame {
+    width: min(100%, 300px) !important;
+    max-width: calc(100vw - 20px) !important;
+  }
+
+  .neo-header h1 {
+    font-size: clamp(2rem, 13vw, 3.05rem) !important;
+  }
+
+  .metric-strip,
+  .profile-card .metric-strip.mini,
+  .screen-grid > .metric-strip {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .friend-choice-row,
+  .weekday-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .neo-auth .auth-frame {
+    width: min(100%, 280px) !important;
+    padding: 14px !important;
+  }
+
+  .date-terminal {
+    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+  }
+
+  .bottom-terminal {
+    left: 6px !important;
+    right: 6px !important;
+    max-width: calc(100vw - 12px) !important;
+  }
+}

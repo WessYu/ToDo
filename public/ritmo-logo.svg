@@ -1,0 +1,110 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Ritmo Presence</title>
+  <desc id="desc">Industrial monochrome logo with a modular R, segmented presence arc, and red status mark.</desc>
+  <rect width="512" height="512" fill="#050505"/>
+  <path d="M105 89H407C416.389 89 424 96.6112 424 106V406C424 415.389 416.389 423 407 423H105C95.6112 423 88 415.389 88 406V106C88 96.6112 95.6112 89 105 89Z" stroke="#F5F5F5" stroke-opacity="0.2" stroke-width="2"/>
+  <g opacity="0.18">
+    <circle cx="128" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="128" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="160" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="192" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="224" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="256" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="288" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="320" r="2" fill="#F5F5F5"/>
+    <circle cx="128" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="160" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="192" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="224" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="256" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="288" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="320" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="352" cy="352" r="2" fill="#F5F5F5"/>
+    <circle cx="384" cy="352" r="2" fill="#F5F5F5"/>
+  </g>
+  <g fill="#F5F5F5">
+    <rect x="154" y="150" width="28" height="28" rx="3"/>
+    <rect x="186" y="150" width="28" height="28" rx="3"/>
+    <rect x="218" y="150" width="28" height="28" rx="3"/>
+    <rect x="250" y="150" width="28" height="28" rx="3"/>
+    <rect x="154" y="182" width="28" height="28" rx="3"/>
+    <rect x="250" y="182" width="28" height="28" rx="3"/>
+    <rect x="154" y="214" width="28" height="28" rx="3"/>
+    <rect x="186" y="214" width="28" height="28" rx="3"/>
+    <rect x="218" y="214" width="28" height="28" rx="3"/>
+    <rect x="250" y="214" width="28" height="28" rx="3"/>
+    <rect x="154" y="246" width="28" height="28" rx="3"/>
+    <rect x="218" y="246" width="28" height="28" rx="3"/>
+    <rect x="154" y="278" width="28" height="28" rx="3"/>
+    <rect x="250" y="278" width="28" height="28" rx="3"/>
+    <rect x="154" y="310" width="28" height="28" rx="3"/>
+    <rect x="282" y="310" width="28" height="28" rx="3"/>
+  </g>
+  <g stroke="#F5F5F5" stroke-width="14" stroke-linecap="square" opacity="0.95">
+    <path d="M336 164C367.966 191.72 387 225.334 387 256"/>
+    <path d="M388 292C380.144 320.008 362.18 342.771 337 360"/>
+  </g>
+  <g opacity="0.34" stroke="#F5F5F5" stroke-width="8" stroke-linecap="square">
+    <path d="M326 139H376"/>
+    <path d="M351 114V164"/>
+    <path d="M326 373H376"/>
+    <path d="M351 348V398"/>
+  </g>
+  <circle cx="380" cy="132" r="13" fill="#D71921"/>
+  <path d="M126 401H386" stroke="#F5F5F5" stroke-opacity="0.34" stroke-width="8" stroke-linecap="square" stroke-dasharray="28 14"/>
+</svg>

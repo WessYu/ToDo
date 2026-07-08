@@ -156,12 +156,59 @@ function namesFor(task, friends) {
   return (task.sharedWith || []).map((friendId) => friends.find((friend) => friend.id === friendId)?.name).filter(Boolean).join(', ');
 }
 
+function parseFriendInput(value) {
+  const clean = value.trim();
+  if (!clean) return { type: 'empty', title: 'Comece por um convite, email ou nome', detail: 'O Ritmo identifica o formato automaticamente.' };
+
+  const looksLikeInvite = clean.startsWith('ritmo://') || /^[A-Za-z0-9+/=]{40,}$/.test(clean);
+  if (looksLikeInvite) {
+    try {
+      const invite = decodeInvite(clean);
+      return {
+        type: 'invite',
+        accountId: invite.id,
+        name: invite.name || invite.username || invite.email || 'Novo amigo',
+        email: invite.email || '',
+        avatar: invite.avatar || String(invite.name || invite.email || 'A').slice(0, 1).toUpperCase(),
+        title: invite.name || invite.username || invite.email || 'Convite Ritmo',
+        detail: invite.email ? `Conta Ritmo: ${invite.email}` : 'Convite de conta Ritmo detectado.',
+      };
+    } catch {
+      return { type: 'invalid', title: 'Convite invalido', detail: 'Confira se o codigo foi copiado inteiro.' };
+    }
+  }
+
+  const emailMatch = clean.match(/[^\s@]+@[^\s@]+\.[^\s@]+/);
+  if (emailMatch) {
+    const email = emailMatch[0].toLowerCase();
+    const name = clean.replace(emailMatch[0], '').replace(/[<>()]/g, '').trim() || email.split('@')[0];
+    return {
+      type: 'email',
+      name,
+      email,
+      avatar: name.slice(0, 1).toUpperCase(),
+      title: name,
+      detail: `Contato por email: ${email}`,
+    };
+  }
+
+  return {
+    type: 'name',
+    name: clean,
+    email: '',
+    avatar: clean.slice(0, 1).toUpperCase(),
+    title: clean,
+    detail: 'Contato local para compartilhar tarefas neste app.',
+  };
+}
+
 function isImageAvatar(value) {
   return typeof value === 'string' && value.startsWith('data:image/');
 }
 
 function Avatar({ value, fallback, className }) {
-  return <div className={className}>{isImageAvatar(value) ? <img src={value} alt="Foto de perfil" /> : <span>{value || fallback || 'R'}</span>}</div>;
+  const safeFallback = String(value || fallback || 'R').trim().slice(0, 2).toUpperCase() || 'R';
+  return <div className={className}>{isImageAvatar(value) ? <img src={value} alt="Foto de perfil" /> : <span>{safeFallback}</span>}</div>;
 }
 
 function encodeInvite(user) {
@@ -253,6 +300,85 @@ function EmptyTerminal({ title, text }) {
   return <div className="empty-terminal"><span>~</span><strong>{title}</strong><p>{text}</p></div>;
 }
 
+function FriendsPanel({
+  friends,
+  myInviteCode,
+  smartFriendInput,
+  setSmartFriendInput,
+  friendPreview,
+  addSmartFriend,
+  shareInvite,
+  copyInvite,
+  removeFriend,
+  startSharedTask,
+}) {
+  const inviteUrl = `ritmo://${myInviteCode}`;
+  const previewInitial = String(friendPreview.avatar || friendPreview.name || 'R').slice(0, 2).toUpperCase();
+  const previewState = friendPreview.type === 'empty' ? 'idle' : friendPreview.type === 'invalid' || friendPreview.disabled ? 'blocked' : 'ready';
+  const previewLabel = friendPreview.type === 'invite' ? 'Convite Ritmo' : friendPreview.type === 'email' ? 'Email detectado' : friendPreview.type === 'name' ? 'Contato local' : 'Entrada inteligente';
+
+  return (
+    <section className="terminal-frame profile-form friends-panel">
+      <div className="panel-head">
+        <div>
+          <span className="kicker">FRIEND LINK</span>
+          <h2>Adicionar amigos</h2>
+          <p>Compartilhe seu link ou cole qualquer contato no campo. O Ritmo entende convite, email ou nome.</p>
+        </div>
+        <strong className="friend-count">{friends.length}</strong>
+      </div>
+
+      <div className="invite-console">
+        <div>
+          <span className="kicker">MEU CONVITE</span>
+          <strong>{inviteUrl.slice(0, 28)}...</strong>
+          <p>Quem receber esse link cola no campo abaixo e entra direto na sua lista.</p>
+        </div>
+        <div className="invite-actions">
+          <button className="neo-primary" type="button" onClick={shareInvite}>ENVIAR</button>
+          <button className="outline-button" type="button" onClick={copyInvite}>COPIAR</button>
+        </div>
+      </div>
+
+      <form className="smart-friend-form" onSubmit={addSmartFriend}>
+        <label>
+          Adicionar agora
+          <input
+            value={smartFriendInput}
+            onChange={(event) => setSmartFriendInput(event.target.value)}
+            placeholder="Cole ritmo://..., email@site.com ou nome"
+            autoCapitalize="none"
+          />
+        </label>
+        <div className={`friend-preview ${previewState}`}>
+          <span>{previewInitial}</span>
+          <div>
+            <small>{previewLabel}</small>
+            <strong>{friendPreview.title}</strong>
+            <p>{friendPreview.detail}</p>
+          </div>
+        </div>
+        <button className="neo-primary" type="submit" disabled={previewState !== 'ready'}>ADICIONAR</button>
+      </form>
+
+      <div className="friend-list interactive">
+        {friends.map((friend) => (
+          <article className="friend-card" key={friend.id}>
+            <span>{friend.avatar || friend.name.slice(0, 1)}</span>
+            <div>
+              <strong>{friend.name}</strong>
+              <small>{friend.email || 'contato local'} / {friend.status === 'manual' ? 'manual' : 'conectado'}</small>
+            </div>
+            <button type="button" onClick={() => startSharedTask(friend.id)}>Tarefa</button>
+            <button type="button" onClick={() => removeFriend(friend.id)}>X</button>
+          </article>
+        ))}
+        {!friends.length && <EmptyTerminal title="Sem amigos ainda" text="Envie seu convite ou cole um contato para comecar." />}
+      </div>
+    </section>
+  );
+}
+
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
   const [user, setUser] = useState(null);
@@ -270,8 +396,7 @@ function App() {
   const [draftWeekdays, setDraftWeekdays] = useState([1, 2, 3, 4, 5]);
   const [draftSharedWith, setDraftSharedWith] = useState([]);
   const [profileDraft, setProfileDraft] = useState({ name: '', username: '', bio: '', avatar: '', githubUsername: '' });
-  const [friendDraft, setFriendDraft] = useState({ name: '', email: '', avatar: '' });
-  const [inviteCode, setInviteCode] = useState('');
+  const [smartFriendInput, setSmartFriendInput] = useState('');
   const [githubSyncing, setGithubSyncing] = useState(false);
   const [aiPrompt, setAiPrompt] = useState('');
   const [aiAnswer, setAiAnswer] = useState('');
@@ -297,6 +422,14 @@ function App() {
   const selectedMonthLabel = formatDate(`${monthKey(selectedDate)}-01`, { month: 'long', year: 'numeric' });
   const bestDay = presenceDays.reduce((best, day) => day.total > best.total ? day : best, selectedPresence);
   const myInviteCode = user ? encodeInvite(user) : '';
+  const friendPreview = useMemo(() => {
+    const preview = parseFriendInput(smartFriendInput);
+    if (preview.type === 'empty' || preview.type === 'invalid') return preview;
+    if (preview.email && preview.email === user?.email) return { ...preview, type: 'invalid', title: 'Este e o seu proprio email', detail: 'Use o convite de outra pessoa para adicionar um amigo.' };
+    const exists = data.friends.some((friend) => (preview.email && friend.email?.toLowerCase() === preview.email) || (preview.accountId && friend.accountId === preview.accountId) || String(friend.name || '').trim().toLowerCase() === String(preview.name || '').trim().toLowerCase());
+    if (exists) return { ...preview, disabled: true, detail: 'Esse amigo ja esta na sua lista.' };
+    return preview;
+  }, [data.friends, smartFriendInput, user?.email]);
 
   useEffect(() => {
     if (!token) {
@@ -412,39 +545,33 @@ function App() {
     setData((current) => ({ ...current, fixedTasks: current.fixedTasks.filter((item) => item.id !== fixedTaskId), tasks: current.tasks.filter((task) => task.fixedTaskId !== fixedTaskId) }));
   }
 
-  function addFriend(event) {
+  function addSmartFriend(event) {
     event.preventDefault();
-    const email = friendDraft.email.trim().toLowerCase();
-    const name = friendDraft.name.trim() || email.split('@')[0] || '';
-    if (!name) {
-      setError('Informe pelo menos nome ou email do amigo.');
+    if (friendPreview.type === 'empty') {
+      setError('Digite um convite, email ou nome para adicionar.');
       return;
     }
-    const exists = data.friends.some((friend) => (email && friend.email?.toLowerCase() === email) || String(friend.name || '').trim().toLowerCase() === name.toLowerCase());
-    if (exists) {
+    if (friendPreview.type === 'invalid') {
+      setError(friendPreview.detail || 'Nao consegui identificar esse contato.');
+      return;
+    }
+    if (friendPreview.disabled) {
       setError('Esse amigo ja esta na sua lista.');
       return;
     }
-    const friend = { id: makeId('friend'), name, email, avatar: friendDraft.avatar.trim().slice(0, 2).toUpperCase() || name.slice(0, 1).toUpperCase(), createdAt: new Date().toISOString(), status: 'accepted' };
-    setData((current) => ({ ...current, friends: [friend, ...current.friends] }));
-    setFriendDraft({ name: '', email: '', avatar: '' });
-    setError('Amigo adicionado. Agora voce pode marcar tarefas com essa pessoa.');
-  }
 
-  function acceptInvite(event) {
-    event.preventDefault();
-    try {
-      const invite = decodeInvite(inviteCode);
-      if (!invite.email || invite.email === user.email) throw new Error('Convite invalido.');
-      const exists = data.friends.some((friend) => friend.email === invite.email || friend.accountId === invite.id);
-      if (exists) throw new Error('Esse amigo ja esta na sua lista.');
-      const friend = { id: makeId('friend'), accountId: invite.id, name: invite.name || invite.username || invite.email, email: invite.email, avatar: invite.avatar || String(invite.name || invite.email).slice(0, 1).toUpperCase(), createdAt: new Date().toISOString(), status: 'accepted' };
-      setData((current) => ({ ...current, friends: [friend, ...current.friends] }));
-      setInviteCode('');
-      setError('Convite aceito. Agora voce pode marcar tarefas com esse amigo.');
-    } catch (inviteError) {
-      setError(inviteError instanceof Error ? inviteError.message : 'Convite invalido.');
-    }
+    const friend = {
+      id: makeId('friend'),
+      accountId: friendPreview.accountId,
+      name: friendPreview.name,
+      email: friendPreview.email || '',
+      avatar: String(friendPreview.avatar || friendPreview.name || 'A').slice(0, 2).toUpperCase(),
+      createdAt: new Date().toISOString(),
+      status: friendPreview.type === 'invite' ? 'accepted' : 'manual',
+    };
+    setData((current) => ({ ...current, friends: [friend, ...current.friends] }));
+    setSmartFriendInput('');
+    setError(friendPreview.type === 'invite' ? 'Convite aceito. Agora voce pode marcar tarefas com esse amigo.' : 'Amigo adicionado. Agora voce pode marcar tarefas com essa pessoa.');
   }
 
   function removeFriend(friendId) {
@@ -460,6 +587,22 @@ function App() {
     } catch {
       setError('Nao consegui compartilhar o convite.');
     }
+  }
+
+  async function copyInvite() {
+    try {
+      await navigator.clipboard.writeText(`ritmo://${myInviteCode}`);
+      setError('Convite copiado para a area de transferencia.');
+    } catch {
+      await shareInvite();
+    }
+  }
+
+  function startSharedTask(friendId) {
+    setDraftSharedWith([friendId]);
+    setDraftFixed(false);
+    setView('tarefas');
+    setError('Amigo selecionado. Crie a tarefa e ela ja fica compartilhada.');
   }
 
   async function handlePhotoUpload(event) {
@@ -524,7 +667,7 @@ function App() {
   if (booting) return <main className="neo-auth"><section className="terminal-frame auth-frame"><span className="kicker">LOADING</span><h1>Sincronizando...</h1></section></main>;
   if (!token || !user) return <AuthScreen onAuth={handleAuth} />;
 
-  return <div className="neo-app"><aside className="neo-sidebar terminal-frame"><div className="top-leds" aria-hidden="true"><span /><span /><span /></div><div className="brand-lockup"><Avatar className="brand-mark" value={user.avatar} fallback="R" /><div><strong>Ritmo</strong><small>@{user.username}</small></div></div><p className="side-copy">CONTA DO SITE / FRIENDS / TASK PRESENCE / GITHUB</p><nav className="side-nav">{navItems.map((item) => <button key={item.id} className={view === item.id ? 'active' : ''} type="button" onClick={() => setView(item.id)}><span><Icon name={item.icon} /></span>{item.label}</button>)}</nav><button className="outline-button" type="button" onClick={logout}>SAIR</button></aside><main className="neo-workspace"><header className="neo-header"><div><span className="kicker">RT-78 / {formatDate(selectedDate, { weekday: 'long' })}</span><h1>{view === 'hoje' ? 'Painel' : view === 'presenca' ? 'Presenca' : view === 'tarefas' ? 'Tarefas' : view === 'perfil' ? 'Perfil' : 'OpenAI'}</h1></div><div className="date-terminal"><button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), -1)))}>&lt;</button><input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} /><button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), 1)))}>&gt;</button></div></header>{error && <div className={error.includes('salvo') || error.includes('sincronizado') || error.includes('carregada') || error.includes('aceito') || error.includes('Copiado') || error.includes('Compartilhamento') ? 'alert success' : 'alert error'}>{error}</div>}{view === 'hoje' && <section className="screen-grid"><section className="terminal-frame panel-large loggd-card"><div className="panel-head"><div><span className="kicker">TODAS AS TAREFAS / {selectedMonthLabel}</span><h2>Presenca mensal</h2><p>Resumo geral da Home somando tarefas fixas, tarefas avulsas, tarefas compartilhadas e GitHub.</p></div><button className="outline-button" type="button" onClick={() => setView('presenca')}>ABRIR</button></div><MonthGrid days={presenceDays} selectedDate={selectedDate} onSelectDate={setSelectedDate} compact /><div className="selected-report inline-report"><span className="kicker">SELECTED DATE</span><h3>{formatDate(selectedDate, { day: '2-digit', month: 'long', year: 'numeric' })}</h3><p>{selectedPresence.completed}/{selectedPresence.planned} tarefa(s) e {selectedPresence.github} GitHub.</p></div></section><div className="metric-strip"><div className="metric-card"><span>MES DONE</span><strong>{monthCompleted}</strong></div><div className="metric-card"><span>MES PLANEJADO</span><strong>{monthPlanned}</strong></div><div className="metric-card"><span>GITHUB MES</span><strong>{monthGithub}</strong></div><div className="metric-card"><span>AMIGOS</span><strong>{data.friends.length}</strong></div><div className="metric-card"><span>BEST DAY</span><strong>{bestDay.total}</strong></div></div><section className="terminal-frame panel-large"><div className="panel-head"><div><span className="kicker">TASK LOG</span><h2>{formatDate(selectedDate, { day: '2-digit', month: 'long' })}</h2></div><button className="outline-button" type="button" onClick={() => setView('tarefas')}>NOVA</button></div><div className="task-list">{selectedFixedItems.map((item) => <TaskRow key={item.fixedTask.id} task={item.task} friends={data.friends} fixed onToggle={() => toggleFixedTask(item.fixedTask.id)} onRemove={() => removeFixedTask(item.fixedTask.id)} />)}{selectedOneOffTasks.map((task) => <TaskRow key={task.id} task={task} friends={data.friends} onToggle={toggleTask} onRemove={removeTask} />)}{!selectedTasks.length && <EmptyTerminal title="Nenhuma tarefa nesse dia" text="Crie uma tarefa normal, fixa ou compartilhada." />}</div></section></section>}{view === 'tarefas' && <section className="task-layout"><form className="terminal-frame neo-form task-form" onSubmit={addTask}><span className="kicker">NOVA TAREFA</span><h2>{draftFixed ? 'Criar tarefa fixa' : 'Registrar tarefa'}</h2><label>Titulo<input value={draftTitle} onChange={(event) => setDraftTitle(event.target.value)} placeholder="Ex.: estudar React" /></label><div className="field-row"><label>Hora<input type="time" value={draftTime} onChange={(event) => setDraftTime(event.target.value)} /></label><label>Prioridade<select value={draftPriority} onChange={(event) => setDraftPriority(event.target.value)}><option value="baixa">Baixa</option><option value="media">Media</option><option value="alta">Alta</option></select></label></div><label>Projeto<input value={draftProject} onChange={(event) => setDraftProject(event.target.value)} placeholder="Opcional" /></label><div className="friend-share-box"><span className="kicker">COMPARTILHAR COM</span>{data.friends.length ? <div className="friend-choice-row">{data.friends.map((friend) => <button key={friend.id} type="button" className={draftSharedWith.includes(friend.id) ? 'active' : ''} onClick={() => toggleFriend(friend.id)}><span>{friend.avatar || friend.name.slice(0, 1)}</span>{friend.name}</button>)}</div> : <p>Adicione amigos no Perfil para criar tarefas compartilhadas.</p>}</div><label className="fixed-toggle"><input type="checkbox" checked={draftFixed} onChange={(event) => setDraftFixed(event.target.checked)} />Tornar tarefa fixa</label>{draftFixed && <div className="weekday-row">{weekLabels.map((day) => <button key={`${day.value}-${day.label}`} type="button" className={draftWeekdays.includes(day.value) ? 'active' : ''} onClick={() => toggleWeekday(day.value)} title={day.title}>{day.label}</button>)}</div>}<button className="neo-primary" type="submit">{draftFixed ? 'ADICIONAR FIXA' : 'ADICIONAR'}</button></form><section className="terminal-frame panel-large"><div className="panel-head"><div><span className="kicker">DAY QUEUE</span><h2>{selectedCompleted}/{selectedTasks.length} completas</h2></div></div><div className="task-list">{selectedFixedItems.map((item) => <TaskRow key={item.fixedTask.id} task={item.task} friends={data.friends} fixed onToggle={() => toggleFixedTask(item.fixedTask.id)} onRemove={() => removeFixedTask(item.fixedTask.id)} />)}{selectedOneOffTasks.map((task) => <TaskRow key={task.id} task={task} friends={data.friends} onToggle={toggleTask} onRemove={removeTask} />)}{!selectedTasks.length && <EmptyTerminal title="Fila vazia" text="Adicione blocos de foco, tarefas fixas ou tarefas com amigos." />}</div></section></section>}{view === 'presenca' && <section className="presence-view terminal-frame"><div className="panel-head"><div><span className="kicker">MENSAL / TAREFAS + GITHUB</span><h2>Presenca mensal</h2><p>O primeiro calendario soma tudo. Abaixo, cada tarefa tem seu proprio calendario mensal.</p></div><div className="presence-legend"><span /><span /><span /><span /><span /></div></div><section className="monthly-overview"><div className="monthly-overview-copy"><span className="kicker">GERAL DO MES</span><strong>{selectedMonthLabel}</strong><p>{monthCompleted}/{monthPlanned} tarefa(s), {monthGithub} GitHub e {activeDays} dia(s) ativos.</p></div><MonthGrid days={presenceDays} selectedDate={selectedDate} onSelectDate={setSelectedDate} /></section><div className="selected-report"><span className="kicker">SELECTED DATE</span><h3>{formatDate(selectedDate, { day: '2-digit', month: 'long', year: 'numeric' })}</h3><p>{selectedPresence.completed} tarefa(s) concluida(s), {selectedPresence.planned} planejada(s), {selectedPresence.github} GitHub.</p></div><section className="task-presence-section"><div className="panel-head slim"><div><span className="kicker">POR TAREFA</span><h2>Calendarios individuais</h2><p>Cada tarefa fixa ou avulsa do mes ganha seu proprio mapa.</p></div></div><div className="task-presence-board">{calendars.map((calendar) => <article className="task-presence-card" key={calendar.id}><div><span className="kicker">{calendar.meta}</span><strong>{calendar.title}</strong><p>{calendar.completed}/{calendar.planned} concluidas</p></div><MiniTaskGrid calendar={calendar} selectedDate={selectedDate} /></article>)}{!calendars.length && <EmptyTerminal title="Sem tarefas no mes" text="Crie tarefas para gerar calendarios individuais." />}</div></section><div className="github-sync-card"><div><span className="kicker">GITHUB COMO EXTRA</span><strong>{data.github.username ? `@${data.github.username}` : 'Nenhum GitHub conectado'}</strong><p>{data.github.syncedAt ? `Sincronizado em ${new Date(data.github.syncedAt).toLocaleString('pt-BR')}` : 'GitHub entra como atividade extra, nao como centro da tela.'}</p></div><div className="github-sync-actions"><input value={profileDraft.githubUsername} onChange={(event) => setProfileDraft((current) => ({ ...current, githubUsername: event.target.value }))} placeholder="WessYu" /><button className="neo-primary" type="button" onClick={syncGithub} disabled={githubSyncing}>{githubSyncing ? 'SYNC...' : 'SINCRONIZAR'}</button></div></div></section>}{view === 'perfil' && <section className="profile-layout"><div className="terminal-frame profile-card"><Avatar className="profile-avatar" value={user.avatar} fallback="R" /><span className="kicker">CONTA DO SITE</span><h2>{user.name}</h2><p>@{user.username}</p><p>{user.email}</p><p>Login, senha, foto e dados salvos nesta conta.</p><div className="metric-strip mini"><div className="metric-card"><span>TASKS</span><strong>{data.tasks.length}</strong></div><div className="metric-card"><span>FIXAS</span><strong>{data.fixedTasks.length}</strong></div><div className="metric-card"><span>DONE</span><strong>{totalCompleted}</strong></div><div className="metric-card"><span>AMIGOS</span><strong>{data.friends.length}</strong></div></div></div><form className="terminal-frame neo-form profile-form" onSubmit={saveProfile}><span className="kicker">USER PROFILE</span><h2>Editar perfil</h2><div className="photo-upload-row"><Avatar className="profile-avatar photo-preview" value={profileDraft.avatar} fallback={profileDraft.name?.slice(0, 1) || 'R'} /><label className="file-button photo-button">Carregar foto<input type="file" accept="image/*" onChange={handlePhotoUpload} /></label></div><label>Nome<input value={profileDraft.name} onChange={(event) => setProfileDraft((current) => ({ ...current, name: event.target.value }))} /></label><label>Usuario<input value={profileDraft.username} onChange={(event) => setProfileDraft((current) => ({ ...current, username: event.target.value }))} /></label><label>GitHub username<input value={profileDraft.githubUsername} onChange={(event) => setProfileDraft((current) => ({ ...current, githubUsername: event.target.value }))} placeholder="WessYu" /></label><label>Avatar texto ou imagem<input value={isImageAvatar(profileDraft.avatar) ? 'foto carregada' : profileDraft.avatar} onChange={(event) => setProfileDraft((current) => ({ ...current, avatar: event.target.value.slice(0, 2) }))} maxLength={20} /></label><label>Bio<textarea value={profileDraft.bio} onChange={(event) => setProfileDraft((current) => ({ ...current, bio: event.target.value }))} placeholder="Foco, estudo, dev, design..." /></label><button className="neo-primary" type="submit">SALVAR PERFIL</button><button className="outline-button" type="button" onClick={syncGithub} disabled={githubSyncing}>{githubSyncing ? 'SINCRONIZANDO...' : 'VINCULAR / SINCRONIZAR GITHUB'}</button></form><section className="terminal-frame profile-form friends-panel"><span className="kicker">CONVITE REAL</span><h2>Adicionar amigos</h2><p>Envie seu convite pelo botao abaixo. A outra pessoa cola o codigo aqui para virar amigo e aparecer nas tarefas compartilhadas.</p><button className="neo-primary" type="button" onClick={shareInvite}>ENVIAR CONVITE</button><form className="neo-form friend-form" onSubmit={acceptInvite}><label>Codigo recebido<input value={inviteCode} onChange={(event) => setInviteCode(event.target.value)} placeholder="ritmo://..." /></label><button className="outline-button" type="submit">ACEITAR CONVITE</button></form><form className="neo-form friend-form" onSubmit={addFriend}><span className="kicker">ADICIONAR MANUAL</span><label>Nome<input value={friendDraft.name} onChange={(event) => setFriendDraft((current) => ({ ...current, name: event.target.value }))} placeholder="Nome da pessoa" /></label><label>Email<input value={friendDraft.email} onChange={(event) => setFriendDraft((current) => ({ ...current, email: event.target.value }))} placeholder="Opcional" /></label><label>Avatar<input value={friendDraft.avatar} onChange={(event) => setFriendDraft((current) => ({ ...current, avatar: event.target.value }))} maxLength={2} placeholder="A" /></label><button className="neo-primary" type="submit">ADICIONAR AMIGO</button></form><div className="friend-list">{data.friends.map((friend) => <article className="friend-card" key={friend.id}><span>{friend.avatar || friend.name.slice(0, 1)}</span><div><strong>{friend.name}</strong><small>{friend.email || 'sem email'}</small></div><button type="button" onClick={() => removeFriend(friend.id)}>X</button></article>)}{!data.friends.length && <EmptyTerminal title="Sem amigos ainda" text="Envie ou aceite um convite para compartilhar tarefas." />}</div></section></section>}{view === 'ia' && <section className="terminal-frame ai-screen"><span className="kicker">OPENAI PLANNER</span><h2>Planejamento inteligente</h2><p>A IA considera tarefas, amigos, conta do site, GitHub e presenca mensal.</p><textarea value={aiPrompt} onChange={(event) => setAiPrompt(event.target.value)} placeholder="Pergunte: o que devo priorizar hoje?" /><button className="neo-primary" type="button" onClick={askAi} disabled={aiLoading}>{aiLoading ? 'GERANDO...' : 'GERAR PLANO'}</button><div className="ai-answer">{aiAnswer || 'A resposta aparece aqui.'}</div></section>}</main><nav className="bottom-terminal">{navItems.map((item) => <button key={item.id} className={view === item.id ? 'active' : ''} type="button" onClick={() => setView(item.id)}><span><Icon name={item.icon} /></span>{item.label}</button>)}</nav></div>;
+  return <div className="neo-app"><aside className="neo-sidebar terminal-frame"><div className="top-leds" aria-hidden="true"><span /><span /><span /></div><div className="brand-lockup"><Avatar className="brand-mark" value={user.avatar} fallback="R" /><div><strong>Ritmo</strong><small>@{user.username}</small></div></div><p className="side-copy">CONTA DO SITE / FRIENDS / TASK PRESENCE / GITHUB</p><nav className="side-nav">{navItems.map((item) => <button key={item.id} className={view === item.id ? 'active' : ''} type="button" onClick={() => setView(item.id)}><span><Icon name={item.icon} /></span>{item.label}</button>)}</nav><button className="outline-button" type="button" onClick={logout}>SAIR</button></aside><main className="neo-workspace"><header className="neo-header"><div><span className="kicker">RT-78 / {formatDate(selectedDate, { weekday: 'long' })}</span><h1>{view === 'hoje' ? 'Painel' : view === 'presenca' ? 'Presenca' : view === 'tarefas' ? 'Tarefas' : view === 'perfil' ? 'Perfil' : 'OpenAI'}</h1></div><div className="date-terminal"><button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), -1)))}>&lt;</button><input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} /><button type="button" onClick={() => setSelectedDate(isoDate(addDays(parseIso(selectedDate), 1)))}>&gt;</button></div></header>{error && <div className={error.includes('salvo') || error.includes('sincronizado') || error.includes('carregada') || error.includes('aceito') || error.includes('Copiado') || error.includes('Compartilhamento') ? 'alert success' : 'alert error'}>{error}</div>}{view === 'hoje' && <section className="screen-grid"><section className="terminal-frame panel-large loggd-card"><div className="panel-head"><div><span className="kicker">TODAS AS TAREFAS / {selectedMonthLabel}</span><h2>Presenca mensal</h2><p>Resumo geral da Home somando tarefas fixas, tarefas avulsas, tarefas compartilhadas e GitHub.</p></div><button className="outline-button" type="button" onClick={() => setView('presenca')}>ABRIR</button></div><MonthGrid days={presenceDays} selectedDate={selectedDate} onSelectDate={setSelectedDate} compact /><div className="selected-report inline-report"><span className="kicker">SELECTED DATE</span><h3>{formatDate(selectedDate, { day: '2-digit', month: 'long', year: 'numeric' })}</h3><p>{selectedPresence.completed}/{selectedPresence.planned} tarefa(s) e {selectedPresence.github} GitHub.</p></div></section><div className="metric-strip"><div className="metric-card"><span>MES DONE</span><strong>{monthCompleted}</strong></div><div className="metric-card"><span>MES PLANEJADO</span><strong>{monthPlanned}</strong></div><div className="metric-card"><span>GITHUB MES</span><strong>{monthGithub}</strong></div><div className="metric-card"><span>AMIGOS</span><strong>{data.friends.length}</strong></div><div className="metric-card"><span>BEST DAY</span><strong>{bestDay.total}</strong></div></div><section className="terminal-frame panel-large"><div className="panel-head"><div><span className="kicker">TASK LOG</span><h2>{formatDate(selectedDate, { day: '2-digit', month: 'long' })}</h2></div><button className="outline-button" type="button" onClick={() => setView('tarefas')}>NOVA</button></div><div className="task-list">{selectedFixedItems.map((item) => <TaskRow key={item.fixedTask.id} task={item.task} friends={data.friends} fixed onToggle={() => toggleFixedTask(item.fixedTask.id)} onRemove={() => removeFixedTask(item.fixedTask.id)} />)}{selectedOneOffTasks.map((task) => <TaskRow key={task.id} task={task} friends={data.friends} onToggle={toggleTask} onRemove={removeTask} />)}{!selectedTasks.length && <EmptyTerminal title="Nenhuma tarefa nesse dia" text="Crie uma tarefa normal, fixa ou compartilhada." />}</div></section></section>}{view === 'tarefas' && <section className="task-layout"><form className="terminal-frame neo-form task-form" onSubmit={addTask}><span className="kicker">NOVA TAREFA</span><h2>{draftFixed ? 'Criar tarefa fixa' : 'Registrar tarefa'}</h2><label>Titulo<input value={draftTitle} onChange={(event) => setDraftTitle(event.target.value)} placeholder="Ex.: estudar React" /></label><div className="field-row"><label>Hora<input type="time" value={draftTime} onChange={(event) => setDraftTime(event.target.value)} /></label><label>Prioridade<select value={draftPriority} onChange={(event) => setDraftPriority(event.target.value)}><option value="baixa">Baixa</option><option value="media">Media</option><option value="alta">Alta</option></select></label></div><label>Projeto<input value={draftProject} onChange={(event) => setDraftProject(event.target.value)} placeholder="Opcional" /></label><div className="friend-share-box"><span className="kicker">COMPARTILHAR COM</span>{data.friends.length ? <div className="friend-choice-row">{data.friends.map((friend) => <button key={friend.id} type="button" className={draftSharedWith.includes(friend.id) ? 'active' : ''} onClick={() => toggleFriend(friend.id)}><span>{friend.avatar || friend.name.slice(0, 1)}</span>{friend.name}</button>)}</div> : <p>Adicione amigos no Perfil para criar tarefas compartilhadas.</p>}</div><label className="fixed-toggle"><input type="checkbox" checked={draftFixed} onChange={(event) => setDraftFixed(event.target.checked)} />Tornar tarefa fixa</label>{draftFixed && <div className="weekday-row">{weekLabels.map((day) => <button key={`${day.value}-${day.label}`} type="button" className={draftWeekdays.includes(day.value) ? 'active' : ''} onClick={() => toggleWeekday(day.value)} title={day.title}>{day.label}</button>)}</div>}<button className="neo-primary" type="submit">{draftFixed ? 'ADICIONAR FIXA' : 'ADICIONAR'}</button></form><section className="terminal-frame panel-large"><div className="panel-head"><div><span className="kicker">DAY QUEUE</span><h2>{selectedCompleted}/{selectedTasks.length} completas</h2></div></div><div className="task-list">{selectedFixedItems.map((item) => <TaskRow key={item.fixedTask.id} task={item.task} friends={data.friends} fixed onToggle={() => toggleFixedTask(item.fixedTask.id)} onRemove={() => removeFixedTask(item.fixedTask.id)} />)}{selectedOneOffTasks.map((task) => <TaskRow key={task.id} task={task} friends={data.friends} onToggle={toggleTask} onRemove={removeTask} />)}{!selectedTasks.length && <EmptyTerminal title="Fila vazia" text="Adicione blocos de foco, tarefas fixas ou tarefas com amigos." />}</div></section></section>}{view === 'presenca' && <section className="presence-view terminal-frame"><div className="panel-head"><div><span className="kicker">MENSAL / TAREFAS + GITHUB</span><h2>Presenca mensal</h2><p>O primeiro calendario soma tudo. Abaixo, cada tarefa tem seu proprio calendario mensal.</p></div><div className="presence-legend"><span /><span /><span /><span /><span /></div></div><section className="monthly-overview"><div className="monthly-overview-copy"><span className="kicker">GERAL DO MES</span><strong>{selectedMonthLabel}</strong><p>{monthCompleted}/{monthPlanned} tarefa(s), {monthGithub} GitHub e {activeDays} dia(s) ativos.</p></div><MonthGrid days={presenceDays} selectedDate={selectedDate} onSelectDate={setSelectedDate} /></section><div className="selected-report"><span className="kicker">SELECTED DATE</span><h3>{formatDate(selectedDate, { day: '2-digit', month: 'long', year: 'numeric' })}</h3><p>{selectedPresence.completed} tarefa(s) concluida(s), {selectedPresence.planned} planejada(s), {selectedPresence.github} GitHub.</p></div><section className="task-presence-section"><div className="panel-head slim"><div><span className="kicker">POR TAREFA</span><h2>Calendarios individuais</h2><p>Cada tarefa fixa ou avulsa do mes ganha seu proprio mapa.</p></div></div><div className="task-presence-board">{calendars.map((calendar) => <article className="task-presence-card" key={calendar.id}><div><span className="kicker">{calendar.meta}</span><strong>{calendar.title}</strong><p>{calendar.completed}/{calendar.planned} concluidas</p></div><MiniTaskGrid calendar={calendar} selectedDate={selectedDate} /></article>)}{!calendars.length && <EmptyTerminal title="Sem tarefas no mes" text="Crie tarefas para gerar calendarios individuais." />}</div></section><div className="github-sync-card"><div><span className="kicker">GITHUB COMO EXTRA</span><strong>{data.github.username ? `@${data.github.username}` : 'Nenhum GitHub conectado'}</strong><p>{data.github.syncedAt ? `Sincronizado em ${new Date(data.github.syncedAt).toLocaleString('pt-BR')}` : 'GitHub entra como atividade extra, nao como centro da tela.'}</p></div><div className="github-sync-actions"><input value={profileDraft.githubUsername} onChange={(event) => setProfileDraft((current) => ({ ...current, githubUsername: event.target.value }))} placeholder="WessYu" /><button className="neo-primary" type="button" onClick={syncGithub} disabled={githubSyncing}>{githubSyncing ? 'SYNC...' : 'SINCRONIZAR'}</button></div></div></section>}{view === 'perfil' && <section className="profile-layout"><div className="terminal-frame profile-card"><Avatar className="profile-avatar" value={user.avatar} fallback="R" /><span className="kicker">CONTA DO SITE</span><h2>{user.name}</h2><p>@{user.username}</p><p>{user.email}</p><p>Login, senha, foto e dados salvos nesta conta.</p><div className="metric-strip mini"><div className="metric-card"><span>TASKS</span><strong>{data.tasks.length}</strong></div><div className="metric-card"><span>FIXAS</span><strong>{data.fixedTasks.length}</strong></div><div className="metric-card"><span>DONE</span><strong>{totalCompleted}</strong></div><div className="metric-card"><span>AMIGOS</span><strong>{data.friends.length}</strong></div></div></div><form className="terminal-frame neo-form profile-form" onSubmit={saveProfile}><span className="kicker">USER PROFILE</span><h2>Editar perfil</h2><div className="photo-upload-row"><Avatar className="profile-avatar photo-preview" value={profileDraft.avatar} fallback={profileDraft.name?.slice(0, 1) || 'R'} /><label className="file-button photo-button">Carregar foto<input type="file" accept="image/*" onChange={handlePhotoUpload} /></label></div><label>Nome<input value={profileDraft.name} onChange={(event) => setProfileDraft((current) => ({ ...current, name: event.target.value }))} /></label><label>Usuario<input value={profileDraft.username} onChange={(event) => setProfileDraft((current) => ({ ...current, username: event.target.value }))} /></label><label>GitHub username<input value={profileDraft.githubUsername} onChange={(event) => setProfileDraft((current) => ({ ...current, githubUsername: event.target.value }))} placeholder="WessYu" /></label><label>Avatar texto ou imagem<input value={isImageAvatar(profileDraft.avatar) ? 'foto carregada' : profileDraft.avatar} onChange={(event) => setProfileDraft((current) => ({ ...current, avatar: event.target.value.slice(0, 2) }))} maxLength={20} /></label><label>Bio<textarea value={profileDraft.bio} onChange={(event) => setProfileDraft((current) => ({ ...current, bio: event.target.value }))} placeholder="Foco, estudo, dev, design..." /></label><button className="neo-primary" type="submit">SALVAR PERFIL</button><button className="outline-button" type="button" onClick={syncGithub} disabled={githubSyncing}>{githubSyncing ? 'SINCRONIZANDO...' : 'VINCULAR / SINCRONIZAR GITHUB'}</button></form><FriendsPanel friends={data.friends} myInviteCode={myInviteCode} smartFriendInput={smartFriendInput} setSmartFriendInput={setSmartFriendInput} friendPreview={friendPreview} addSmartFriend={addSmartFriend} shareInvite={shareInvite} copyInvite={copyInvite} removeFriend={removeFriend} startSharedTask={startSharedTask} /></section>}{view === 'ia' && <section className="terminal-frame ai-screen"><span className="kicker">OPENAI PLANNER</span><h2>Planejamento inteligente</h2><p>A IA considera tarefas, amigos, conta do site, GitHub e presenca mensal.</p><textarea value={aiPrompt} onChange={(event) => setAiPrompt(event.target.value)} placeholder="Pergunte: o que devo priorizar hoje?" /><button className="neo-primary" type="button" onClick={askAi} disabled={aiLoading}>{aiLoading ? 'GERANDO...' : 'GERAR PLANO'}</button><div className="ai-answer">{aiAnswer || 'A resposta aparece aqui.'}</div></section>}</main><nav className="bottom-terminal">{navItems.map((item) => <button key={item.id} className={view === item.id ? 'active' : ''} type="button" onClick={() => setView(item.id)}><span><Icon name={item.icon} /></span>{item.label}</button>)}</nav></div>;
 }
 
 export default App;

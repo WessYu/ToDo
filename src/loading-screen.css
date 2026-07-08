@@ -230,3 +230,59 @@
     font-size: clamp(2.08rem, 9.8vw, 3.5rem);
   }
 }
+
+/* Keep the boot screen aligned with the Nothing-inspired theme loaded in saka.css. */
+.neo-auth:has(.auth-frame:not(:has(form))) {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    #000000;
+  background-size: 16px 16px, auto;
+}
+
+.neo-auth:has(.auth-frame:not(:has(form)))::before,
+.neo-auth:has(.auth-frame:not(:has(form)))::after,
+.neo-auth .auth-frame:not(:has(form)) .kicker::before,
+.neo-auth .auth-frame:not(:has(form)) .kicker::after,
+.neo-auth .auth-frame:not(:has(form)) h1::after {
+  display: none;
+}
+
+.neo-auth .auth-frame:not(:has(form)) {
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: #0d0d0d;
+  box-shadow: none;
+}
+
+.neo-auth .auth-frame:not(:has(form))::before {
+  height: 10px;
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(90deg, var(--text) 0 18px, transparent 18px 22px),
+    #222222;
+  box-shadow: none;
+}
+
+.neo-auth .auth-frame:not(:has(form))::after {
+  display: block;
+  content: "";
+  right: 28px;
+  bottom: 29px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--nothing-accent);
+  animation: loadPulse 1.2s ease-in-out infinite alternate;
+}
+
+.neo-auth .auth-frame:not(:has(form)) .kicker {
+  color: var(--muted);
+  text-shadow: none;
+}
+
+.neo-auth .auth-frame:not(:has(form)) h1 {
+  color: var(--text);
+  font-family: "Doto", "Space Mono", monospace;
+  letter-spacing: 0;
+  text-shadow: none;
+}

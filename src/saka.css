@@ -573,3 +573,878 @@ p {
     max-width: 300px;
   }
 }
+
+/* Nothing-inspired visual pass: monochrome, industrial, type-led. */
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --panel: #0d0d0d;
+  --panel-2: #151515;
+  --line: #252525;
+  --line-strong: #3a3a3a;
+  --text: #f5f5f5;
+  --muted: #8f8f8f;
+  --orange: #f5f5f5;
+  --orange-2: #ffffff;
+  --red: #d71921;
+  --green: #4a9e5c;
+  --shadow: none;
+  --nothing-accent: #d71921;
+  --nothing-disabled: #5f5f5f;
+  --nothing-grid: rgba(255, 255, 255, 0.06);
+  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  background: #000000;
+  color: var(--text);
+}
+
+html {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    #000000;
+  background-size: 16px 16px, auto;
+}
+
+body {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    #000000;
+  background-size: 96px 100%, 100% 96px, auto;
+  color: var(--text);
+  letter-spacing: 0;
+}
+
+body::before,
+body::after,
+.terminal-frame::after,
+.metric-card::after,
+.neo-auth:has(.auth-frame:not(:has(form)))::before,
+.neo-auth:has(.auth-frame:not(:has(form)))::after,
+.neo-auth .auth-frame:not(:has(form)) .kicker::before,
+.neo-auth .auth-frame:not(:has(form)) .kicker::after,
+.neo-auth .auth-frame:not(:has(form)) h1::after {
+  display: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+.brand-lockup strong,
+.metric-card strong,
+.monthly-overview-copy strong,
+.task-presence-card strong,
+.sync-status-card strong,
+.empty-terminal strong {
+  color: var(--text);
+  font-family: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-shadow: none;
+  text-transform: none;
+}
+
+h1 {
+  font-family: "Doto", "Space Mono", monospace;
+  font-size: clamp(3.1rem, 8vw, 7.2rem);
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+h2 {
+  font-size: clamp(2rem, 4.6vw, 4.6rem);
+  line-height: 0.95;
+}
+
+h3 {
+  line-height: 1.15;
+}
+
+p,
+.task-main span,
+.brand-lockup small,
+.friend-card small,
+.selected-report p,
+.monthly-overview-copy p,
+.task-presence-card p,
+.sync-status-card p,
+.friend-share-box p,
+.friends-panel p {
+  color: var(--muted);
+}
+
+.kicker,
+.panel-head span,
+.sync-status-card span,
+.metric-card span,
+.side-copy,
+.neo-form label,
+.task-main strong small,
+.bottom-terminal button,
+.side-nav button,
+.friend-choice-row button,
+.neo-primary,
+.outline-button,
+.link-button,
+.date-terminal button,
+.weekday-row button,
+.file-button.photo-button {
+  font-family: "Space Mono", "JetBrains Mono", "Cascadia Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.kicker,
+.panel-head span,
+.sync-status-card span,
+.metric-card span {
+  color: var(--muted);
+}
+
+.neo-app {
+  gap: 20px;
+  padding: 20px;
+  background: transparent;
+}
+
+.neo-workspace {
+  gap: 20px;
+  padding: 0;
+}
+
+.terminal-frame,
+.metric-card,
+.sync-status-card,
+.friend-share-box,
+.friend-card,
+.task-presence-card,
+.monthly-overview,
+.task-item,
+.log-item,
+.ai-card,
+.github-sync-card,
+.fixed-toggle,
+.selected-report,
+.ai-answer,
+.task-row {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(13, 13, 13, 0.94);
+  box-shadow: none;
+}
+
+.terminal-frame::before,
+.metric-card::before {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    transparent;
+  background-size: 16px 16px, auto;
+  opacity: 0.2;
+  mask-image: linear-gradient(180deg, black, transparent 82%);
+}
+
+.auth-frame,
+.hero-terminal,
+.panel-large,
+.presence-view,
+.ai-screen,
+.profile-card,
+.profile-form,
+.task-form {
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.neo-sidebar {
+  top: 20px;
+  height: calc(100vh - 40px);
+  border-color: var(--line-strong);
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.brand-mark,
+.profile-avatar,
+.friend-choice-row span,
+.friend-card > span {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: #000000;
+  background: var(--text);
+  box-shadow: none;
+}
+
+.top-leds span {
+  background: var(--nothing-accent);
+  box-shadow: none;
+}
+
+.top-leds span:nth-child(2),
+.top-leds span:nth-child(3) {
+  background: var(--line-strong);
+}
+
+.auth-frame h1 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(2.35rem, 7vw, 3.4rem);
+}
+
+.neo-auth .auth-frame::after {
+  display: none;
+  content: none;
+}
+
+.profile-avatar {
+  border-radius: 16px;
+}
+
+.side-nav {
+  gap: 6px;
+}
+
+.side-nav button,
+.bottom-terminal button {
+  border-radius: 8px;
+  color: var(--nothing-disabled);
+  background: transparent;
+}
+
+.side-nav button:hover,
+.side-nav button.active,
+.bottom-terminal button:hover,
+.bottom-terminal button.active {
+  border-color: var(--line-strong);
+  color: var(--text);
+  background: #111111;
+  box-shadow: inset 2px 0 0 var(--nothing-accent);
+}
+
+.bottom-terminal button.active {
+  color: #000000;
+  background: var(--text);
+  box-shadow: none;
+}
+
+.bottom-terminal {
+  border-color: var(--line-strong);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.94);
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.nav-icon {
+  color: currentColor;
+  filter: none;
+  stroke-width: 1.7;
+}
+
+.side-nav button.active .nav-icon,
+.bottom-terminal button.active .nav-icon {
+  color: currentColor;
+  filter: none;
+}
+
+.neo-form input,
+.neo-form select,
+.neo-form textarea,
+.date-terminal input,
+.ai-screen textarea,
+.github-sync-actions input {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--text);
+  background: #050505;
+  box-shadow: none;
+}
+
+.neo-form input:focus,
+.neo-form select:focus,
+.neo-form textarea:focus,
+.date-terminal input:focus,
+.ai-screen textarea:focus,
+.github-sync-actions input:focus {
+  border-color: var(--text);
+  box-shadow: none;
+}
+
+.neo-primary,
+.date-terminal button,
+.weekday-row button.active,
+.friend-choice-row button.active,
+.task-row.done .task-check,
+.bottom-terminal button.active {
+  border-color: var(--text);
+  color: #000000;
+  background: var(--text);
+  text-shadow: none;
+}
+
+.outline-button,
+.link-button,
+.weekday-row button,
+.friend-choice-row button,
+.friend-card button,
+.file-button.photo-button,
+.task-check,
+.task-delete {
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--text);
+  background: transparent;
+  box-shadow: none;
+}
+
+.neo-primary:hover,
+.outline-button:hover,
+.link-button:hover,
+.date-terminal button:hover,
+.weekday-row button:hover,
+.friend-choice-row button:hover,
+.friend-card button:hover,
+.file-button.photo-button:hover {
+  border-color: var(--text);
+  color: #000000;
+  background: var(--text);
+}
+
+.alert,
+.empty-terminal,
+.photo-upload-row {
+  border-radius: 12px;
+  background: #0a0a0a;
+  box-shadow: none;
+}
+
+.alert.error,
+.task-delete,
+.danger,
+.sync-status-card.error {
+  border-color: var(--nothing-accent);
+  color: var(--nothing-accent);
+  background: transparent;
+}
+
+.alert.success {
+  border-color: var(--green);
+  color: #b7e3c0;
+  background: transparent;
+}
+
+.progress-line {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 2px;
+  height: 14px;
+  border: 0;
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--line-strong) 0 1px,
+      transparent 1px calc(5% - 2px),
+      var(--line) calc(5% - 2px) 5%
+    );
+}
+
+.progress-line span {
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      var(--text) 0 calc(5% - 2px),
+      transparent calc(5% - 2px) 5%
+    );
+}
+
+.metric-strip {
+  gap: 14px;
+}
+
+.metric-card {
+  min-height: 126px;
+  background: #0d0d0d;
+}
+
+.metric-card strong {
+  font-family: "Space Mono", "JetBrains Mono", monospace;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.task-list {
+  gap: 8px;
+}
+
+.task-row {
+  grid-template-columns: 42px minmax(0, 1fr) 22px 36px;
+  border-radius: 10px;
+  background: #070707;
+}
+
+.task-row.done {
+  border-color: var(--line-strong);
+  background: #111111;
+}
+
+.task-row.done .task-main strong {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--muted);
+  text-decoration-thickness: 1px;
+}
+
+.task-check,
+.task-delete {
+  border-radius: 6px;
+  color: var(--text);
+}
+
+.task-check.done,
+.presence-cell.on,
+.presence-cell.github,
+.presence-cell.total {
+  border-color: var(--text);
+  background: var(--text);
+  box-shadow: none;
+}
+
+.task-main strong small {
+  border-color: var(--line-strong);
+  color: var(--muted);
+  background: transparent;
+}
+
+.presence-grid,
+.presence-grid.compact,
+.presence-grid.monthly.compact {
+  filter: none;
+}
+
+.presence-cell,
+.presence-legend span,
+.task-month-grid .presence-cell,
+.presence-grid.monthly .presence-cell {
+  border: 1px solid #242424;
+  border-radius: 2px;
+  background: #111111;
+  box-shadow: none;
+}
+
+.presence-cell.level-1,
+.presence-legend span:nth-child(2) {
+  background: #3d3d3d;
+}
+
+.presence-cell.level-2,
+.presence-legend span:nth-child(3) {
+  background: #737373;
+}
+
+.presence-cell.level-3,
+.presence-legend span:nth-child(4),
+.presence-cell.task {
+  background: #b8b8b8;
+}
+
+.presence-cell.level-4,
+.presence-legend span:nth-child(5) {
+  border-color: var(--text);
+  background: var(--text);
+}
+
+.presence-cell.selected {
+  outline: 2px solid var(--nothing-accent);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.presence-cell.today {
+  border-color: var(--nothing-accent);
+}
+
+.monthly-overview,
+.friend-share-box,
+.github-sync-card,
+.fixed-toggle,
+.photo-upload-row {
+  background: #0b0b0b;
+}
+
+.friend-choice-row button.active,
+.weekday-row button.active {
+  border-color: var(--text);
+  color: #000000;
+  background: var(--text);
+}
+
+.profile-card .profile-avatar {
+  font-family: "Doto", "Space Mono", monospace;
+}
+
+.neo-auth:has(.auth-frame:not(:has(form))) {
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    #000000;
+  background-size: 16px 16px, auto;
+}
+
+.neo-auth .auth-frame:not(:has(form)) {
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: #0d0d0d;
+  box-shadow: none;
+}
+
+.neo-auth .auth-frame:not(:has(form))::before {
+  height: 10px;
+  border-radius: 0;
+  background:
+    repeating-linear-gradient(90deg, var(--text) 0 18px, transparent 18px 22px),
+    #222222;
+  box-shadow: none;
+}
+
+.neo-auth .auth-frame:not(:has(form))::after {
+  display: block;
+  content: "";
+  right: 28px;
+  bottom: 29px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--nothing-accent);
+  animation: loadPulse 1.2s ease-in-out infinite alternate;
+}
+
+.neo-auth .auth-frame:not(:has(form)) .kicker {
+  color: var(--muted);
+  text-shadow: none;
+}
+
+.neo-auth .auth-frame:not(:has(form)) h1 {
+  color: var(--text);
+  font-family: "Doto", "Space Mono", monospace;
+  letter-spacing: 0;
+  text-shadow: none;
+}
+
+@media (max-width: 980px) {
+  .app-shell,
+  .neo-app {
+    background: transparent;
+  }
+
+  .neo-app {
+    padding: 16px 14px calc(116px + env(safe-area-inset-bottom));
+  }
+
+  .neo-header h1 {
+    font-size: clamp(2.8rem, 17vw, 5.2rem);
+  }
+
+  .bottom-terminal button.active {
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .neo-header h1 {
+    font-size: clamp(2.5rem, 16vw, 4.1rem);
+  }
+}
+
+.friends-panel {
+  gap: 16px;
+}
+
+.friend-count {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: #000000;
+  background: var(--text);
+  font-family: "Space Mono", "JetBrains Mono", monospace;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.invite-console,
+.smart-friend-form,
+.friend-preview {
+  display: grid;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #080808;
+}
+
+.invite-console {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+}
+
+.invite-console strong,
+.friend-preview strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.invite-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(86px, auto));
+  gap: 8px;
+}
+
+.invite-actions .neo-primary,
+.invite-actions .outline-button {
+  min-height: 42px;
+}
+
+.smart-friend-form {
+  gap: 12px;
+  padding: 14px;
+}
+
+.smart-friend-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+  font-family: "Space Mono", "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.smart-friend-form input {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: var(--text);
+  background: #000000;
+  padding: 0 14px;
+  outline: none;
+}
+
+.smart-friend-form input:focus {
+  border-color: var(--text);
+}
+
+.friend-preview {
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+}
+
+.friend-preview > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  color: #000000;
+  background: var(--text);
+  font-family: "Doto", "Space Mono", monospace;
+  font-weight: 800;
+}
+
+.friend-preview small {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-family: "Space Mono", "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.friend-preview p {
+  margin: 4px 0 0;
+}
+
+.friend-preview.ready {
+  border-color: rgba(245, 245, 245, 0.58);
+}
+
+.friend-preview.blocked {
+  border-color: var(--nothing-accent);
+}
+
+.friend-preview.blocked > span {
+  color: #ffffff;
+  background: var(--nothing-accent);
+}
+
+.friend-list.interactive {
+  gap: 8px;
+}
+
+.friend-list.interactive .friend-card {
+  grid-template-columns: 34px minmax(0, 1fr) auto 36px;
+}
+
+.friend-list.interactive .friend-card button {
+  width: auto;
+  min-width: 36px;
+  height: 34px;
+  padding: 0 10px;
+}
+
+.friend-list.interactive .friend-card button:first-of-type {
+  color: var(--text);
+  border-color: var(--line-strong);
+}
+
+.friend-list.interactive .friend-card button:first-of-type:hover {
+  color: #000000;
+  background: var(--text);
+}
+
+@media (max-width: 620px) {
+  .invite-console,
+  .invite-actions,
+  .friend-list.interactive .friend-card {
+    grid-template-columns: 1fr;
+  }
+
+  .friend-count {
+    width: 48px;
+    height: 48px;
+  }
+
+  .friend-list.interactive .friend-card > span {
+    justify-self: start;
+  }
+
+  .friend-list.interactive .friend-card button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 980px) {
+  .bottom-terminal {
+    right: 10px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+    width: auto;
+    max-width: none;
+    min-height: 68px;
+    padding: 8px;
+    overflow: hidden;
+  }
+
+  .bottom-terminal button {
+    display: grid;
+    grid-template-rows: 28px 16px;
+    min-width: 0;
+    min-height: 52px;
+    place-items: center;
+    gap: 3px;
+    padding: 4px 2px;
+    overflow: hidden;
+    border-radius: 8px;
+    font-size: 0.58rem;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .bottom-terminal button span {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+  }
+
+  .bottom-terminal .nav-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .bottom-terminal button.active {
+    border-color: var(--text);
+    color: #000000;
+    background: var(--text);
+  }
+}
+
+@media (max-width: 420px) {
+  .bottom-terminal {
+    gap: 3px;
+    padding: 7px;
+  }
+
+  .bottom-terminal button {
+    font-size: 0.52rem;
+  }
+
+  .bottom-terminal .nav-icon {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+.brand-mark,
+.profile-avatar {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  color: #000000;
+  background: var(--text);
+}
+
+.brand-mark {
+  width: 52px;
+  min-width: 52px;
+  height: 52px;
+  border-radius: 10px;
+}
+
+.brand-mark img,
+.profile-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.brand-mark span,
+.profile-avatar span {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: #000000;
+  font-family: "Doto", "Space Mono", monospace;
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.profile-avatar span {
+  font-size: 2.2rem;
+}

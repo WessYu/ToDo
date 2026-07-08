@@ -20,7 +20,7 @@ App web responsivo para habitos, tarefas, planejamento, revisao e diario pessoal
 
 ## GitHub
 
-Em `Ajustes > GitHub`, informe seu usuario e clique em sincronizar.
+Informe seu usuario e clique em sincronizar.
 
 Sem token, o app usa eventos publicos recentes. Com um token pessoal do GitHub, ele busca o calendario anual de contribuicoes pela GraphQL API. O token fica salvo apenas no navegador e nao entra no backup JSON.
 
@@ -34,15 +34,3 @@ O app tem cadastro/login local: cada conta salva seus proprios habitos, tarefas,
 npm install
 npm run dev
 ```
-
-Abra `http://localhost:5173/`.
-
-## Build
-
-```bash
-npm run build
-```
-
-## Vercel
-
-Suba o projeto no Vercel normalmente. Em **Settings > Environment Variables**, coloque `OPENAI_API_KEY` com a chave da OpenAI. Depois faca o deploy.

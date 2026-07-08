@@ -2,22 +2,22 @@
   "name": "Ritmo Presence",
   "short_name": "Ritmo",
   "description": "Tarefas, presença anual, GitHub e foco em um planner pessoal.",
-  "start_url": "/?v=13",
+  "start_url": "/?v=14",
   "scope": "/",
   "display": "standalone",
   "background_color": "#090706",
   "theme_color": "#090706",
   "icons": [
     {
-      "src": "/icone-v11.png?v=2",
-      "sizes": "180x180",
-      "type": "image/png",
+      "src": "/ritmo-logo.svg?v=14",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/apple-touch-icon-v11.png?v=2",
-      "sizes": "180x180",
-      "type": "image/png",
+      "src": "/ritmo-logo.svg?v=14",
+      "sizes": "any",
+      "type": "image/svg+xml",
       "purpose": "maskable"
     }
   ]

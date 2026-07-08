@@ -24,19 +24,6 @@ Em `Ajustes > GitHub`, informe seu usuario e clique em sincronizar.
 
 Sem token, o app usa eventos publicos recentes. Com um token pessoal do GitHub, ele busca o calendario anual de contribuicoes pela GraphQL API. O token fica salvo apenas no navegador e nao entra no backup JSON.
 
-## OpenAI
-
-O painel lateral usa o backend em `api/ai.js`, que chama a Responses API da OpenAI sem expor a chave no navegador.
-
-Para rodar no Vercel, configure estas variaveis de ambiente:
-
-```bash
-OPENAI_API_KEY=sua_chave_da_openai
-OPENAI_MODEL=gpt-5.5
-```
-
-`OPENAI_MODEL` e opcional; se nao preencher, o backend usa `gpt-5.5`.
-
 ## Contas e app instalavel
 
 O app tem cadastro/login local: cada conta salva seus proprios habitos, tarefas, diario e configuracoes no navegador. O menu lateral tambem tem o botao `Baixar app`, que aciona a instalacao PWA quando o navegador permite.

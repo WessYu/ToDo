@@ -1263,7 +1263,7 @@ h3,
     max-width: 100vw !important;
     min-height: 100svh !important;
     align-items: center !important;
-    justify-items: start !important;
+    justify-items: center !important;
     padding: 12px 10px !important;
     overflow-x: hidden !important;
   }
@@ -1271,7 +1271,7 @@ h3,
   .neo-auth .auth-frame {
     width: 100% !important;
     max-width: 320px !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     padding: 16px !important;
   }
 
@@ -1615,5 +1615,408 @@ h3,
 
   .task-row {
     grid-template-columns: 36px minmax(0, 1fr) 16px 32px !important;
+  }
+}
+
+/* Nothing x Cyberpunk: OLED, industrial typography, flat instruments. */
+:root {
+  --nt-black: #000000;
+  --nt-surface: #0b0b0b;
+  --nt-surface-raised: #111111;
+  --nt-border: #222222;
+  --nt-border-visible: #363636;
+  --nt-display: #ffffff;
+  --nt-primary: #e8e8e8;
+  --nt-secondary: #969696;
+  --nt-disabled: #5f5f5f;
+  --nt-accent: #ff4f19;
+  --nt-accent-soft: rgba(255, 79, 25, 0.16);
+  --nt-good: #4a9e5c;
+  --nt-font-display: "Doto", "Space Mono", monospace;
+  --nt-font-ui: "Space Grotesk", "DM Sans", system-ui, sans-serif;
+  --nt-font-data: "Space Mono", "JetBrains Mono", "SF Mono", monospace;
+  --rt-black: var(--nt-black);
+  --rt-panel: var(--nt-surface);
+  --rt-line: rgba(255, 255, 255, 0.18);
+  --rt-line-hot: rgba(255, 255, 255, 0.58);
+  --rt-orange: var(--nt-accent);
+  --rt-orange-2: #ff7a2f;
+  --rt-text: var(--nt-display);
+  --rt-muted: var(--nt-secondary);
+  --rt-shadow-premium: none;
+}
+
+html,
+body {
+  background: var(--nt-black) !important;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--nt-font-ui) !important;
+}
+
+body::before {
+  opacity: 0.12 !important;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px),
+    radial-gradient(circle at 76% 18%, rgba(255, 79, 25, 0.2), transparent 24rem) !important;
+  background-size: 16px 16px, auto !important;
+  mix-blend-mode: screen !important;
+}
+
+body::after {
+  opacity: 0.2 !important;
+  background:
+    linear-gradient(90deg, transparent 0 23.8%, rgba(255, 255, 255, 0.14) 23.86%, transparent 23.94%),
+    linear-gradient(90deg, transparent 0 73.8%, rgba(255, 79, 25, 0.2) 73.86%, transparent 73.94%),
+    linear-gradient(180deg, transparent 0 35%, rgba(255, 255, 255, 0.08) 35.08%, transparent 35.18%) !important;
+}
+
+.neo-app {
+  background:
+    radial-gradient(circle at 78% 12%, rgba(255, 79, 25, 0.16), transparent 22rem),
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+    var(--nt-black) !important;
+  background-size: auto, 16px 16px, auto !important;
+}
+
+.terminal-frame,
+.metric-card,
+.task-row,
+.github-sync-card,
+.friend-share-box,
+.friend-card,
+.task-presence-card,
+.monthly-overview,
+.fixed-toggle,
+.selected-report,
+.empty-terminal,
+.ai-answer,
+.bottom-terminal {
+  border: 1px solid var(--nt-border-visible) !important;
+  border-radius: 12px !important;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px),
+    var(--nt-surface) !important;
+  background-size: 14px 14px, auto !important;
+  box-shadow: none !important;
+}
+
+.terminal-frame::before,
+.metric-card::before {
+  opacity: 0 !important;
+}
+
+.terminal-frame::after,
+.metric-card::after,
+.selected-report::after {
+  color: var(--nt-accent) !important;
+  font-family: var(--nt-font-data) !important;
+  opacity: 0.95 !important;
+}
+
+h1,
+h2 {
+  font-family: var(--nt-font-display) !important;
+  color: var(--nt-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  text-shadow: none !important;
+}
+
+h3,
+.brand-lockup strong,
+.task-main strong {
+  font-family: var(--nt-font-ui) !important;
+  color: var(--nt-primary) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+}
+
+.metric-card strong,
+.selected-report h3,
+.monthly-overview-copy strong {
+  font-family: var(--nt-font-data) !important;
+  color: var(--nt-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.kicker,
+.panel-head span,
+.metric-card span,
+.sync-status-card span,
+.neo-form label,
+.side-nav button,
+.bottom-terminal button,
+.outline-button,
+.neo-primary,
+.link-button {
+  font-family: var(--nt-font-data) !important;
+  color: var(--nt-secondary) !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+}
+
+p,
+.task-main span,
+.friend-card small {
+  color: var(--nt-secondary) !important;
+}
+
+.brand-mark,
+.profile-avatar {
+  border-color: var(--nt-border-visible) !important;
+  border-radius: 12px !important;
+  background-color: var(--nt-surface-raised) !important;
+  box-shadow: none !important;
+}
+
+.brand-lockup {
+  border-bottom-color: var(--nt-border) !important;
+}
+
+.top-leds span {
+  width: 8px !important;
+  height: 8px !important;
+  background: var(--nt-accent) !important;
+  box-shadow: none !important;
+}
+
+.side-copy {
+  font-family: var(--nt-font-data) !important;
+  color: var(--nt-disabled) !important;
+}
+
+.side-nav button,
+.bottom-terminal button {
+  border-radius: 999px !important;
+  color: var(--nt-disabled) !important;
+  background: transparent !important;
+}
+
+.side-nav button:hover,
+.side-nav button.active,
+.bottom-terminal button.active {
+  border-color: var(--nt-display) !important;
+  color: var(--nt-display) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.side-nav button.active::after,
+.bottom-terminal button.active::after {
+  content: "" !important;
+  width: 6px !important;
+  height: 6px !important;
+  margin-left: auto !important;
+  border-radius: 999px !important;
+  background: var(--nt-accent) !important;
+}
+
+.bottom-terminal button.active::after {
+  position: absolute !important;
+  right: 8px !important;
+  top: 8px !important;
+  margin: 0 !important;
+}
+
+.nav-icon {
+  stroke-width: 1.7 !important;
+}
+
+.side-nav button.active .nav-icon,
+.bottom-terminal button.active .nav-icon {
+  color: var(--nt-display) !important;
+}
+
+.neo-primary,
+.date-terminal button,
+.weekday-row button.active,
+.friend-choice-row button.active {
+  border: 0 !important;
+  border-radius: 999px !important;
+  color: var(--nt-black) !important;
+  background: var(--nt-display) !important;
+  box-shadow: none !important;
+}
+
+.outline-button,
+.link-button,
+.weekday-row button,
+.friend-choice-row button,
+.friend-card button {
+  border: 1px solid var(--nt-border-visible) !important;
+  border-radius: 999px !important;
+  color: var(--nt-primary) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.outline-button:hover,
+.link-button:hover,
+.weekday-row button:hover,
+.friend-choice-row button:hover,
+.friend-card button:hover {
+  border-color: var(--nt-display) !important;
+  color: var(--nt-display) !important;
+  background: transparent !important;
+}
+
+.neo-form input,
+.neo-form select,
+.neo-form textarea,
+.date-terminal input,
+.github-sync-actions input {
+  border: 1px solid var(--nt-border-visible) !important;
+  border-radius: 8px !important;
+  color: var(--nt-primary) !important;
+  background: var(--nt-black) !important;
+  box-shadow: none !important;
+  font-family: var(--nt-font-data) !important;
+}
+
+.neo-form input:focus,
+.neo-form select:focus,
+.neo-form textarea:focus,
+.date-terminal input:focus,
+.github-sync-actions input:focus {
+  border-color: var(--nt-display) !important;
+  box-shadow: none !important;
+}
+
+.neo-form input::placeholder,
+.neo-form textarea::placeholder,
+.github-sync-actions input::placeholder {
+  color: var(--nt-disabled) !important;
+}
+
+.alert {
+  border-radius: 8px !important;
+  background: transparent !important;
+  font-family: var(--nt-font-data) !important;
+}
+
+.alert.success {
+  border-color: var(--nt-good) !important;
+  color: var(--nt-good) !important;
+}
+
+.alert.error {
+  border-color: var(--nt-accent) !important;
+  color: var(--nt-accent) !important;
+}
+
+.presence-grid.monthly,
+.task-month-grid {
+  filter: none !important;
+}
+
+.presence-cell {
+  border-color: var(--nt-border-visible) !important;
+  border-radius: 0 !important;
+  background: var(--nt-border) !important;
+  box-shadow: none !important;
+}
+
+.presence-cell.level-1 {
+  background: rgba(255, 255, 255, 0.36) !important;
+}
+
+.presence-cell.level-2 {
+  background: rgba(255, 255, 255, 0.62) !important;
+}
+
+.presence-cell.level-3,
+.presence-cell.level-4,
+.presence-cell.on,
+.presence-cell.github,
+.presence-cell.total {
+  border-color: var(--nt-display) !important;
+  background: var(--nt-display) !important;
+  box-shadow: none !important;
+}
+
+.presence-cell.selected {
+  outline: 2px solid var(--nt-accent) !important;
+  outline-offset: 3px !important;
+  box-shadow: none !important;
+}
+
+.task-check,
+.task-delete {
+  border-color: var(--nt-border-visible) !important;
+  border-radius: 999px !important;
+  color: var(--nt-secondary) !important;
+  background: transparent !important;
+}
+
+.task-row.done .task-check,
+.task-check.done {
+  color: var(--nt-black) !important;
+  background: var(--nt-display) !important;
+}
+
+.task-row.done {
+  border-color: var(--nt-display) !important;
+  background: var(--nt-surface-raised) !important;
+}
+
+.task-main strong small {
+  border-color: var(--nt-border-visible) !important;
+  color: var(--nt-accent) !important;
+  background: transparent !important;
+}
+
+.friend-card > span,
+.friend-choice-row button span {
+  font-family: var(--nt-font-data) !important;
+  color: var(--nt-accent) !important;
+}
+
+@media (min-width: 981px) {
+  .neo-sidebar::before {
+    border-color: var(--nt-border-visible) !important;
+    color: var(--nt-secondary) !important;
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+      var(--nt-black) !important;
+    background-size: 12px 12px, auto !important;
+  }
+
+  .neo-workspace::before {
+    border-color: var(--nt-border) !important;
+    opacity: 0.42 !important;
+    background:
+      radial-gradient(circle at 26% 26%, transparent 0 116px, rgba(255, 255, 255, 0.16) 117px, transparent 119px),
+      radial-gradient(circle at 70% 34%, rgba(255, 79, 25, 0.08) 0 94px, rgba(255, 79, 25, 0.42) 95px, transparent 97px),
+      linear-gradient(90deg, transparent 0 42%, rgba(255, 255, 255, 0.1) 42.08%, transparent 42.18%),
+      linear-gradient(180deg, transparent 0 52%, rgba(255, 255, 255, 0.08) 52.08%, transparent 52.18%) !important;
+  }
+
+  .neo-workspace::after {
+    border-color: var(--nt-border-visible) !important;
+    color: var(--nt-accent) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .neo-auth .auth-frame {
+    max-width: min(280px, calc(100vw - 24px)) !important;
+  }
+
+  .bottom-terminal {
+    background:
+      radial-gradient(circle, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+      var(--nt-surface) !important;
+    background-size: 12px 12px, auto !important;
   }
 }

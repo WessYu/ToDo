@@ -1,4 +1,3 @@
-// @ts-nocheck
-import App from './AppRemodel.jsx';
+import App from './AppPremium';
 
 export default App;

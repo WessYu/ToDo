@@ -8,7 +8,7 @@ import './nav-icons.css';
 import './saka.css';
 import './avatar-fallback.css';
 import './loading-screen.css';
-import './app-remodel.css';
+import './app-premium.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

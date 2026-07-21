@@ -10,6 +10,7 @@ import './avatar-fallback.css';
 import './loading-screen.css';
 import './app-premium.css';
 import './nothing-modern.css';
+import './friends-app.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

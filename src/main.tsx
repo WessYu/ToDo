@@ -9,6 +9,7 @@ import './saka.css';
 import './avatar-fallback.css';
 import './loading-screen.css';
 import './app-premium.css';
+import './nothing-modern.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>

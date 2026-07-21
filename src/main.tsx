@@ -8,7 +8,7 @@ import './nav-icons.css';
 import './saka.css';
 import './avatar-fallback.css';
 import './loading-screen.css';
-import './ritmo-luxury.css';
+import './app-premium.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -17,7 +17,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 );
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js').catch(() => undefined);
+  window.addEventListener('load', async () => {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    await Promise.all(registrations.map((registration) => registration.unregister()));
+    const cacheKeys = await caches.keys();
+    await Promise.all(cacheKeys.filter((key) => key.startsWith('ritmo-')).map((key) => caches.delete(key)));
   });
 }

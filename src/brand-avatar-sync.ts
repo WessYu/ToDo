@@ -1,3 +1,5 @@
+export {};
+
 const TOKEN_KEY = 'ritmo-presence-token-v1';
 
 let currentAvatar = '';

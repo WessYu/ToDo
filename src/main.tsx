@@ -8,7 +8,7 @@ import './nav-icons.css';
 import './saka.css';
 import './avatar-fallback.css';
 import './loading-screen.css';
-import './app-premium.css';
+import './ritmo-luxury.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
